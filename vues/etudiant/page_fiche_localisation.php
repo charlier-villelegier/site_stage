@@ -1,10 +1,20 @@
+<!--Si l'utilisateur accÃ¨de a la page alors qu'il n'est pas connectÃ©, on le redirige -->
+<?php
+	include("../../modeles/membre.php");
+	session_start();
+	if(!isset($_SESSION['membre'])){
+		echo"pas de membre";
+		header('Location: ../../index.html'); 
+	}
+?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head> 
     <title>Gestion des stages - Accueil</title>
     <link href="../../style.css" rel="stylesheet" type="text/css" />
 	<script src="../../js/jquery-1.11.1.min.js" type="text/javascript"></script>
-	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   </head>
   
   <body>
@@ -14,18 +24,18 @@
 		<div class="ConteneurPrincipalePetit">
 			<div class="ConteneurPetitPlan">
 				<div class="PlanMenu">Votre compte</div>
-                <form method="post" action="connexion.php">
+                <form method="post" action="../../controleurs/deconnexion.php">
 					<div class="TexteBonjour">
                     	<p>
-							Bonjour MORICEAU Véronique
+							<?php $membre=$_SESSION['membre']; echo "Bonjour ".strtoupper($membre->nom)." ".$membre->prenom; ?> 
 						</p>
                     </div>
               
                     <p>
-                    	Statut : Professeur
+                    	Statut : Etudiant
                     </p>
                     <p>
-						<input name="Deconnexion" type="submit" value="Déconnexion"/>
+						<input name="Deconnexion" type="submit" value="DÃ©connexion"/>
 					</p>
                    
 				</form>
@@ -41,8 +51,8 @@
 			<div class="ConteneurPetitPlan">
 				<div class="PlanMenu">Mes fiches</div>
 				<ul>
-					<li><div class="TitrePlan"><a href="page_fiche_localisation.html">Fiche de localisation</a></div></li>
-					<li><div class="TitrePlan"><a href="page_fiche_avis.html">Fiche d'avis sur le stage</a></div></li>
+					<li><div class="TitrePlan"><a href="#">Fiche de localisation</a></div></li>
+					<li><div class="TitrePlan"><a href="page_fiche_avis.php">Fiche d'avis sur le stage</a></div></li>
 				</ul>
 			</div>
 		</div>
@@ -56,7 +66,7 @@
 					<ul>
 						<li><a href="#">Accueil</a></li>
 						<li><a href="page_fiche_localisation.html" class="PageActive">Mes fiches</a></li>
-						<li><a href="#">Disponibilités</a></li>
+						<li><a href="#">DisponibilitÃ©s</a></li>
 						<li><a href="#">Contacts</a></li>
 					</ul>
 				</div>
@@ -69,7 +79,7 @@
 					<label for="NomEtudiant">Nom : </label>
 						<input name="NomEtudiant" type="text"/>
 					
-					<label for="PrenomEtudiant">Prénom : </label>
+					<label for="PrenomEtudiant">PrÃ©nom : </label>
 						<input name="PrenomEtudiant" type="text"/>
 					<br/>
 					<br/>
@@ -79,7 +89,7 @@
 					<br/>
 					<br/>
 					
-					<label for="AdresseEtudiant">Adresse personnelle (hors scolarité) : </label>
+					<label for="AdresseEtudiant">Adresse personnelle (hors scolaritÃ©) : </label>
 						<input name="AdresseEtudiant" type="text"/>
 					<br/>
 					<br/>
@@ -87,14 +97,14 @@
 					<label for="MailEtudiant">Courrier IUT : </label>
 						<input name="Tuteur" type="text"/>
 						
-					<label for="TelFixe">Téléhphone : </label>
+					<label for="TelFixe">TÃ©lÃ©hphone : </label>
 						<input name="TelFixe" type="text"/>
 					<br/>
 					<br/>
 					
 					<div id="entreprise"> </div>
 					<h3> Entreprise </h3>
-					<label for="NomEntreprise">Nom de l'établissement où s'effectue le stage : </label>
+					<label for="NomEntreprise">Nom de l'Ã©tablissement oÃ¹ s'effectue le stage : </label>
 						<input name="NomEntreprise" type="text"/>
 					<br/>
 					<br/>
@@ -109,7 +119,7 @@
 					<br/>
 					<br/>
 					
-					<label for="TelResponsable">Numéro de téléphone où l'on peut le joindre : </label>
+					<label for="TelResponsable">NumÃ©ro de tÃ©lÃ©phone oÃ¹ l'on peut le joindre : </label>
 						<input name="TelResponsable" type="text"/>
 					<br/>
 					<br/>
@@ -119,7 +129,7 @@
 					<br/>
 					<br/>
 					
-					<label for="JourRencontre">Jour de la semaine où il est possible de le rencontrer : </label>
+					<label for="JourRencontre">Jour de la semaine oÃ¹ il est possible de le rencontrer : </label>
 						<input name="JourRencontre" type="text"/>
 					<br/>
 					<br/>
@@ -127,12 +137,12 @@
 					<div id="etudiant"> </div>
 					<h3> Etudiant </h3>
 					
-					<label for="TelEntreprise">Numéro de téléphone où l'on peut vous joindre en entreprise : </label>
+					<label for="TelEntreprise">NumÃ©ro de tÃ©lÃ©phone oÃ¹ l'on peut vous joindre en entreprise : </label>
 						<input name="TelEntreprise" type="text"/>
 					<br/>
 					<br/>
 					
-					<label for="TelEtudiant">Numéro de téléphone portable : </label>
+					<label for="TelEtudiant">NumÃ©ro de tÃ©lÃ©phone portable : </label>
 						<input name="TelEtudiant" type="text"/>
 					<br/>
 					<br/>
@@ -157,7 +167,7 @@
 	</div>
     
 		<div class="ConteneurBas">
-			<p>Copyright © 2015 - IUT Orsay (Léo Charlier, Xavier Villelegier)</p>
+			<p>Copyright Â© 2015 - IUT Orsay (LÃ©o Charlier, Xavier Villelegier)</p>
 			<!--
             A enlever du commentaire quand la page sera valide CSS et XHTML
             <p>
