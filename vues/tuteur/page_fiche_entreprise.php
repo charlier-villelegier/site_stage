@@ -6,6 +6,46 @@
 		echo"pas de membre";
 		header('Location: ../../index.html'); 
 	}
+	else{
+		$membre=$_SESSION['membre'];
+		$bd = new Bd("site_stage");
+		$co = $bd->connexion();
+		
+		//Stagiaire
+		$resultat = mysqli_query($co,  "SELECT prenom, nom
+										FROM appariement_tuteur A, etudiant E
+										WHERE A.etudiant = E.login
+										AND tuteur='$membre->login'");
+		$row = mysqli_fetch_row($resultat);
+		$prenom_etudiant = $row[0];
+		$nom_etudiant = $row[1];
+		
+		//Entreprise
+		$resultat = mysqli_query($co,  "SELECT E.nom_entreprise
+										FROM tuteur_entreprise T, entreprise E
+										WHERE T.entreprise = E.num_entreprise
+										AND T.login='$membre->login'");
+		$row = mysqli_fetch_row($resultat);
+		$nom_entreprise = $row[0];
+		
+		//Tuteur
+		$resultat = mysqli_query($co,  "SELECT prenom, nom
+										FROM tuteur_entreprise
+										WHERE login='$membre->login'");
+		$row = mysqli_fetch_row($resultat);
+		$prenom_tuteur = $row[0];
+		$nom_tuteur = $row[1];
+		
+		//Fiche
+		$resultat = mysqli_query($co,  "SELECT num_jury
+										FROM appariement_tuteur A, etudiant E, fiche_tuteur F
+										WHERE A.etudiant = E.login
+										AND F.num_fiche = E.sa_fiche_tuteur
+										AND tuteur='$membre->login'");
+										
+		$row = mysqli_fetch_row($resultat);
+		$num_jury = $row[0];
+	}
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -64,23 +104,20 @@
 					<form method="post" action="faille.php">
 					<p>
 						<label for="NomEtudiant"> Nom du stagiaire : </label>
-							<input type="text" name="nomEtudiant"/>
-
-						<label for="PrenomEtudiant">  Prénom du stagiaire : </b></label>
-							<input type="text" name="PrenomEtudiant"/>
+							<input type="text" name="nomEtudiant" value="<?php echo $prenom_etudiant." ".$nom_etudiant?>" disabled="disabled"/>
 						<br/>
 						<br/>
 							
 						<label for="NumJury"> Jury N° : </label>
-							<input type="text" name="NumJury"/>
+							<input type="text" name="NumJury" value="<?php echo $num_jury?>"/>
 							
 						<label for="entrepriseRaisonSociale"> Entreprise (raison sociale) : </label>
-							<input type="text" name="entrepriseRaisonSociale"/>
+							<input type="text" name="entrepriseRaisonSociale" value="<?php echo $nom_entreprise?>"/>
 						<br/>
 						<br/>
 							
 						<label for="ResponsableStage"> Responsable du stage : </label>
-							<input type="text" name="ResponsableStage"/>
+							<input type="text" name="ResponsableStage" value="<?php echo $prenom_tuteur." ".$nom_tuteur?>"/>
 					
 						<h3>APPRÉCIATIONS SUR LE STAGIAIRE : </h3>
 						
