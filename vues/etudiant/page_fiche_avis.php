@@ -78,6 +78,11 @@
 					<p>
 						<label for="NomEtudiant">Nom : </label>
 							<input name="NomEtudiant" type="text"/>
+							
+						<label for="PrenomEtudiant">Prénom : </label>
+							<input name="¨PrenomEtudiant" type="text"/>
+						<br/>
+						<br/>
 						
 							
 						<label for="Tuteur">Nom du tuteur / de la tutrice : </label>
