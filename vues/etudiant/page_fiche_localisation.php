@@ -11,123 +11,63 @@
 		$co = $bd->connexion();
 		
 		//Etudiant
-		$resultat = mysqli_query($co,  "SELECT nom
-										FROM appariement_enseignant, enseignant
-										WHERE etudiant='$membre->login'");
+		$resultat = mysqli_query($co,  "SELECT nom,prenom
+										FROM appariement_enseignant ae, enseignant e
+										WHERE ae.enseignant=e.login
+										AND etudiant='$membre->login'");
 		$nom_enseignant = $resultat;
 		$row = mysqli_fetch_row($resultat);
 		$nom_enseignant = $row[0];
+		$prenom_enseignant = $row[1];
 		
-		$resultat = mysqli_query($co,  "SELECT prenom
-										FROM appariement_enseignant, enseignant
-										WHERE etudiant='$membre->login'");
-		$prenom_enseignant = $resultat;
-		$row = mysqli_fetch_row($resultat);
-		$prenom_enseignant = $row[0];
 		
-		$resultat = mysqli_query($co, "SELECT adresse FROM etudiant WHERE login='$membre->login'");
+		$resultat = mysqli_query($co,  "SELECT adresse,ville,code_postal,mail_iut,tel_portable
+										FROM etudiant 
+										WHERE login='$membre->login'");
 		$adresse_etudiant = $resultat;
 		$row = mysqli_fetch_row($resultat);
 		$adresse_etudiant = $row[0];
-		
-		$resultat = mysqli_query($co, "SELECT ville FROM etudiant WHERE login='$membre->login'");
-		$ville_etudiant = $resultat;
-		$row = mysqli_fetch_row($resultat);
-		$ville_etudiant = $row[0];
-		
-		$resultat = mysqli_query($co, "SELECT code_postal FROM etudiant WHERE login='$membre->login'");
-		$cp_etudiant = $resultat;
-		$row = mysqli_fetch_row($resultat);
-		$cp_etudiant = $row[0];
-		
-		$resultat = mysqli_query($co, "SELECT mail_iut FROM etudiant WHERE login='$membre->login'");
-		$mail_iut = $resultat;
-		$row = mysqli_fetch_row($resultat);
-		$mail_iut = $row[0];
-		
-		$resultat = mysqli_query($co, "SELECT tel_portable FROM etudiant WHERE login='$membre->login'");
-		$tel = $resultat;
-		$row = mysqli_fetch_row($resultat);
-		$tel = $row[0];
+		$ville_etudiant = $row[1];
+		$cp_etudiant = $row[2];
+		$mail_iut = $row[3];
+		$tel = $row[4];
 		
 		//Entreprise
-		$resultat = mysqli_query($co,  "SELECT nom_entreprise 
-										FROM appariement_tuteur, entreprise 
-										WHERE etudiant='$membre->login'");
+		$resultat = mysqli_query($co,  "SELECT nom_entreprise, adresse, ville, code_postal
+										FROM appariement_tuteur at, tuteur_entreprise t, entreprise e
+										WHERE at.tuteur=t.login
+										AND t.entreprise=e.num_entreprise
+										AND etudiant='$membre->login'");
 		$nom_entreprise = $resultat;
 		$row = mysqli_fetch_row($resultat);
 		$nom_entreprise = $row[0];
-		
-		$resultat = mysqli_query($co,  "SELECT adresse
-										FROM appariement_tuteur, entreprise 
-										WHERE etudiant='$membre->login'");
-		$adresse_entreprise = $resultat;
-		$row = mysqli_fetch_row($resultat);
-		$adresse_entreprise = $row[0];
-		
-		$resultat = mysqli_query($co,  "SELECT ville
-										FROM appariement_tuteur, entreprise 
-										WHERE etudiant='$membre->login'");
-		$ville_entreprise = $resultat;
-		$row = mysqli_fetch_row($resultat);
-		$ville_entreprise = $row[0];
-		
-		$resultat = mysqli_query($co,  "SELECT code_postal
-										FROM appariement_tuteur, entreprise 
-										WHERE etudiant='$membre->login'");
-		$cp_entreprise = $resultat;
-		$row = mysqli_fetch_row($resultat);
-		$cp_entreprise = $row[0];
+		$adresse_entreprise = $row[1];
+		$ville_entreprise = $row[2];
+		$cp_entreprise = $row[3];
 		
 		//Tuteur
-		$resultat = mysqli_query($co,  "SELECT nom
-										FROM appariement_tuteur, tuteur_entreprise
-										WHERE etudiant='$membre->login'");
+		$resultat = mysqli_query($co,  "SELECT nom, prenom, telephone, mail
+										FROM appariement_tuteur at, tuteur_entreprise t
+										WHERE at.tuteur=t.login
+										AND etudiant='$membre->login'");
 		$nom_tuteur = $resultat;
 		$row = mysqli_fetch_row($resultat);
 		$nom_tuteur = $row[0];
-		
-		$resultat = mysqli_query($co,  "SELECT prenom
-										FROM appariement_tuteur, tuteur_entreprise
-										WHERE etudiant='$membre->login'");
-		$prenom_tuteur = $resultat;
-		$row = mysqli_fetch_row($resultat);
-		$prenom_tuteur = $row[0];
-		
-		$resultat = mysqli_query($co,  "SELECT telephone
-										FROM appariement_tuteur, tuteur_entreprise
-										WHERE etudiant='$membre->login'");
-		$tel_tuteur = $resultat;
-		$row = mysqli_fetch_row($resultat);
-		$tel_tuteur = $row[0];
-		
-		$resultat = mysqli_query($co,  "SELECT mail
-										FROM appariement_tuteur, tuteur_entreprise
-										WHERE etudiant='$membre->login'");
-		$mail_tuteur = $resultat;
-		$row = mysqli_fetch_row($resultat);
-		$mail_tuteur = $row[0];
+		$prenom_tuteur = $row[1];
+		$tel_tuteur = $row[2];
+		$mail_tuteur = $row[3];
 		
 		//Complément étudiant
-		$resultat = mysqli_query($co, "SELECT tel_entreprise FROM etudiant WHERE login='$membre->login'");
+		$resultat = mysqli_query($co,  "SELECT tel_entreprise, tel_portable, mail_perso, sujet_stage 
+										FROM etudiant 
+										WHERE login='$membre->login'");
 		$tel_entreprise = $resultat;
 		$row = mysqli_fetch_row($resultat);
 		$tel_entreprise = $row[0];
+		$tel_portable = $row[1];
+		$mail_perso = $row[2];
+		$sujet_stage = $row[3];
 		
-		$resultat = mysqli_query($co, "SELECT tel_portable FROM etudiant WHERE login='$membre->login'");
-		$tel_portable = $resultat;
-		$row = mysqli_fetch_row($resultat);
-		$tel_portable = $row[0];
-		
-		$resultat = mysqli_query($co, "SELECT mail_perso FROM etudiant WHERE login='$membre->login'");
-		$mail_perso = $resultat;
-		$row = mysqli_fetch_row($resultat);
-		$mail_perso = $row[0];
-		
-		$resultat = mysqli_query($co, "SELECT sujet_stage FROM etudiant WHERE login='$membre->login'");
-		$sujet_stage = $resultat;
-		$row = mysqli_fetch_row($resultat);
-		$sujet_stage = $row[0];
 	}
 ?>
 
