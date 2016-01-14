@@ -13,16 +13,19 @@
 		$resultat = mysqli_query($co, "SELECT login FROM etudiant WHERE login='$login' AND mdp='$mdp'");
 		if(mysqli_num_rows($resultat)>0){
 			$function="etudiant";
+			header('Location: ../vues/etudiant/accueil.php'); 
 		}
 		else{
 			$resultat = mysqli_query($co, "SELECT login FROM enseignant WHERE login='$login' AND mdp='$mdp'");
 			if(mysqli_num_rows($resultat)>0){
 				$function="enseignant";
+				header('Location: ../vues/enseignant/accueil.php');
 			}
 			else{
 				$resultat = mysqli_query($co, "SELECT login FROM tuteur_entreprise WHERE login='$login' AND mdp='$mdp'");
 				if(mysqli_num_rows($resultat)>0){
 					$function="tuteur";
+					header('Location: ../vues/tuteur/accueil.php');
 				}
 				else{
 					header('Location: ../index.html'); 
@@ -35,9 +38,6 @@
 		$membre->connexion();
 
 		$_SESSION['membre']=$membre;
-			
-			
-		header('Location: ../vues/etudiant/accueil.php'); 
 		
 	}
 	

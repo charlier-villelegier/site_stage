@@ -64,7 +64,7 @@
 			<div class="Bleue">
 				<div id="Ribbon">
 					<ul>
-						<li><a href="#">Accueil</a></li>
+						<li><a href="accueil.php">Accueil</a></li>
 						<li><a href="page_fiche_localisation.html" class="PageActive">Mes fiches</a></li>
 						<li><a href="#">Disponibilités</a></li>
 						<li><a href="#">Contacts</a></li>
@@ -93,6 +93,7 @@
 						<br/>
 						<br/>
 						
+						<h3>ENTREPRISE :</h3>
 						<label for="NomEntreprise">ENTREPRISE (Raison Sociale) : </label>
 							<input name="NomEntreprise" type="text"/>
 						<br/>
@@ -260,6 +261,9 @@
 						<br/>
 						<br/>
 						
+						<p style="text-align: center;">
+							<input name="Enregistrer" type="submit" value="Enregistrer"/>
+						</p>
 						
 					</p>
 				</form>

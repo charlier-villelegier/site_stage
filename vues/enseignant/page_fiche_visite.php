@@ -1,3 +1,13 @@
+<!--Si l'utilisateur accède a la page alors qu'il n'est pas connecté, on le redirige -->
+<?php
+	include("../../modeles/membre.php");
+	session_start();
+	if(!isset($_SESSION['membre'])){
+		echo"pas de membre";
+		header('Location: ../../index.html'); 
+	}
+?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head> 
@@ -17,7 +27,7 @@
                 <form method="post" action="deconnexion.php">
 					<div class="TexteBonjour">
                     	<p>
-							Bonjour MORICEAU Véronique
+							<?php $membre=$_SESSION['membre']; echo "Bonjour ".strtoupper($membre->nom)." ".$membre->prenom; ?> 
 						</p>
                     </div>
               
@@ -57,7 +67,7 @@
 			<div class="Bleue">
 				<div id="Ribbon">
 					<ul>
-						<li><a href="#">Accueil</a></li>
+						<li><a href="accueil.php">Accueil</a></li>
 						<li><a href="#" class="PageActive">Gérer mes étudiants</a></li>
 						<li><a href="#">Etudiants disponibles</a></li>
 						<li><a href="#">Mes disponibilités</a></li>

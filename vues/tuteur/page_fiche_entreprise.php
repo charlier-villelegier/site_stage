@@ -32,7 +32,7 @@
                     </div>
               
                     <p>
-                    	Statut : Etudiant
+                    	Statut : Tuteur
                     </p>
                     <p>
 						<input name="Deconnexion" type="submit" value="Déconnexion"/>
@@ -51,8 +51,8 @@
 			<div class="Bleue">
 				<div id="Ribbon">
 					<ul>
-						<li><a href="#">Accueil</a></li>
-						<li><a href="page_fiche_localisation.html" class="PageActive">Mes fiches</a></li>
+						<li><a href="accueil.php">Accueil</a></li>
+						<li><a href="page_fiche_entreprise.html" class="PageActive">Mes fiches</a></li>
 						<li><a href="#">Disponibilités</a></li>
 						<li><a href="#">Contacts</a></li>
 					</ul>

@@ -32,7 +32,7 @@
                     </div>
               
                     <p>
-                    	Statut : Etudiant
+                    	Statut : Tuteur
                     </p>
                     <p>
 						<input name="Deconnexion" type="submit" value="Déconnexion"/>
@@ -49,11 +49,7 @@
 		<div class="ConteneurHautPetit"></div>
 		<div class="ConteneurPrincipalePetit">
 			<div class="ConteneurPetitPlan">
-				<div class="PlanMenu">Mes fiches</div>
-				<ul>
-					<li><div class="TitrePlan"><a href="#">Fiche de localisation</a></div></li>
-					<li><div class="TitrePlan"><a href="page_fiche_avis.php">Fiche d'avis sur le stage</a></div></li>
-				</ul>
+				
 			</div>
 		</div>
 		<div class="ConteneurBasPetit"></div>
@@ -64,8 +60,8 @@
 			<div class="Bleue">
 				<div id="Ribbon">
 					<ul>
-						<li><a href="accueil.php">Accueil</a></li>
-						<li><a href="page_fiche_localisation.html" class="PageActive">Mes fiches</a></li>
+						<li><a href="#" class="PageActive">Accueil</a></li>
+						<li><a href="page_fiche_entreprise.php">Mes fiches</a></li>
 						<li><a href="#">Disponibilités</a></li>
 						<li><a href="#">Contacts</a></li>
 					</ul>
@@ -73,98 +69,9 @@
 			</div>
       
 			<div class="ConteneurTexte">   
-				<div class="TitrePartie" id="titre1">LOCALISATION DE STAGE</div>
-				<form method="post" action="faille.php">
-				<p>
-					<label for="NomEtudiant">Nom : </label>
-						<input name="NomEtudiant" type="text"/>
-					
-					<label for="PrenomEtudiant">Prénom : </label>
-						<input name="PrenomEtudiant" type="text"/>
-					<br/>
-					<br/>
-						
-					<label for="Tuteur">Tuteur/Tutrice : </label>
-						<input name="Tuteur" type="text"/>
-					<br/>
-					<br/>
-					
-					<label for="AdresseEtudiant">Adresse personnelle (hors scolarité) : </label>
-						<input name="AdresseEtudiant" type="text"/>
-					<br/>
-					<br/>
-					
-					<label for="MailEtudiant">Courrier IUT : </label>
-						<input name="Tuteur" type="text"/>
-						
-					<label for="TelFixe">Téléhphone : </label>
-						<input name="TelFixe" type="text"/>
-					<br/>
-					<br/>
-					
-					<div id="entreprise"> </div>
-					<h3> Entreprise </h3>
-					<label for="NomEntreprise">Nom de l'établissement où s'effectue le stage : </label>
-						<input name="NomEntreprise" type="text"/>
-					<br/>
-					<br/>
-					
-					<label for="AdresseEntreprise">Adresse (Lieu du stage) : </label>
-						<input name="AdresseEntreprise" type="text"/>
-					<br/>
-					<br/>
-					
-					<label for="NomResponsable">Nom du responsable du stage : </label>
-						<input name="NomResponsable" type="text"/>
-					<br/>
-					<br/>
-					
-					<label for="TelResponsable">Numéro de téléphone où l'on peut le joindre : </label>
-						<input name="TelResponsable" type="text"/>
-					<br/>
-					<br/>
-					
-					<label for="MailResponsable">E-mail : </label>
-						<input name="MailResponsable" type="text"/>
-					<br/>
-					<br/>
-					
-					<label for="JourRencontre">Jour de la semaine où il est possible de le rencontrer : </label>
-						<input name="JourRencontre" type="text"/>
-					<br/>
-					<br/>
-					
-					<div id="etudiant"> </div>
-					<h3> Etudiant </h3>
-					
-					<label for="TelEntreprise">Numéro de téléphone où l'on peut vous joindre en entreprise : </label>
-						<input name="TelEntreprise" type="text"/>
-					<br/>
-					<br/>
-					
-					<label for="TelEtudiant">Numéro de téléphone portable : </label>
-						<input name="TelEtudiant" type="text"/>
-					<br/>
-					<br/>
-					
-					<label for="MailPerso">E-Mail personnel : </label>
-						<input name="MailPerso" type="text"/>
-					<br/>
-					<br/>
-					
-					<label>Sujet du stage : </label> <br/>
-						<textarea rows="20" cols="50"></textarea>
-					<br/>
-					
-				
-					<p style="text-align: center;">
-						<input name="Enregistrer" type="submit" value="Enregistrer"/>
-					</p>
-					
-				</p>
-				</form>
+				<div class="TitrePartie" id="titre1">Vos statistiques : </div>
 			</div>
-	</div>
+		</div>
     
 		<div class="ConteneurBas">
 			<p>Copyright © 2015 - IUT Orsay (Léo Charlier, Xavier Villelegier)</p>
