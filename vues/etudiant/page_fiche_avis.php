@@ -74,7 +74,7 @@
       
 			<div class="ConteneurTexte">   
 				<div class="TitrePartie" id="titre1">AVIS ETUDIANT</div>
-					<form method="get" action="faille.php">
+					<form method="post" action="faille.php">
 					<p>
 						<label for="NomEtudiant">Nom : </label>
 							<input name="NomEtudiant" type="text"/>
