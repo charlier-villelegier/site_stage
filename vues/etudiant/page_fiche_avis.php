@@ -6,6 +6,133 @@
 		echo"pas de membre";
 		header('Location: ../../index.html'); 
 	}
+	$membre=$_SESSION['membre'];
+	$bd = new Bd("site_stage");
+	$co = $bd->connexion();
+	
+	//Professeur tuteur
+	$resultat = mysqli_query($co, "SELECT en.nom,en.prenom 
+									FROM etudiant e, appariement_enseignant ae, enseignant en
+									WHERE e.login=ae.etudiant
+									AND ae.enseignant=en.login
+									AND e.login='$membre->login' AND e.mdp='$membre->mdp'");
+	$row = mysqli_fetch_row($resultat);
+	$nom_prof_tuteur=$row[0]." ".$row[1];
+	
+	//TP et mail perso
+	$resultat = mysqli_query($co, "SELECT e.tp,e.mail_perso 
+									FROM etudiant e
+									WHERE e.login='$membre->login' AND e.mdp='$membre->mdp'");
+	$row = mysqli_fetch_row($resultat);
+	$tp=$row[0];
+	$mail_perso=$row[1];
+	
+	//Entreprise
+	$resultat = mysqli_query($co, "SELECT en.nom_entreprise, en.adresse, en.code_postal, en.ville 
+									FROM etudiant e, appariement_tuteur at, tuteur_entreprise t, entreprise en 
+									WHERE e.login=at.etudiant 
+									AND at.tuteur=t.login 
+									AND t.entreprise=en.num_entreprise 
+									AND e.login='$membre->login' AND e.mdp='$membre->mdp'");
+	$row = mysqli_fetch_row($resultat);
+	$nom_entreprise=$row[0];
+	$adresse_entreprise=$row[1];
+	$code_postal_entreprise=$row[2];
+	$ville_entreprise=$row[3];
+	
+	//Tuteur en entreprise
+	$resultat = mysqli_query($co, "SELECT t.nom,t.prenom, t.fonction 
+									FROM etudiant e, appariement_tuteur at, tuteur_entreprise t
+									WHERE e.login=at.etudiant
+									AND at.tuteur=t.login
+									AND e.login='$membre->login' AND e.mdp='$membre->mdp'");
+	$row = mysqli_fetch_row($resultat);
+	$nom_tuteur_entreprise=$row[0]." ".$row[1];
+	$fonction_tuteur_entreprise=$row[2];
+	
+	//Rémunération
+	$resultat = mysqli_query($co, "SELECT f.remuneration, f.salaire 
+									FROM etudiant e, fiche_avis f
+									WHERE e.sa_fiche_avis=f.num_fiche
+									AND e.login='$membre->login' AND e.mdp='$membre->mdp'");
+	$row = mysqli_fetch_row($resultat);
+	$remuneration=$row[0];
+	$salaire=$row[1];
+	
+	//Encadrement
+	$resultat = mysqli_query($co, "SELECT f.encadre_informaticien, f.appel_informaticien, f.travail_seul, f.taille_equipe 
+									FROM etudiant e, fiche_avis f
+									WHERE e.sa_fiche_avis=f.num_fiche
+									AND e.login='$membre->login' AND e.mdp='$membre->mdp'");
+	$row = mysqli_fetch_row($resultat);
+	$encadre_informaticien=$row[0];
+	$appel_informaticien=$row[1];
+	$travail_seul=$row[2];
+	$taille_equipe=$row[3];
+	
+	//Environnement
+	$resultat = mysqli_query($co, "SELECT f.type_materiel, f.unix, f.linux, f.nt, f.windows, f.autre_systeme, f.langage 
+									FROM etudiant e, fiche_avis f
+									WHERE e.sa_fiche_avis=f.num_fiche
+									AND e.login='$membre->login' AND e.mdp='$membre->mdp'");
+	$row = mysqli_fetch_row($resultat);
+	$type_materiel=$row[0];
+	$unix=$row[1];
+	$linux=$row[2];
+	$nt=$row[3];
+	$windows=$row[4];
+	$autre_systeme=$row[5];
+	$langage=$row[6];
+	
+	//Objet du stage
+	$resultat = mysqli_query($co, "SELECT f.systeme, f.multimedia, f.reseau, f.web, f.autre_dev, f.bd, f.autre_objet 
+									FROM etudiant e, fiche_avis f
+									WHERE e.sa_fiche_avis=f.num_fiche
+									AND e.login='$membre->login' AND e.mdp='$membre->mdp'");
+	$row = mysqli_fetch_row($resultat);
+	$systeme=$row[0];
+	$multimedia=$row[1];
+	$reseau=$row[2];
+	$web=$row[3];
+	$autre_dev=$row[4];
+	$bd=$row[5];
+	$autre_objet=$row[6];
+	
+	//Avis de l'étudiant sur le stage
+	$resultat = mysqli_query($co, "SELECT f.satisfait_condition, f.explication_satisfaction
+									FROM etudiant e, fiche_avis f
+									WHERE e.sa_fiche_avis=f.num_fiche
+									AND e.login='$membre->login' AND e.mdp='$membre->mdp'");
+	$row = mysqli_fetch_row($resultat);
+	$satisfait_condition=$row[0];
+	$explication_satisfaction=$row[1];
+	
+	//Objectifs du stage
+	$resultat = mysqli_query($co, "SELECT f.objectif_atteint, f.explication_objectif
+									FROM etudiant e, fiche_avis f
+									WHERE e.sa_fiche_avis=f.num_fiche
+									AND e.login='$membre->login' AND e.mdp='$membre->mdp'");
+	$row = mysqli_fetch_row($resultat);
+	$objectif_atteint=$row[0];
+	$explication_objectif=$row[1];
+	
+	//Matières à développer
+	$resultat = mysqli_query($co, "SELECT f.matiere_dev, f.explication_matiere
+									FROM etudiant e, fiche_avis f
+									WHERE e.sa_fiche_avis=f.num_fiche
+									AND e.login='$membre->login' AND e.mdp='$membre->mdp'");
+	$row = mysqli_fetch_row($resultat);
+	$matiere_dev=$row[0];
+	$explication_matiere=$row[1];
+	
+	//Appport du stage
+	$resultat = mysqli_query($co, "SELECT f.apport_stage
+									FROM etudiant e, fiche_avis f
+									WHERE e.sa_fiche_avis=f.num_fiche
+									AND e.login='$membre->login' AND e.mdp='$membre->mdp'");
+	$row = mysqli_fetch_row($resultat);
+	$apport_stage=$row[0];
+	
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -77,55 +204,55 @@
 					<form method="post" action="faille.php">
 					<p>
 						<label for="NomEtudiant">Nom : </label>
-							<input name="NomEtudiant" type="text"/>
+							<input name="NomEtudiant" type="text" value="<?php echo $membre->nom ?>"/>
 							
 						<label for="PrenomEtudiant">Prénom : </label>
-							<input name="¨PrenomEtudiant" type="text"/>
+							<input name="¨PrenomEtudiant" type="text" value="<?php echo $membre->prenom ?>"/>
 						<br/>
 						<br/>
 						
 							
 						<label for="Tuteur">Nom du tuteur / de la tutrice : </label>
-							<input name="Tuteur" type="text"/>
+							<input name="Tuteur" type="text" disabled="disabled" value="<?php echo $nom_prof_tuteur ?>"/>
 						<br/>
 						<br/>
 						
 						<label for="TP">TP : </label>
-							<input name="TP" type="text"/>
+							<input name="TP" type="text" value="<?php echo $tp ?>"/>
 						
 						<label for="AdressePerso">Adresse électronique autre que IUT : </label>
-							<input name="AdressePerso" type="text"/>
+							<input name="AdressePerso" type="text" value="<?php echo $mail_perso ?>"/>
 						<br/>
 						<br/>
 						
 						<h3>ENTREPRISE :</h3>
 						<label for="NomEntreprise">ENTREPRISE (Raison Sociale) : </label>
-							<input name="NomEntreprise" type="text"/>
+							<input name="NomEntreprise" type="text" value="<?php echo $nom_entreprise ?>"/>
 						<br/>
 						<br/>
 						
 						<label for="AdresseEntreprise">Adresse : </label>
-							<input name="AdresseEntreprise" type="text"/>
+							<input name="AdresseEntreprise" type="text" value="<?php echo $adresse_entreprise ?>"/>
 						<br/>
 						<br/>
 						
 						<label for="CPEntreprise">Code Postal : </label>
-							<input name="CPEntreprise" type="text"/>
+							<input name="CPEntreprise" type="text" value="<?php echo $code_postal_entreprise ?>"/>
 						<br/>
 						<br/>
 						
 						<label for="VilleEntreprise">Ville : </label>
-							<input name="VilleEntreprise" type="text"/>
+							<input name="VilleEntreprise" type="text" value="<?php echo $ville_entreprise ?>"/>
 						<br/>
 						<br/>
 						
 						<label for="NomResponsable">Nom du responsable du stage : </label>
-							<input name="NomResponsable" type="text"/>
+							<input name="NomResponsable" type="text" disabled="disabled" value="<?php echo $nom_tuteur_entreprise ?>"/>
 						<br/>
 						<br/>
 						
 						<label for="FonctionResponsable">Fonction du responsable : </label>
-							<input name="FonctionResponsable" type="text"/>
+							<input name="FonctionResponsable" type="text" disabled="disabled" value="<?php echo $fonction_tuteur_entreprise ?>"/>
 						<br/>
 						<br/>
 						
@@ -133,13 +260,15 @@
 						<h3> REMUNERATION : </h3>
 						
 						<label>Votre stage a-t-il été rémunéré ? </label>
-							<input name="Remuneration" type="radio" value="Remunere"/><label for="Remunere">Oui </label>
-							<input name="Remuneration" type="radio" value="NonRemunere"/><label for="NonRemunere">Non </label>
+							<input name="Remuneration" type="radio" value="Remunere" 
+							<?php if($remuneration)echo "checked=\"checked\"" ?>/><label for="Remunere">Oui </label>
+							<input name="Remuneration" type="radio" value="NonRemunere" 
+							<?php if(!$remuneration)echo "checked=\"checked\"" ?>/><label for="NonRemunere">Non </label>
 						<br/>
 						<br/>
 						
 						<label for="Salaire">Si oui, combien ? </label>
-							<input name="Salaire" type="text"/>
+							<input name="Salaire" type="text" value="<?php echo $salaire ?>"/>
 						<br/>
 						<br/>
 						
@@ -147,25 +276,31 @@
 						<h3> ENCADREMENT : </h3>
 						
 						<label>Avez-vous été encadré directement par un informaticien ? </label>
-							<input name="Informaticien" type="radio" value="Informaticien"/><label for="Informaticien">Oui </label>
-							<input name="Informaticien" type="radio" value="NonInformaticien"/><label for="NonInformaticien">Non </label>
+							<input name="Informaticien" type="radio" value="Informaticien" 
+							<?php if($encadre_informaticien)echo "checked=\"checked\"" ?>/><label for="Informaticien">Oui </label>
+							<input name="Informaticien" type="radio" value="NonInformaticien" 
+							<?php if(!$encadre_informaticien)echo "checked=\"checked\"" ?>/><label for="NonInformaticien">Non </label>
 						<br/>
 						<br/>
 						
 						<label>Si non, en cas de besoin pouviez-vous faire appel à un informaticien ? </label>
-							<input name="AppelInformaticien" type="radio" value="AppelInformaticien"/><label for="AppelInformaticien">Oui </label>
-							<input name="AppelInformaticien" type="radio" value="NonAppelInformaticien"/><label for="NonAppelInformaticien">Non </label>
+							<input name="AppelInformaticien" type="radio" value="AppelInformaticien" 
+							<?php if($appel_informaticien)echo "checked=\"checked\"" ?>/><label for="AppelInformaticien">Oui </label>
+							<input name="AppelInformaticien" type="radio" value="NonAppelInformaticien" 
+							<?php if(!$appel_informaticien)echo "checked=\"checked\"" ?>/><label for="NonAppelInformaticien">Non </label>
 						<br/>
 						<br/>
 						
 						<label>Dans le cadre de votre stage, avez-vous travaillé seul ? </label>
-							<input name="Equipe" type="radio" value="Seul"/><label for="Seul">Oui </label>
-							<input name="Equipe" type="radio" value="Groupe"/><label for="Groupe">Non </label>
+							<input name="Equipe" type="radio" value="Seul" 
+							<?php if($travail_seul)echo "checked=\"checked\"" ?>/><label for="Seul">Oui </label>
+							<input name="Equipe" type="radio" value="Groupe" 
+                            <?php if(!$travail_seul)echo "checked=\"checked\"" ?>/><label for="Groupe">Non </label>
 						<br/>
 						<br/>
 						
 						<label for="TailleEquipe">Si non, taille de l'équipe : </label>
-							<input name="TailleEquipe" type="text"/>
+							<input name="TailleEquipe" type="text" value="<?php echo $taille_equipe ?>"/>
 						<br/>
 						<br/>
 						
@@ -173,50 +308,67 @@
 						<h3> ENVIRONNEMENT GENERAL : </h3>
 						
 						<label>Type de matériel : </label>
-							<input name="Materiel" type="radio" value="PC"/><label for="PC">PC </label>
-							<input name="Materiel" type="radio" value="Autre"/><label for="Autre">Autre (préciser) </label>
+							<input name="Materiel" type="radio" value="PC" 
+							<?php if($type_materiel=="PC")echo "checked=\"checked\"" ?>/><label for="PC">PC </label>
+							<input name="Materiel" type="radio" value="Autre"
+                            <?php if($type_materiel!="PC")echo "checked=\"checked\"" ?>/><label for="Autre">Autre (préciser) </label>
 							<input name="Materiel" type="text"/>
 						<br/>
 						<br/>
 						
 						<label>Système : </label>
-							<input name="Systeme" type="checkbox" value="UNIX"/><label for="UNIX">UNIX </label>
-							<input name="Systeme" type="checkbox" value="LINUX"/><label for="LINUX">LINUX </label>
-							<input name="Systeme" type="checkbox" value="NT"/><label for="UNIX">NT </label>
-							<input name="Systeme" type="checkbox" value="WINDOWS"/><label for="LINUX">WINDOWS </label> <br/>
-							<input name="Systeme" type="checkbox" value="Autre"/><label for="Autre">Autre (préciser) </label>
-							<input name="Systeme" type="text"/>
+							<input name="Systeme" type="checkbox" value="UNIX"
+                            <?php if($unix)echo "checked=\"checked\"" ?>/><label for="UNIX">UNIX </label>
+							<input name="Systeme" type="checkbox" value="LINUX"
+                            <?php if($linux)echo "checked=\"checked\"" ?>/><label for="LINUX">LINUX </label>
+							<input name="Systeme" type="checkbox" value="NT"
+                            <?php if($nt)echo "checked=\"checked\"" ?>/><label for="UNIX">NT </label>
+							<input name="Systeme" type="checkbox" value="WINDOWS"
+                            <?php if($windows)echo "checked=\"checked\"" ?>/><label for="LINUX">WINDOWS </label> <br/>
+							<input name="Systeme" type="checkbox" value="Autre"
+                            <?php if($autre_systeme)echo "checked=\"checked\"" ?>/><label for="Autre">Autre (préciser) </label>
+							<input name="Systeme" type="text" value="<?php echo $autre_systeme ?>"/>
 						<br/>
 						<br/>
 						
 						<label for="Language">Language : </label>
-							<input name="Language" type="text"/>
+							<input name="Language" type="text" value="<?php echo $langage ?>"/>
 						<br/>
 						<br/>
 						
 						<div id="objet"> </div>
 						<h3> OBJET PRINCIPAL DU STAGE (2 cases maximum à cocher) : </h3>
 						
-							<input name="ObjetStage" type="checkbox" value="Systeme"/><label for="Systeme">Système </label>
-							<input name="ObjetStage" type="checkbox" value="Multimedia"/><label for="Multimedia">Multimedia </label>
-							<input name="ObjetStage" type="checkbox" value="Reseaux"/><label for="Reseaux">Réseaux </label>
-							<input name="ObjetStage" type="checkbox" value="DeveloppementWEB"/><label for="DeveloppementWEB">Développement WEB </label> <br/>
-							<input name="ObjetStage" type="checkbox" value="AutreDvpt"/><label for="AutreDvpt">Autre Développement </label>
-							<input name="ObjetStage" type="checkbox" value="BD"/><label for="BD">Base de données </label>
-							<input name="ObjetStage" type="checkbox" value="Autre"/><label for="Autre">Autre (préciser) </label>
-							<input name="ObjetStage" type="text"/>
+							<input name="ObjetStage" type="checkbox" value="Systeme"
+                            <?php if($systeme)echo "checked=\"checked\"" ?>/><label for="Systeme">Système </label>
+							<input name="ObjetStage" type="checkbox" value="Multimedia"
+                            <?php if($multimedia)echo "checked=\"checked\"" ?>/><label for="Multimedia">Multimedia </label>
+							<input name="ObjetStage" type="checkbox" value="Reseaux"
+                            <?php if($reseau)echo "checked=\"checked\"" ?>/><label for="Reseaux">Réseaux </label>
+							<input name="ObjetStage" type="checkbox" value="DeveloppementWEB"
+                            <?php if($web)echo "checked=\"checked\"" ?>/><label for="DeveloppementWEB">Développement WEB </label> <br/>
+							<input name="ObjetStage" type="checkbox" value="AutreDvpt"
+                            <?php if($autre_dev)echo "checked=\"checked\"" ?>/><label for="AutreDvpt">Autre Développement </label>
+							<input name="ObjetStage" type="checkbox" value="BD"
+                            <?php if($bd)echo "checked=\"checked\"" ?>/><label for="BD">Base de données </label>
+							<input name="ObjetStage" type="checkbox" value="Autre"
+                            <?php if($autre_objet)echo "checked=\"checked\"" ?>/><label for="Autre">Autre (préciser) </label>
+							<input name="ObjetStage" type="text" value="<?php echo $autre_objet ?>"/>
 						
 						<div id="avis_stage"> </div>
 						<h3> AVIS DE L'ETUDIANT SUR LE STAGE : </h3>
 						
 						<label>Etes-vous totalement satisfait des conditions dans lesquelles ce sont déroulées votre stage : </label>
-							<input name="Satisfait" type="radio" value="Satisfait"/><label for="Satisfait">Oui </label>
-							<input name="Satisfait" type="radio" value="NonSatisfait"/><label for="NonSatisfait">Non </label>
+                        <br/>
+							<input name="Satisfait" type="radio" value="Satisfait"
+                            <?php if($satisfait_condition)echo "checked=\"checked\"" ?>/><label for="Satisfait">Oui </label>
+							<input name="Satisfait" type="radio" value="NonSatisfait"
+                            <?php if(!$satisfait_condition)echo "checked=\"checked\"" ?>/><label for="NonSatisfait">Non </label>
 						<br/>
 						<br/>
 						
 						<label>Si non expliquez en quelques mots pourquoi : </label> <br/>
-							<textarea rows="10" cols="50"></textarea>
+							<textarea rows="10" cols="50" ><?php echo $explication_satisfaction ?></textarea>
 						<br/>
 						<br/>
 						
@@ -234,13 +386,15 @@
 						<br/>
 						
 						<label>Ces objectifs ont-ils été atteints : </label>
-							<input name="ObjectifAtteint" type="radio" value="ObjectifAtteint"/><label for="ObjectifAtteint">Oui </label>
-							<input name="ObjectifAtteint" type="radio" value="ObjectifNonAtteint"/><label for="ObjectifNonAtteint">Non </label>
+							<input name="ObjectifAtteint" type="radio" value="ObjectifAtteint"
+                            <?php if($objectif_atteint)echo "checked=\"checked\"" ?>/><label for="ObjectifAtteint">Oui </label>
+							<input name="ObjectifAtteint" type="radio" value="ObjectifNonAtteint"
+                            <?php if(!$objectif_atteint)echo "checked=\"checked\"" ?>/><label for="ObjectifNonAtteint">Non </label>
 						<br/>
 						<br/>
 						
 						<label>Si non expliquez en quelques mots pourquoi : </label> <br/>
-							<textarea rows="10" cols="50"></textarea>
+							<textarea rows="10" cols="50"><?php echo $explication_objectif ?></textarea>
 						<br/>
 						<br/>
 						
@@ -248,13 +402,15 @@
 						<h3> AVIS DE L'ETUDIANT SUR LES ENSEIGNEMENTS DISPENSES A L'IUT : </h3>
 						
 						<label>Après cette expérience dans l'entreprise, estimez-vous que certaines matières enseignées n'ont pas été assez développées ? </label>
-							<input name="AvisIUT" type="radio" value="AvisIUTPositif"/><label for="AvisIUTPositif">Oui </label>
-							<input name="AvisIUT" type="radio" value="AvisIUTNegatif"/><label for="AvisIUTNegatif">Non </label>
+							<input name="AvisIUT" type="radio" value="AvisIUTPositif"
+                            <?php if($matiere_dev)echo "checked=\"checked\"" ?>/><label for="AvisIUTPositif">Oui </label>
+							<input name="AvisIUT" type="radio" value="AvisIUTNegatif"
+                            <?php if(!$matiere_dev)echo "checked=\"checked\"" ?>/><label for="AvisIUTNegatif">Non </label>
 						<br/>
 						<br/>
 						
 						<label>Si oui, précisez lesquelles : </label> <br/>
-							<textarea rows="10" cols="50"></textarea>
+							<textarea rows="10" cols="50"><?php echo $explication_matiere ?></textarea>
 						<br/>
 						<br/>
 						
@@ -262,7 +418,7 @@
 						<h3> APPORT DU STAGE DANS VOTRE PROJET PERSONNEL ET PROFESSIONNEL : </h3>
 						
 						<label> Précisez en quelques lignes comment le stage a enrichi ou modifié votre projet personnel et professionnel :</label> <br/>
-							<textarea rows="20" cols="50"></textarea>
+							<textarea rows="20" cols="50"><?php echo $apport_stage ?></textarea>
 						<br/>
 						<br/>
 						
