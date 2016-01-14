@@ -3,8 +3,131 @@
 	include("../../modeles/membre.php");
 	session_start();
 	if(!isset($_SESSION['membre'])){
-		echo"pas de membre";
 		header('Location: ../../index.html'); 
+	}
+	else{
+		$membre=$_SESSION['membre'];
+		$bd = new Bd("site_stage");
+		$co = $bd->connexion();
+		
+		//Etudiant
+		$resultat = mysqli_query($co,  "SELECT nom
+										FROM appariement_enseignant, enseignant
+										WHERE etudiant='$membre->login'");
+		$nom_enseignant = $resultat;
+		$row = mysqli_fetch_row($resultat);
+		$nom_enseignant = $row[0];
+		
+		$resultat = mysqli_query($co,  "SELECT prenom
+										FROM appariement_enseignant, enseignant
+										WHERE etudiant='$membre->login'");
+		$prenom_enseignant = $resultat;
+		$row = mysqli_fetch_row($resultat);
+		$prenom_enseignant = $row[0];
+		
+		$resultat = mysqli_query($co, "SELECT adresse FROM etudiant WHERE login='$membre->login'");
+		$adresse_etudiant = $resultat;
+		$row = mysqli_fetch_row($resultat);
+		$adresse_etudiant = $row[0];
+		
+		$resultat = mysqli_query($co, "SELECT ville FROM etudiant WHERE login='$membre->login'");
+		$ville_etudiant = $resultat;
+		$row = mysqli_fetch_row($resultat);
+		$ville_etudiant = $row[0];
+		
+		$resultat = mysqli_query($co, "SELECT code_postal FROM etudiant WHERE login='$membre->login'");
+		$cp_etudiant = $resultat;
+		$row = mysqli_fetch_row($resultat);
+		$cp_etudiant = $row[0];
+		
+		$resultat = mysqli_query($co, "SELECT mail_iut FROM etudiant WHERE login='$membre->login'");
+		$mail_iut = $resultat;
+		$row = mysqli_fetch_row($resultat);
+		$mail_iut = $row[0];
+		
+		$resultat = mysqli_query($co, "SELECT tel_portable FROM etudiant WHERE login='$membre->login'");
+		$tel = $resultat;
+		$row = mysqli_fetch_row($resultat);
+		$tel = $row[0];
+		
+		//Entreprise
+		$resultat = mysqli_query($co,  "SELECT nom_entreprise 
+										FROM appariement_tuteur, entreprise 
+										WHERE etudiant='$membre->login'");
+		$nom_entreprise = $resultat;
+		$row = mysqli_fetch_row($resultat);
+		$nom_entreprise = $row[0];
+		
+		$resultat = mysqli_query($co,  "SELECT adresse
+										FROM appariement_tuteur, entreprise 
+										WHERE etudiant='$membre->login'");
+		$adresse_entreprise = $resultat;
+		$row = mysqli_fetch_row($resultat);
+		$adresse_entreprise = $row[0];
+		
+		$resultat = mysqli_query($co,  "SELECT ville
+										FROM appariement_tuteur, entreprise 
+										WHERE etudiant='$membre->login'");
+		$ville_entreprise = $resultat;
+		$row = mysqli_fetch_row($resultat);
+		$ville_entreprise = $row[0];
+		
+		$resultat = mysqli_query($co,  "SELECT code_postal
+										FROM appariement_tuteur, entreprise 
+										WHERE etudiant='$membre->login'");
+		$cp_entreprise = $resultat;
+		$row = mysqli_fetch_row($resultat);
+		$cp_entreprise = $row[0];
+		
+		//Tuteur
+		$resultat = mysqli_query($co,  "SELECT nom
+										FROM appariement_tuteur, tuteur_entreprise
+										WHERE etudiant='$membre->login'");
+		$nom_tuteur = $resultat;
+		$row = mysqli_fetch_row($resultat);
+		$nom_tuteur = $row[0];
+		
+		$resultat = mysqli_query($co,  "SELECT prenom
+										FROM appariement_tuteur, tuteur_entreprise
+										WHERE etudiant='$membre->login'");
+		$prenom_tuteur = $resultat;
+		$row = mysqli_fetch_row($resultat);
+		$prenom_tuteur = $row[0];
+		
+		$resultat = mysqli_query($co,  "SELECT telephone
+										FROM appariement_tuteur, tuteur_entreprise
+										WHERE etudiant='$membre->login'");
+		$tel_tuteur = $resultat;
+		$row = mysqli_fetch_row($resultat);
+		$tel_tuteur = $row[0];
+		
+		$resultat = mysqli_query($co,  "SELECT mail
+										FROM appariement_tuteur, tuteur_entreprise
+										WHERE etudiant='$membre->login'");
+		$mail_tuteur = $resultat;
+		$row = mysqli_fetch_row($resultat);
+		$mail_tuteur = $row[0];
+		
+		//Complément étudiant
+		$resultat = mysqli_query($co, "SELECT tel_entreprise FROM etudiant WHERE login='$membre->login'");
+		$tel_entreprise = $resultat;
+		$row = mysqli_fetch_row($resultat);
+		$tel_entreprise = $row[0];
+		
+		$resultat = mysqli_query($co, "SELECT tel_portable FROM etudiant WHERE login='$membre->login'");
+		$tel_portable = $resultat;
+		$row = mysqli_fetch_row($resultat);
+		$tel_portable = $row[0];
+		
+		$resultat = mysqli_query($co, "SELECT mail_perso FROM etudiant WHERE login='$membre->login'");
+		$mail_perso = $resultat;
+		$row = mysqli_fetch_row($resultat);
+		$mail_perso = $row[0];
+		
+		$resultat = mysqli_query($co, "SELECT sujet_stage FROM etudiant WHERE login='$membre->login'");
+		$sujet_stage = $resultat;
+		$row = mysqli_fetch_row($resultat);
+		$sujet_stage = $row[0];
 	}
 ?>
 
@@ -77,60 +200,75 @@
 				<form method="post" action="faille.php">
 				<p>
 					<label for="NomEtudiant">Nom : </label>
-						<input name="NomEtudiant" type="text"/>
+						<input name="NomEtudiant" type="text" value="<?php echo $membre->nom ?>"/>
 					
 					<label for="PrenomEtudiant">Prénom : </label>
-						<input name="PrenomEtudiant" type="text"/>
+						<input name="PrenomEtudiant" type="text" value="<?php echo $membre->prenom ?>"/>
 					<br/>
 					<br/>
 						
 					<label for="Tuteur">Tuteur/Tutrice : </label>
-						<input name="Tuteur" type="text"/>
+						<input name="Tuteur" type="text" value="<?php echo $prenom_enseignant." ".$nom_enseignant?>" disabled="disabled"/>
 					<br/>
 					<br/>
 					
 					<label for="AdresseEtudiant">Adresse personnelle (hors scolarité) : </label>
-						<input name="AdresseEtudiant" type="text"/>
+						<input name="AdresseEtudiant" type="text"  value="<?php echo $adresse_etudiant?>" size="35"/>
+					<br/>
+					<br/>
+					
+					<label for="VilleEtudiant">Ville : </label>
+						<input name="VilleEtudiant" type="text"  value="<?php echo $ville_etudiant?>"/>
+					<br/>
+					<br/>
+					
+					<label for="CPEtudiant">Code postal : </label>
+						<input name="CPEtudiant" type="text"  value="<?php echo $cp_etudiant?>"/>
 					<br/>
 					<br/>
 					
 					<label for="MailEtudiant">Courrier IUT : </label>
-						<input name="Tuteur" type="text"/>
+						<input name="Tuteur" type="text"  value="<?php echo $mail_iut?>"/>
 						
 					<label for="TelFixe">Téléhphone : </label>
-						<input name="TelFixe" type="text"/>
+						<input name="TelFixe" type="text"  value="<?php echo $tel?>"/>
 					<br/>
 					<br/>
 					
 					<div id="entreprise"> </div>
 					<h3> Entreprise </h3>
 					<label for="NomEntreprise">Nom de l'établissement où s'effectue le stage : </label>
-						<input name="NomEntreprise" type="text"/>
+						<input name="NomEntreprise" type="text"  value="<?php echo $nom_entreprise?>"/>
 					<br/>
 					<br/>
 					
 					<label for="AdresseEntreprise">Adresse (Lieu du stage) : </label>
-						<input name="AdresseEntreprise" type="text"/>
+						<input name="AdresseEntreprise" type="text" value="<?php echo $adresse_entreprise?>" size="35"/>
+					<br/>
+					<br/>
+					
+					<label for="VilleEntreprise">Ville : </label>
+						<input name="VilleEntreprise" type="text" value="<?php echo $ville_entreprise?>"/>
+					<br/>
+					<br/>
+					
+					<label for="CPEntreprise">Code postal : </label>
+						<input name="CPEntreprise" type="text" value="<?php echo $cp_entreprise?>"/>
 					<br/>
 					<br/>
 					
 					<label for="NomResponsable">Nom du responsable du stage : </label>
-						<input name="NomResponsable" type="text"/>
+						<input name="NomResponsable" type="text" value="<?php echo $prenom_tuteur." ".$nom_tuteur?>" disabled="disabled"/>
 					<br/>
 					<br/>
 					
 					<label for="TelResponsable">Numéro de téléphone où l'on peut le joindre : </label>
-						<input name="TelResponsable" type="text"/>
+						<input name="TelResponsable" type="text" value="<?php echo $tel_tuteur?>" disabled="disabled"/>
 					<br/>
 					<br/>
 					
 					<label for="MailResponsable">E-mail : </label>
-						<input name="MailResponsable" type="text"/>
-					<br/>
-					<br/>
-					
-					<label for="JourRencontre">Jour de la semaine où il est possible de le rencontrer : </label>
-						<input name="JourRencontre" type="text"/>
+						<input name="MailResponsable" type="text" value="<?php echo $mail_tuteur?>" disabled="disabled" size="35"/>
 					<br/>
 					<br/>
 					
@@ -138,22 +276,22 @@
 					<h3> Etudiant </h3>
 					
 					<label for="TelEntreprise">Numéro de téléphone où l'on peut vous joindre en entreprise : </label>
-						<input name="TelEntreprise" type="text"/>
+						<input name="TelEntreprise" type="text" value="<?php echo $tel_entreprise?>"/>
 					<br/>
 					<br/>
 					
 					<label for="TelEtudiant">Numéro de téléphone portable : </label>
-						<input name="TelEtudiant" type="text"/>
+						<input name="TelEtudiant" type="text" value="<?php echo $tel_portable?>"/>
 					<br/>
 					<br/>
 					
 					<label for="MailPerso">E-Mail personnel : </label>
-						<input name="MailPerso" type="text"/>
+						<input name="MailPerso" type="text" value="<?php echo $mail_perso?>" size="35"/>
 					<br/>
 					<br/>
 					
 					<label>Sujet du stage : </label> <br/>
-						<textarea rows="20" cols="50"></textarea>
+						<textarea rows="20" cols="50"><?php echo $sujet_stage?></textarea>
 					<br/>
 					
 				

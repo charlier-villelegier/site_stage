@@ -2,8 +2,8 @@
 	include("bd.php");
 	class Membre {
 		
-		private $login;
-		private $mdp;
+		public $login;
+		public $mdp;
 		public $nom;
 		public $prenom;
 		private $fonction;
