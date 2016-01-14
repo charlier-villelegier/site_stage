@@ -47,7 +47,27 @@
 		}
 		
 		public function maj(){
-			$this=new Membre($this->login,$this->mdp,$this->fonction);
+			$bd = new Bd("site_stage");
+			$co = $bd->connexion();
+			
+			switch($this->fonction){
+				case "etudiant":
+					$resultat = mysqli_query($co, "SELECT nom,prenom FROM etudiant WHERE login='$this->login' AND mdp='$this->mdp'");
+					break;
+							
+				case "enseignant":
+					$resultat = mysqli_query($co, "SELECT nom,prenom FROM enseignant WHERE login='$this->login' AND mdp='$this->mdp'");
+					break;
+							
+				case "tuteur":
+					$resultat = mysqli_query($co, "SELECT nom,prenom FROM tuteur_entreprise WHERE login='$this->login' AND mdp='$this->mdp'");
+					break;
+							
+			}
+			
+			$row = mysqli_fetch_row($resultat);
+			$this->nom=$row[0];
+			$this->prenom=$row[1];
 			
 		}
 		
