@@ -46,6 +46,11 @@
 			mysqli_query($co, "UPDATE membres SET mdpasse=$this->mdpasse WHERE id=$this->id");	
 		}
 		
+		public function maj(){
+			$this=new Membre($this->login,$this->mdp,$this->fonction);
+			
+		}
+		
 		public function deconnexion() {
 			session_destroy();
 		} 
