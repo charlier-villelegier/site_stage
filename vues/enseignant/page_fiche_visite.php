@@ -1,4 +1,4 @@
-<!--Si l'utilisateur accède a la page alors qu'il n'est pas connecté, on le redirige -->
+<!--Si l'utilisateur accÃ¨de a la page alors qu'il n'est pas connectÃ©, on le redirige -->
 <?php
 	include("../../modeles/membre.php");
 	session_start();
@@ -14,7 +14,7 @@
     <title>Gestion des stages - Accueil</title>
     <link href="../../style.css" rel="stylesheet" type="text/css" />
 	<script src="../../js/jquery-1.11.1.min.js" type="text/javascript"></script>
-	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   </head>
   
   <body>
@@ -24,7 +24,7 @@
 		<div class="ConteneurPrincipalePetit">
 			<div class="ConteneurPetitPlan">
 				<div class="PlanMenu">Votre compte</div>
-                <form method="post" action="deconnexion.php">
+                <form method="post" action="../../controleurs/deconnexion.php">
 					<div class="TexteBonjour">
                     	<p>
 							<?php $membre=$_SESSION['membre']; echo "Bonjour ".strtoupper($membre->nom)." ".$membre->prenom; ?> 
@@ -35,7 +35,7 @@
                     	Statut : Professeur
                     </p>
                     <p>
-						<input name="Deconnexion" type="submit" value="Déconnexion"/>
+						<input name="Deconnexion" type="submit" value="DÃ©connexion"/>
 					</p>
                    
 				</form>
@@ -51,11 +51,11 @@
 			<div class="ConteneurPetitPlan">
 				<div class="PlanMenu">Menu</div>
 				<ul>
-					<li><div class="TitrePlan"><a href="#encadrement">Encadrement de l'étudiant</a></div></li>
+					<li><div class="TitrePlan"><a href="#encadrement">Encadrement de l'Ã©tudiant</a></div></li>
 					<li><div class="TitrePlan"><a href="#objet">Objet du stage</a></div></li>
-					<li><div class="TitrePlan"><a href="#avisEtu">Avis sur l'étudiant</a></div></li>
+					<li><div class="TitrePlan"><a href="#avisEtu">Avis sur l'Ã©tudiant</a></div></li>
                     <li><div class="TitrePlan"><a href="#avisIUT">Avis sur l'IUT</a></div></li>
-                    <li><div class="TitrePlan"><a href="#avisGeneral">Avis général</a></div></li>
+                    <li><div class="TitrePlan"><a href="#avisGeneral">Avis gÃ©nÃ©ral</a></div></li>
 				</ul>
 			</div>
 		</div>
@@ -68,9 +68,9 @@
 				<div id="Ribbon">
 					<ul>
 						<li><a href="accueil.php">Accueil</a></li>
-						<li><a href="#" class="PageActive">Gérer mes étudiants</a></li>
+						<li><a href="#" class="PageActive">GÃ©rer mes Ã©tudiants</a></li>
 						<li><a href="#">Etudiants disponibles</a></li>
-						<li><a href="#">Mes disponibilités</a></li>
+						<li><a href="#">Mes disponibilitÃ©s</a></li>
                         <li><a href="#">Contacts</a></li>
 					</ul>
 				</div>
@@ -80,7 +80,7 @@
 				<div class="TitrePartie" id="titre1">COMPTE-RENDU DE VISITE DE STAGE</div>
 	<form method="get" action="faille.php">
 		<p>
-			<label for="NomEtudiant">Nom de l'étudiant : </label>
+			<label for="NomEtudiant">Nom de l'Ã©tudiant : </label>
 				<input name="NomEtudiant" type="text"/>
 			<br/>
             <br/>
@@ -114,7 +114,7 @@
 			<br/>
 			<br/>
 			
-			<label>Vous êtes vous rendu sur le lieu du stage pour rencontrer le stagiaire et son responsable de stage ? </label>
+			<label>Vous Ãªtes vous rendu sur le lieu du stage pour rencontrer le stagiaire et son responsable de stage ? </label>
 				<input name="StagiaireRencontre" type="radio" value="StagiaireRencontre"/><label for="StagiaireRencontre">Oui </label>
 				<input name="StagiaireRencontre" type="radio" value="StagiaireNonRencontre"/><label for="StagiaireNonRencontre">Non </label>
 			<br/>
@@ -125,7 +125,7 @@
 			<br/>
 			<br/>
 			
-			<label for="NomResponsable">Nom du responsable rencontré : </label>
+			<label for="NomResponsable">Nom du responsable rencontrÃ© : </label>
 				<input name="NomResponsable" type="text"/>
             <br/>
             <br/>
@@ -135,12 +135,12 @@
 			<br/>
 			<br/>
 			
-			<label for="NomRH">Nom du responsable des Ressources Humaines ou de la personne à contacter pour la taxe d'apprentissage : </label>
+			<label for="NomRH">Nom du responsable des Ressources Humaines ou de la personne Ã  contacter pour la taxe d'apprentissage : </label>
 				<input name="NomRH" type="text"/>
 			<br/>
 			<br/>
 			
-			<label for="TelRH">Téléphone : </label>
+			<label for="TelRH">TÃ©lÃ©phone : </label>
 				<input name="TelRH" type="text"/>
 				
 			<label for="MailRH">E-mail : </label>
@@ -149,45 +149,45 @@
 			<div id="encadrement"></div>
 			<h3> ENCADREMENT DE L'ETUDIANT : </h3>
 			
-			<label>L'étudiant a-t-il été encadré directement par un informaticien ? </label>
+			<label>L'Ã©tudiant a-t-il Ã©tÃ© encadrÃ© directement par un informaticien ? </label>
 				<input name="Informaticien" type="radio" value="Informaticien"/><label for="Informaticien">Oui </label>
 				<input name="Informaticien" type="radio" value="NonInformaticien"/><label for="NonInformaticien">Non </label>
 			<br/>
 			<br/>
 			
-			<label>Si non, en cas de besoin pouvait-il faire appel à un informaticien ? </label>
+			<label>Si non, en cas de besoin pouvait-il faire appel Ã  un informaticien ? </label>
 				<input name="AppelInformaticien" type="radio" value="AppelInformaticien"/><label for="AppelInformaticien">Oui </label>
 				<input name="AppelInformaticien" type="radio" value="NonAppelInformaticien"/><label for="NonAppelInformaticien">Non </label>
 			<br/>
 			<br/>
 			
-			<label>Dans le cadre de votre stage, l'étudiant a-t-il travaillé seul ? </label>
+			<label>Dans le cadre de votre stage, l'Ã©tudiant a-t-il travaillÃ© seul ? </label>
 				<input name="Equipe" type="radio" value="Seul"/><label for="Seul">Oui </label>
 				<input name="Equipe" type="radio" value="Groupe"/><label for="Groupe">Non </label>
 			<br/>
 			<br/>
 			
-			<label for="TailleEquipe">Si non, taille de l'équipe : </label>
+			<label for="TailleEquipe">Si non, taille de l'Ã©quipe : </label>
 				<input name="TailleEquipe" type="text"/>
 			<br/>
 			<br/>
 			<div id="objet"></div>
-			<h3> OBJET PRINCIPAL DU STAGE (2 cases maximum à cocher) : </h3>
+			<h3> OBJET PRINCIPAL DU STAGE (2 cases maximum Ã  cocher) : </h3>
 			
-				<input name="ObjetStage" type="checkbox" value="Systeme"/><label for="Systeme">Système </label>
+				<input name="ObjetStage" type="checkbox" value="Systeme"/><label for="Systeme">SystÃ¨me </label>
 				<input name="ObjetStage" type="checkbox" value="Multimedia"/><label for="Multimedia">Multimedia </label>
-				<input name="ObjetStage" type="checkbox" value="Reseaux"/><label for="Reseaux">Réseaux </label>
-				<input name="ObjetStage" type="checkbox" value="DeveloppementWEB"/><label for="DeveloppementWEB">Développement WEB </label> <br/>
-				<input name="ObjetStage" type="checkbox" value="AutreDvpt"/><label for="AutreDvpt">Autre Développement </label>
-				<input name="ObjetStage" type="checkbox" value="BD"/><label for="BD">Base de données </label>
-				<input name="ObjetStage" type="checkbox" value="Autre"/><label for="Autre">Autre (préciser) </label>
+				<input name="ObjetStage" type="checkbox" value="Reseaux"/><label for="Reseaux">RÃ©seaux </label>
+				<input name="ObjetStage" type="checkbox" value="DeveloppementWEB"/><label for="DeveloppementWEB">DÃ©veloppement WEB </label> <br/>
+				<input name="ObjetStage" type="checkbox" value="AutreDvpt"/><label for="AutreDvpt">Autre DÃ©veloppement </label>
+				<input name="ObjetStage" type="checkbox" value="BD"/><label for="BD">Base de donnÃ©es </label>
+				<input name="ObjetStage" type="checkbox" value="Autre"/><label for="Autre">Autre (prÃ©ciser) </label>
 				<input name="ObjetStage" type="text"/>
 			
             <div id="avisEtu"></div>
-			<h3> AVIS DE L’ENTREPRISE SUR LE TRAVAIL ET LE COMPORTEMENT DE L’ETUDIANT </h3>
+			<h3> AVIS DE Lâ€™ENTREPRISE SUR LE TRAVAIL ET LE COMPORTEMENT DE Lâ€™ETUDIANT </h3>
 			
-			<label>Globalement, concernant le travail de l'étudiant, êtes-vous : </label> <br/>
-				<input name="Satisfaction" type="radio" value="TresSatisfait"/><label for="TresSatisfait">Très satisfait </label> <br/>
+			<label>Globalement, concernant le travail de l'Ã©tudiant, Ãªtes-vous : </label> <br/>
+				<input name="Satisfaction" type="radio" value="TresSatisfait"/><label for="TresSatisfait">TrÃ¨s satisfait </label> <br/>
 				<input name="Satisfaction" type="radio" value="Satisfait"/><label for="Satisfait">Satisfait </label> <br/>
 				<input name="Satisfaction" type="radio" value="PeuSatisfait"/><label for="PeuSatisfait">Peu satisfait </label> <br/>
 				<input name="Satisfaction" type="radio" value="PasSatisfait"/><label for="PasSatisfait">Pas satisfait </label> <br/>
@@ -199,16 +199,16 @@
 			<br/>
 			
             <div id="avisIUT"></div>
-			<h3> AVIS DE L’ENTREPRISE SUR LA FORMATION RECUE A L'IUT </h3>
+			<h3> AVIS DE Lâ€™ENTREPRISE SUR LA FORMATION RECUE A L'IUT </h3>
 			
-			<label>Dans la formation telle que vous l'avez perçue lors de la présence du stagiaire dans votre entreprise avez-vous constaté des manques handicapants pour un futur informaticien ?</label>
+			<label>Dans la formation telle que vous l'avez perÃ§ue lors de la prÃ©sence du stagiaire dans votre entreprise avez-vous constatÃ© des manques handicapants pour un futur informaticien ?</label>
             <br/>
 				<input name="Manque" type="radio" value="Manque"/><label for="Manque">Oui </label>
 				<input name="Manque" type="radio" value="PasDeManque"/><label for="PasDeManque">Non </label>
 			<br/>
 			<br/>
 			
-			<label>Si oui, précisez lesquelles : </label> <br/>
+			<label>Si oui, prÃ©cisez lesquelles : </label> <br/>
 				<textarea rows="10" cols="50"></textarea>
 			<br/>
 			<br/>
@@ -220,10 +220,10 @@
 			<br/>
 			<br/>
 			
-			<label>En conclusion, cette entreprise peut-elle les prochaines années accueillir dans des conditions correctes ses étudiants ?</label> <br/>
+			<label>En conclusion, cette entreprise peut-elle les prochaines annÃ©es accueillir dans des conditions correctes ses Ã©tudiants ?</label> <br/>
 				<input name="Accueil" type="radio" value="AccueilPossible"/><label for="AccueilPossible">Oui </label> <br/>
 				<input name="Accueil" type="radio" value="AccueilImpossible"/><label for="AccueilImpossible">Non </label> <br/>
-				<input name="Accueil" type="radio" value="AccueilSousCondition"/><label for="AccueilSousCondition">Oui, mais en prenant quelques précautions. Quelles précautions ?</label> <br/>
+				<input name="Accueil" type="radio" value="AccueilSousCondition"/><label for="AccueilSousCondition">Oui, mais en prenant quelques prÃ©cautions. Quelles prÃ©cautions ?</label> <br/>
 				<textarea rows="20" cols="50"></textarea>
 			<br/>
 			<br/>
@@ -237,7 +237,7 @@
 		</div>
     
 		<div class="ConteneurBas">
-			<p>Copyright © 2015 - IUT Orsay (Léo Charlier, Xavier Villelegier)</p>
+			<p>Copyright Â© 2015 - IUT Orsay (LÃ©o Charlier, Xavier Villelegier)</p>
 			<!--
             A enlever du commentaire quand la page sera valide CSS et XHTML
             <p>

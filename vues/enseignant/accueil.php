@@ -60,10 +60,11 @@
 			<div class="Bleue">
 				<div id="Ribbon">
 					<ul>
-						<li><a href="#" class="PageActive">Accueil</a></li>
-						<li><a href="page_fiche_visite.php">Mes fiches</a></li>
-						<li><a href="#">Disponibilités</a></li>
-						<li><a href="#">Contacts</a></li>
+						<li><a href="accueil.php" class="PageActive">Accueil</a></li>
+						<li><a href="#" >Gérer mes étudiants</a></li>
+						<li><a href="#">Etudiants disponibles</a></li>
+						<li><a href="#">Mes disponibilités</a></li>
+                        <li><a href="#">Contacts</a></li>
 					</ul>
 				</div>
 			</div>
