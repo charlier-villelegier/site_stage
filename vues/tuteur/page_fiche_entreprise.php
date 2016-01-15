@@ -334,20 +334,20 @@
 						<label for="projetProfessionel"> 	Embaucheriez-vous le stagiaire si vous en aviez la possibilité ? (Ceci n'a pour but que
 						d'apprécier les services que pourrait rendre le candidat dans une entreprise.)</label>	
 						</br>
-						<input type="radio" name="remarque" value="news" <?php if($embauche == "Oui")echo "checked=\"checked\"" ?>/> Oui
-						<input type="radio" name="remarque" value="news" <?php if($embauche == "Peut-être")echo "checked=\"checked\"" ?>/> Peut-être
-						<input type="radio" name="remarque" value="news" <?php if($embauche == "Non")echo "checked=\"checked\"" ?>/> Non
+						<input type="radio" name="embauche" value="Oui" <?php if($embauche == "Oui")echo "checked=\"checked\"" ?>/> Oui
+						<input type="radio" name="embauche" value="Peut-être" <?php if($embauche == "Peut-être")echo "checked=\"checked\"" ?>/> Peut-être
+						<input type="radio" name="embauche" value="Non" <?php if($embauche == "Non")echo "checked=\"checked\"" ?>/> Non
 						</br>
 						</br>
 						
 						
 						<label for="experience"> Pour quelles raisons ?</label> </br>
-						<textarea name="projetProfessionel" id="projetProfessionel" rows="10" cols="50"><?php echo $raison_embauche ?></textarea></br>
+						<textarea name="raisonEmbauche" rows="10" cols="50"><?php echo $raison_embauche ?></textarea></br>
 						</br>
 						
 						<label for="projetProfessionel"> Seriez-vous présent lors de la soutenance de votre stagiaire ou un autre représentant de l’entreprise ?</label>	
-						<input type="radio" name="remarque" value="news"  <?php if($presence_soutenance)echo "checked=\"checked\"" ?>/> Oui
-						<input type="radio" name="remarque" value="news" <?php if(!$presence_soutenance)echo "checked=\"checked\"" ?>/> Non
+						<input type="radio" name="PresenceSoutenance" value="Present"  <?php if($presence_soutenance)echo "checked=\"checked\"" ?>/> Oui
+						<input type="radio" name="PresenceSoutenance" value="Absent" <?php if(!$presence_soutenance)echo "checked=\"checked\"" ?>/> Non
 						</br>
 						
 						<p style="text-align: center;">
