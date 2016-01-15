@@ -139,6 +139,9 @@
   <head> 
     <title>Gestion des stages - Accueil</title>
     <link href="../../style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../js/buttons.css"/>
+    <link rel="stylesheet" type="text/css" href="../../js/animate.css"/>
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css"/>
 	<script src="../../js/jquery-1.11.1.min.js" type="text/javascript"></script>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   </head>
@@ -338,21 +341,21 @@
 						<div id="objet"> </div>
 						<h3> OBJET PRINCIPAL DU STAGE (2 cases maximum à cocher) : </h3>
 						
-							<input name="ObjetStage" type="checkbox" value="Systeme"
+							<input name="Systeme" type="checkbox" value="Systeme"
                             <?php if($systeme)echo "checked=\"checked\"" ?>/><label for="Systeme">Système </label>
-							<input name="ObjetStage" type="checkbox" value="Multimedia"
+							<input name="Multimedia" type="checkbox" value="Multimedia"
                             <?php if($multimedia)echo "checked=\"checked\"" ?>/><label for="Multimedia">Multimedia </label>
-							<input name="ObjetStage" type="checkbox" value="Reseaux"
+							<input name="Reseaux" type="checkbox" value="Reseaux"
                             <?php if($reseau)echo "checked=\"checked\"" ?>/><label for="Reseaux">Réseaux </label>
-							<input name="ObjetStage" type="checkbox" value="DeveloppementWEB"
+							<input name="DeveloppementWEB" type="checkbox" value="DeveloppementWEB"
                             <?php if($web)echo "checked=\"checked\"" ?>/><label for="DeveloppementWEB">Développement WEB </label> <br/>
-							<input name="ObjetStage" type="checkbox" value="AutreDvpt"
+							<input name="AutreDvpt" type="checkbox" value="AutreDvpt"
                             <?php if($autre_dev)echo "checked=\"checked\"" ?>/><label for="AutreDvpt">Autre Développement </label>
-							<input name="ObjetStage" type="checkbox" value="BD"
+							<input name="BD" type="checkbox" value="BD"
                             <?php if($bd)echo "checked=\"checked\"" ?>/><label for="BD">Base de données </label>
-							<input name="ObjetStage" type="checkbox" value="Autre"
+							<input name="AutreObjet" type="checkbox" value="Autre"
                             <?php if($autre_objet)echo "checked=\"checked\"" ?>/><label for="Autre">Autre (préciser) </label>
-							<input name="ObjetStage" type="text" value="<?php echo $autre_objet ?>"/>
+							<input name="AutreObjetText" type="text" value="<?php echo $autre_objet ?>"/>
 						
 						<div id="avis_stage"> </div>
 						<h3> AVIS DE L'ETUDIANT SUR LE STAGE : </h3>
@@ -367,7 +370,7 @@
 						<br/>
 						
 						<label>Si non expliquez en quelques mots pourquoi : </label> <br/>
-							<textarea rows="10" cols="50" ><?php echo $explication_satisfaction ?></textarea>
+							<textarea name="ExplicationSatisfaction" rows="10" cols="50" ><?php echo $explication_satisfaction ?></textarea>
 						<br/>
 						<br/>
 						
@@ -442,6 +445,52 @@
 		</div>
 	</div>
     
+    <?php
+		if(isset($_GET['saved'])){
+		echo"
+    <script type=\"text/javascript\" src=\"../../js/noty/packaged/jquery.noty.packaged.js\"></script>
+    <script type=\"text/javascript\">
+
+
+        function generate(type, text) {
+
+            var n = noty({
+                text        : text,
+                type        : type,
+                dismissQueue: true,
+                layout      : 'bottomRight',
+                theme       : 'relax',
+                maxVisible  : 10,
+                animation   : {
+                    open  : 'animated bounceInRight',
+                    close : 'animated bounceOutRight',
+                    easing: 'swing',
+                    speed : 500
+                }
+            });
+            console.log('html: ' + n.options.id);
+        }
+
+        function generateAll() {
+            generate('success', '<div class=\"activity-item\"> <i class=\"fa fa-check text-success\"></i> <div class=\"activity\"> Vos changements ont bien été enregistrés </div> </div>');
+        }
+
+        $(document).ready(function () {
+
+            setTimeout(function() {
+                generateAll();
+            }, 200);
+			
+			setTimeout(function () {
+           		$.noty.closeAll();
+        	}, 3000);
+		
+        });
+
+    </script>
+    ";
+    }
+    ?>
     <!--Scripte pour que le menu verticale suive le scroll-->
 	<script type="text/javascript">
 		// listen for scroll

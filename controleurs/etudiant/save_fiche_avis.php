@@ -74,10 +74,7 @@
 	}
 	
 	//Environnement général
-	if(isset($_POST['Materiel'])){
-		echo("c'est good");
-									 
-									 
+	if(isset($_POST['Materiel'])){							 	 
 		$type_materiel = ($_POST['Materiel']=="PC"? $_POST['Materiel'] : $_POST['MaterielText']);
 		$unix = (isset($_POST['UNIX']) ? true : false);
 		$linux = (isset($_POST['LINUX']) ? true : false);
@@ -92,10 +89,37 @@
 							WHERE num_fiche='$num_fiche_avis'");	
 	}
 	
+	//Objet du stage
+	if(isset($_POST['AutreObjetText'])){
+		echo("c'est good");				 
+		$systeme = (isset($_POST['Systeme']) ? true : false);
+		$multimedia = (isset($_POST['Multimedia']) ? true : false);
+		$reseau = (isset($_POST['Reseaux']) ? true : false);
+		$dev_web = (isset($_POST['DeveloppementWEB']) ? true : false);
+		$autre_dev = (isset($_POST['AutreDvpt']) ? true : false);
+		$bd = (isset($_POST['BD']) ? true : false);
+		$autre_objet = ((isset($_POST['AutreObjet']) ? $_POST['AutreObjetText'] : NULL));
+		
+		mysqli_query($co,  "UPDATE fiche_avis
+							SET systeme='$systeme', multimedia='$multimedia',reseau='$reseau',
+								web='$dev_web', autre_dev='$autre_dev', bd='$bd', autre_objet='$autre_objet'
+							WHERE num_fiche='$num_fiche_avis'");	
+	}
+	
+	
+	//Objet du stage
+	if(isset($_POST['Satisfait']) && isset($_POST['ExplicationSatisfaction'])){
+		$satisfait_condition = ($_POST['Satisfait']=="Satisfait"? true : false);
+		$explication_satisfaction = ($satisfait_condition? NULL : $_POST['ExplicationSatisfaction']);
+		
+		mysqli_query($co,  "UPDATE fiche_avis
+							SET satisfait_condition='$satisfait_condition', explication_satisfaction='$explication_satisfaction'
+							WHERE num_fiche='$num_fiche_avis'");	
+	}
 	
 	//On met à jour le membre et on redirige vers le forumaire
 	$membre->maj();
-	header("Location: ../../vues/etudiant/page_fiche_avis.php");
+	header("Location: ../../vues/etudiant/page_fiche_avis.php?saved=true");
 	
 ?>
 
