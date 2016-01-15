@@ -3,7 +3,6 @@
 	include("../../modeles/membre.php");
 	session_start();
 	if(!isset($_SESSION['membre'])){
-		echo"pas de membre";
 		header('Location: ../../index.html'); 
 	}
 	$membre=$_SESSION['membre'];
@@ -201,13 +200,13 @@
       
 			<div class="ConteneurTexte">   
 				<div class="TitrePartie" id="titre1">AVIS ETUDIANT</div>
-					<form method="post" action="faille.php">
+					<form method="post" action="../../controleurs/etudiant/save_fiche_avis.php">
 					<p>
 						<label for="NomEtudiant">Nom : </label>
 							<input name="NomEtudiant" type="text" value="<?php echo $membre->nom ?>"/>
 							
 						<label for="PrenomEtudiant">Prénom : </label>
-							<input name="¨PrenomEtudiant" type="text" value="<?php echo $membre->prenom ?>"/>
+							<input name="PrenomEtudiant" type="text" value="<?php echo $membre->prenom ?>"/>
 						<br/>
 						<br/>
 						
@@ -312,27 +311,27 @@
 							<?php if($type_materiel=="PC")echo "checked=\"checked\"" ?>/><label for="PC">PC </label>
 							<input name="Materiel" type="radio" value="Autre"
                             <?php if($type_materiel!="PC")echo "checked=\"checked\"" ?>/><label for="Autre">Autre (préciser) </label>
-							<input name="Materiel" type="text"/>
+							<input name="MaterielText" type="text" value="<?php if($type_materiel!="PC")echo $type_materiel ?>"/>
 						<br/>
 						<br/>
 						
 						<label>Système : </label>
-							<input name="Systeme" type="checkbox" value="UNIX"
+							<input name="UNIX" type="checkbox" value="UNIX"
                             <?php if($unix)echo "checked=\"checked\"" ?>/><label for="UNIX">UNIX </label>
-							<input name="Systeme" type="checkbox" value="LINUX"
+							<input name="LINUX" type="checkbox" value="LINUX"
                             <?php if($linux)echo "checked=\"checked\"" ?>/><label for="LINUX">LINUX </label>
-							<input name="Systeme" type="checkbox" value="NT"
+							<input name="NT" type="checkbox" value="NT"
                             <?php if($nt)echo "checked=\"checked\"" ?>/><label for="UNIX">NT </label>
-							<input name="Systeme" type="checkbox" value="WINDOWS"
+							<input name="WINDOWS" type="checkbox" value="WINDOWS"
                             <?php if($windows)echo "checked=\"checked\"" ?>/><label for="LINUX">WINDOWS </label> <br/>
-							<input name="Systeme" type="checkbox" value="Autre"
+							<input name="Autre" type="checkbox" value="Autre"
                             <?php if($autre_systeme)echo "checked=\"checked\"" ?>/><label for="Autre">Autre (préciser) </label>
-							<input name="Systeme" type="text" value="<?php echo $autre_systeme ?>"/>
+							<input name="AutreSystemeText" type="text" value="<?php echo $autre_systeme ?>"/>
 						<br/>
 						<br/>
 						
-						<label for="Language">Language : </label>
-							<input name="Language" type="text" value="<?php echo $langage ?>"/>
+						<label for="Langage">Langage : </label>
+							<input name="Langage" type="text" value="<?php echo $langage ?>"/>
 						<br/>
 						<br/>
 						
