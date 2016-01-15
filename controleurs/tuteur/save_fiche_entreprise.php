@@ -9,8 +9,8 @@
 	
 	//Tuteur
 	if(isset($_POST['NomResponsableStage']) && isset($_POST['PrenomResponsableStage'])){
-		$nom=$_POST['NomResponsableStage'];
-		$prenom=$_POST['PrenomResponsableStage'];
+		$nom=mysqli_real_escape_string($co,$_POST['NomResponsableStage']);
+		$prenom=mysqli_real_escape_string($co,$_POST['PrenomResponsableStage']);
 		
 		mysqli_query($co,  "UPDATE tuteur_entreprise
 							SET nom='$nom', prenom='$prenom'
@@ -19,7 +19,7 @@
 	
 	//Entreprise
 	if(isset($_POST['entrepriseRaisonSociale'])){
-		$nom_entreprise=$_POST['entrepriseRaisonSociale'];
+		$nom_entreprise=mysqli_real_escape_string($co,$_POST['entrepriseRaisonSociale']);
 		
 		mysqli_query($co,  "UPDATE entreprise
 							SET nom_entreprise='$nom_entreprise'
