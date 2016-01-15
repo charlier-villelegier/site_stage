@@ -98,6 +98,9 @@
   <head> 
     <title>Gestion des stages - Accueil</title>
     <link href="../../style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../js/buttons.css"/>
+    <link rel="stylesheet" type="text/css" href="../../js/animate.css"/>
+    <link rel="stylesheet" href="../../js/font-awesome/css/font-awesome.min.css"/>
 	<script src="../../js/jquery-1.11.1.min.js" type="text/javascript"></script>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   </head>
@@ -369,6 +372,54 @@
             -->
 		</div>
 	</div>
+    
+     <!-- Affiche la popup de données enregistrées si nécessaire--!>
+    <?php
+		if(isset($_GET['saved'])){
+		echo"
+    <script type=\"text/javascript\" src=\"../../js/noty/packaged/jquery.noty.packaged.js\"></script>
+    <script type=\"text/javascript\">
+
+
+        function generate(type, text) {
+
+            var n = noty({
+                text        : text,
+                type        : type,
+                dismissQueue: true,
+                layout      : 'bottomRight',
+                theme       : 'relax',
+                maxVisible  : 10,
+                animation   : {
+                    open  : 'animated bounceInRight',
+                    close : 'animated bounceOutRight',
+                    easing: 'swing',
+                    speed : 500
+                }
+            });
+            console.log('html: ' + n.options.id);
+        }
+
+        function generateAll() {
+            generate('success', '<div class=\"activity-item\"> <i class=\"fa fa-check text-success\"></i> <div class=\"activity\"> Vos changements ont bien été enregistrés </div> </div>');
+        }
+
+        $(document).ready(function () {
+
+            setTimeout(function() {
+                generateAll();
+            }, 200);
+			
+			setTimeout(function () {
+           		$.noty.closeAll();
+        	}, 3000);
+		
+        });
+
+    </script>
+    ";
+    }
+    ?>
     
     <!--Scripte pour que le menu verticale suive le scroll-->
 	<script type="text/javascript">

@@ -141,7 +141,7 @@
     <link href="../../style.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../js/buttons.css"/>
     <link rel="stylesheet" type="text/css" href="../../js/animate.css"/>
-    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="../../js/font-awesome/css/font-awesome.min.css"/>
 	<script src="../../js/jquery-1.11.1.min.js" type="text/javascript"></script>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   </head>
@@ -396,7 +396,7 @@
 						<br/>
 						
 						<label>Si non expliquez en quelques mots pourquoi : </label> <br/>
-							<textarea rows="10" cols="50"><?php echo $explication_objectif ?></textarea>
+							<textarea rows="10" cols="50" name="ExplicationObjectif"><?php echo $explication_objectif ?></textarea>
 						<br/>
 						<br/>
 						
@@ -412,7 +412,7 @@
 						<br/>
 						
 						<label>Si oui, précisez lesquelles : </label> <br/>
-							<textarea rows="10" cols="50"><?php echo $explication_matiere ?></textarea>
+							<textarea rows="10" cols="50" name="ExplicationAvis"><?php echo $explication_matiere ?></textarea>
 						<br/>
 						<br/>
 						
@@ -420,7 +420,7 @@
 						<h3> APPORT DU STAGE DANS VOTRE PROJET PERSONNEL ET PROFESSIONNEL : </h3>
 						
 						<label> Précisez en quelques lignes comment le stage a enrichi ou modifié votre projet personnel et professionnel :</label> <br/>
-							<textarea rows="20" cols="50"><?php echo $apport_stage ?></textarea>
+							<textarea rows="20" cols="50" name="ApportStage"><?php echo $apport_stage ?></textarea>
 						<br/>
 						<br/>
 						
@@ -445,6 +445,7 @@
 		</div>
 	</div>
     
+    <!-- Affiche la popup de données enregistrées si nécessaire--!>
     <?php
 		if(isset($_GET['saved'])){
 		echo"

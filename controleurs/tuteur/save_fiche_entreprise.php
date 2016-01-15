@@ -58,8 +58,11 @@
 							WHERE num_fiche ='$num_fiche_tuteur'");	
 	}
 	
-	echo "c'est good";
-	
 	//Méthodes de travail et aptitudes
 	
+	
+	
+	//On met à jour le membre et on redirige vers le forumaire
+	$membre->maj();
+	header("Location: ../../vues/tuteur/page_fiche_avis.php?saved=true");
 ?>

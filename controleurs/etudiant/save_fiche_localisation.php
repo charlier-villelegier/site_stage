@@ -47,5 +47,5 @@
 	
 	//On met à jour le membre et on redirige vers le forumaire
 	$membre->maj();
-	header("Location: ../../vues/etudiant/page_fiche_localisation.php");
+	header("Location: ../../vues/etudiant/page_fiche_localisation.php?saved=true");
 ?>
