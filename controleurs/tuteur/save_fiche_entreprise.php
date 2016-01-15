@@ -17,6 +17,17 @@
 							WHERE login='$membre->login' AND mdp='$membre->mdp'");	
 	}
 	
+	//Entreprise
+	if(isset($_POST['entrepriseRaisonSociale'])){
+		$nom_entreprise=$_POST['entrepriseRaisonSociale'];
+		
+		mysqli_query($co,  "UPDATE entreprise
+							SET nom_entreprise='$nom_entreprise'
+							WHERE num_entreprise IN (SELECT entreprise
+													FROM tuteur_entreprise
+													WHERE login='$membre->login' AND mdp='$membre->mdp')");	
+	}
+	
 	//On vérifie s'il a déjà une fiche_tuteur dans la base de données
 	$resultat = mysqli_query($co,  "SELECT sa_fiche_tuteur
 									FROM etudiant E, appariement_tuteur A, tuteur_entreprise T
@@ -35,8 +46,20 @@
 							WHERE login IN (SELECT etudiant
 											FROM appariement_tuteur	A, tuteur_entreprise T
 											WHERE A.tuteur = T.login
-											AND T.login='$membre->login' ABD T.mdp='$membre->mdp'");
+											AND T.login='$membre->login' AND T.mdp='$membre->mdp')");
+	}
+	
+	//Jury
+	if(isset($_POST['NumJury'])){
+		$num_jury=$_POST['NumJury'];
+		
+		mysqli_query($co,  "UPDATE fiche_tuteur
+							SET num_jury='$num_jury'
+							WHERE num_fiche ='$num_fiche_tuteur'");	
 	}
 	
 	echo "c'est good";
+	
+	//Méthodes de travail et aptitudes
+	
 ?>
