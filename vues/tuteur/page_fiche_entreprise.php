@@ -183,50 +183,50 @@
 							
 							<TR>
 								<TD name="niveauConnaisanceTitre"> <label for="niveauConnaisanceTitre">  NIVEAU DE CONNAISSANCE </label> </TD>
-								<TD> <input type="radio" name="niveauConnaisance" value="Excellent" <?php if($niveau_connaissance = "Excellence")echo "checked=\"checked\"" ?>/> </TD>
-								<TD> <input type="radio" name="niveauConnaisance" value="Bon" <?php if($niveau_connaissance = "Bon")echo "checked=\"checked\"" ?>/> </TD>
-								<TD> <input type="radio" name="niveauConnaisance" value="Moyen" <?php if($niveau_connaissance = "Moyen")echo "checked=\"checked\"" ?>/> </TD>
-								<TD> <input type="radio" name="niveauConnaisance" value="Insuffisant" <?php if($niveau_connaissance = "Insuffisant")echo "checked=\"checked\"" ?>/> </TD>
+								<TD> <input type="radio" name="niveauConnaisance" value="Excellent" <?php if($niveau_connaissance == "Excellence")echo "checked=\"checked\"" ?>/> </TD>
+								<TD> <input type="radio" name="niveauConnaisance" value="Bon" <?php if($niveau_connaissance == "Bon")echo "checked=\"checked\"" ?>/> </TD>
+								<TD> <input type="radio" name="niveauConnaisance" value="Moyen" <?php if($niveau_connaissance == "Moyen")echo "checked=\"checked\"" ?>/> </TD>
+								<TD> <input type="radio" name="niveauConnaisance" value="Insuffisant" <?php if($niveau_connaissance =="Insuffisant")echo "checked=\"checked\"" ?>/> </TD>
 							</TR>
 							
 							<TR>
 								<TD name="organisationTitre"> <label for="organisationTitre">  ORGANISATION </label> </TD>
-								<TD> <input type="radio" name="organisation" value="Excellent" <?php if($organisation = "Excellence")echo "checked=\"checked\"" ?>/> </TD>
-								<TD> <input type="radio" name="organisation" value="Bon" <?php if($organisation = "Bon")echo "checked=\"checked\"" ?>/> </TD>
-								<TD> <input type="radio" name="organisation" value="Moyen" <?php if($organisation = "Moyen")echo "checked=\"checked\"" ?>/> </TD>
-								<TD> <input type="radio" name="organisation" value="Insuffisant" <?php if($organisation = "Insuffisant")echo "checked=\"checked\"" ?>/></TD>
+								<TD> <input type="radio" name="organisation" value="Excellent" <?php if($organisation == "Excellence")echo "checked=\"checked\"" ?>/> </TD>
+								<TD> <input type="radio" name="organisation" value="Bon" <?php if($organisation == "Bon")echo "checked=\"checked\"" ?>/> </TD>
+								<TD> <input type="radio" name="organisation" value="Moyen" <?php if($organisation == "Moyen")echo "checked=\"checked\"" ?>/> </TD>
+								<TD> <input type="radio" name="organisation" value="Insuffisant" <?php if($organisation == "Insuffisant")echo "checked=\"checked\"" ?>/></TD>
 							</TR>
 							
 							<TR>
 								<TD name="initiativeTitre"> <label for="initiativeTitre"> INITIATIVE </label> </TD>
-								<TD> <input type="radio" name="initiative" value="Excellent" <?php if($initiative = "Excellence")echo "checked=\"checked\"" ?>/>   </TD>
-								<TD> <input type="radio" name="initiative" value="Bon" <?php if($initiative = "Bon")echo "checked=\"checked\"" ?>/> </TD>
-								<TD> <input type="radio" name="initiative" value="Moyen" <?php if($initiative = "Moyen")echo "checked=\"checked\"" ?>/> </TD>
-								<TD> <input type="radio" name="initiative" value="Insuffisant" <?php if($initiative = "Insuffisant")echo "checked=\"checked\"" ?>/></TD>
+								<TD> <input type="radio" name="initiative" value="Excellent" <?php if($initiative == "Excellence")echo "checked=\"checked\"" ?>/>   </TD>
+								<TD> <input type="radio" name="initiative" value="Bon" <?php if($initiative == "Bon")echo "checked=\"checked\"" ?>/> </TD>
+								<TD> <input type="radio" name="initiative" value="Moyen" <?php if($initiative == "Moyen")echo "checked=\"checked\"" ?>/> </TD>
+								<TD> <input type="radio" name="initiative" value="Insuffisant" <?php if($initiative == "Insuffisant")echo "checked=\"checked\"" ?>/></TD>
 							</TR>
 							
 							<TR>
 								<TD name="perseveranceTitre"> <label for="perseveranceTitre"> PERSÉVÉRANCE </label> </TD>
-								<TD> <input type="radio" name="perseverance" value="Excellent" <?php if($perseverance = "Excellence")echo "checked=\"checked\"" ?>/>   </TD>
-								<TD> <input type="radio" name="perseverance" value="Bon" <?php if($perseverance = "Bon")echo "checked=\"checked\"" ?>/> </TD>
-								<TD> <input type="radio" name="perseverance" value="Moyen" <?php if($perseverance = "Moyen")echo "checked=\"checked\"" ?>/> </TD>
-								<TD> <input type="radio" name="perseverance" value="Insuffisant" <?php if($perseverance = "Insuffisant")echo "checked=\"checked\"" ?>/></TD>
+								<TD> <input type="radio" name="perseverance" value="Excellent" <?php if($perseverance == "Excellence")echo "checked=\"checked\"" ?>/>   </TD>
+								<TD> <input type="radio" name="perseverance" value="Bon" <?php if($perseverance == "Bon")echo "checked=\"checked\"" ?>/> </TD>
+								<TD> <input type="radio" name="perseverance" value="Moyen" <?php if($perseverance == "Moyen")echo "checked=\"checked\"" ?>/> </TD>
+								<TD> <input type="radio" name="perseverance" value="Insuffisant" <?php if($perseverance == "Insuffisant")echo "checked=\"checked\"" ?>/></TD>
 							</TR>
 							
 							<TR>
 								<TD name="efficaciteTitre"> <label for="efficaciteTitre">  EFFICACITÉ </label> </TD>
-								<TD> <input type="radio" name="efficacite" value="Excellent" <?php if($efficacite = "Excellence")echo "checked=\"checked\"" ?>/>   </TD>
-								<TD> <input type="radio" name="efficacite" value="Bon" <?php if($efficacite = "Bon")echo "checked=\"checked\"" ?>/> </TD>
-								<TD> <input type="radio" name="efficacite" value="Moyen" <?php if($efficacite = "Moyen")echo "checked=\"checked\"" ?>/> </TD>
-								<TD> <input type="radio" name="efficacite" value="Insuffisant" <?php if($efficacite = "Insuffisant")echo "checked=\"checked\"" ?>/></TD>
+								<TD> <input type="radio" name="efficacite" value="Excellent" <?php if($efficacite == "Excellence")echo "checked=\"checked\"" ?>/>   </TD>
+								<TD> <input type="radio" name="efficacite" value="Bon" <?php if($efficacite == "Bon")echo "checked=\"checked\"" ?>/> </TD>
+								<TD> <input type="radio" name="efficacite" value="Moyen" <?php if($efficacite == "Moyen")echo "checked=\"checked\"" ?>/> </TD>
+								<TD> <input type="radio" name="efficacite" value="Insuffisant" <?php if($efficacite == "Insuffisant")echo "checked=\"checked\"" ?>/></TD>
 							</TR>
 							
 							<TR>
 								<TD name="interetTitre"> <label for="interetTitre"> INTÉRÊT PORTÉ AU TRAVAIL </label> </TD>
-								<TD> <input type="radio" name="interet" value="Excellent" <?php if($interet_travail = "Excellence")echo "checked=\"checked\"" ?>/>   </TD>
-								<TD> <input type="radio" name="interet" value="Bon" <?php if($interet_travail = "Bon")echo "checked=\"checked\"" ?>/> </TD>
-								<TD> <input type="radio" name="interet" value="Moyen" <?php if($interet_travail = "Moyen")echo "checked=\"checked\"" ?>/> </TD>
-								<TD> <input type="radio" name="interet" value="Insuffisant" <?php if($interet_travail = "Insuffisant")echo "checked=\"checked\"" ?>/></TD>
+								<TD> <input type="radio" name="interet" value="Excellent" <?php if($interet_travail == "Excellence")echo "checked=\"checked\"" ?>/>   </TD>
+								<TD> <input type="radio" name="interet" value="Bon" <?php if($interet_travail == "Bon")echo "checked=\"checked\"" ?>/> </TD>
+								<TD> <input type="radio" name="interet" value="Moyen" <?php if($interet_travail == "Moyen")echo "checked=\"checked\"" ?>/> </TD>
+								<TD> <input type="radio" name="interet" value="Insuffisant" <?php if($interet_travail == "Insuffisant")echo "checked=\"checked\"" ?>/></TD>
 							</TR>
 							
 						</TABLE>
@@ -246,50 +246,50 @@
 								
 							<TR>
 								<TD name="presentationTitre"> <label for="presentationTitre"> PRÉSENTATION</label> </TD>
-								<TD> <input type="radio" name="presentation" value="Excellent" <?php if($presentation = "Excellence")echo "checked=\"checked\"" ?>/>   </TD>
-								<TD> <input type="radio" name="presentation" value="Bon" <?php if($presentation = "Bon")echo "checked=\"checked\"" ?>/> </TD>
-								<TD> <input type="radio" name="presentation" value="Moyen" <?php if($presentation = "Moyen")echo "checked=\"checked\"" ?>/> </TD>
-								<TD> <input type="radio" name="presentation" value="Insuffisant" <?php if($presentation = "Insuffisant")echo "checked=\"checked\"" ?>/></TD>
+								<TD> <input type="radio" name="presentation" value="Excellent" <?php if($presentation == "Excellence")echo "checked=\"checked\"" ?>/>   </TD>
+								<TD> <input type="radio" name="presentation" value="Bon" <?php if($presentation == "Bon")echo "checked=\"checked\"" ?>/> </TD>
+								<TD> <input type="radio" name="presentation" value="Moyen" <?php if($presentation == "Moyen")echo "checked=\"checked\"" ?>/> </TD>
+								<TD> <input type="radio" name="presentation" value="Insuffisant" <?php if($presentation == "Insuffisant")echo "checked=\"checked\"" ?>/></TD>
 							</TR>
 								
 							<TR>
 								<TD name ="ponctualiteTitre"> <label for="ponctualiteTitre"> PONCTUALITÉ </label> </TD>
-								<TD> <input type="radio" name="ponctualite" value="Excellent" <?php if($ponctualite = "Excellence")echo "checked=\"checked\"" ?>/>   </TD>
-								<TD> <input type="radio" name="ponctualite" value="Bon" <?php if($ponctualite = "Bon")echo "checked=\"checked\"" ?>/> </TD>
-								<TD> <input type="radio" name="ponctualite" value="Moyen" <?php if($ponctualite = "Moyen")echo "checked=\"checked\"" ?>/> </TD>
-								<TD> <input type="radio" name="ponctualite" value="Insuffisant" <?php if($ponctualite = "Insuffisant")echo "checked=\"checked\"" ?>/></TD>
+								<TD> <input type="radio" name="ponctualite" value="Excellent" <?php if($ponctualite == "Excellence")echo "checked=\"checked\"" ?>/>   </TD>
+								<TD> <input type="radio" name="ponctualite" value="Bon" <?php if($ponctualite == "Bon")echo "checked=\"checked\"" ?>/> </TD>
+								<TD> <input type="radio" name="ponctualite" value="Moyen" <?php if($ponctualite == "Moyen")echo "checked=\"checked\"" ?>/> </TD>
+								<TD> <input type="radio" name="ponctualite" value="Insuffisant" <?php if($ponctualite == "Insuffisant")echo "checked=\"checked\"" ?>/></TD>
 							</TR>
 								
 							<TR>
 								<TD name="assiduiteTitre"> <label for="assiduiteTitre"> ASSIDUITÉ </label> </TD>
-								<TD> <input type="radio" name="assiduite" value="Excellent" <?php if($assiduite = "Excellence")echo "checked=\"checked\"" ?>/>   </TD>
-								<TD> <input type="radio" name="assiduite" value="Bon" <?php if($assiduite = "Bon")echo "checked=\"checked\"" ?>/> </TD>
-								<TD> <input type="radio" name="assiduite" value="Moyen" <?php if($assiduite = "Moyen")echo "checked=\"checked\"" ?>/> </TD>
-								<TD> <input type="radio" name="assiduite" value="Insuffisant" <?php if($assiduite = "Insuffisant")echo "checked=\"checked\"" ?>/></TD>
+								<TD> <input type="radio" name="assiduite" value="Excellent" <?php if($assiduite == "Excellence")echo "checked=\"checked\"" ?>/>   </TD>
+								<TD> <input type="radio" name="assiduite" value="Bon" <?php if($assiduite == "Bon")echo "checked=\"checked\"" ?>/> </TD>
+								<TD> <input type="radio" name="assiduite" value="Moyen" <?php if($assiduite == "Moyen")echo "checked=\"checked\"" ?>/> </TD>
+								<TD> <input type="radio" name="assiduite" value="Insuffisant" <?php if($assiduite == "Insuffisant")echo "checked=\"checked\"" ?>/></TD>
 							</TR>
 								
 							<TR>
 								<TD name="expressionTitre"> <label for="expressionTitre"> EXPRESSION </label> </TD>
-								<TD> <input type="radio" name="expression" value="Excellent" <?php if($expression = "Excellence")echo "checked=\"checked\"" ?>/>   </TD>
-								<TD> <input type="radio" name="expression" value="Bon" <?php if($expression = "Bon")echo "checked=\"checked\"" ?>/> </TD>
-								<TD> <input type="radio" name="expression" value="Moyen" <?php if($expression = "Moyen")echo "checked=\"checked\"" ?>/> </TD>
-								<TD> <input type="radio" name="expression" value="Insuffisant" <?php if($expression = "Insuffisant")echo "checked=\"checked\"" ?>/></TD>
+								<TD> <input type="radio" name="expression" value="Excellent" <?php if($expression == "Excellence")echo "checked=\"checked\"" ?>/>   </TD>
+								<TD> <input type="radio" name="expression" value="Bon" <?php if($expression == "Bon")echo "checked=\"checked\"" ?>/> </TD>
+								<TD> <input type="radio" name="expression" value="Moyen" <?php if($expression == "Moyen")echo "checked=\"checked\"" ?>/> </TD>
+								<TD> <input type="radio" name="expression" value="Insuffisant" <?php if($expression == "Insuffisant")echo "checked=\"checked\"" ?>/></TD>
 							</TR>
 								
 							<TR>
 								<TD name ="sociabiliteTitre"> <label for="sociabiliteTitre">  SOCIABILITÉ </label> </TD>
-								<TD> <input type="radio" name="sociabilite" value="Excellent" <?php if($sociabilite = "Excellence")echo "checked=\"checked\"" ?>/>   </TD>
-								<TD> <input type="radio" name="sociabilite" value="Bon" <?php if($sociabilite = "Bon")echo "checked=\"checked\"" ?>/> </TD>
-								<TD> <input type="radio" name="sociabilite" value="Moyen" <?php if($sociabilite = "Moyen")echo "checked=\"checked\"" ?>/> </TD>
-								<TD> <input type="radio" name="sociabilite" value="Insuffisant" <?php if($sociabilite = "Insuffisant")echo "checked=\"checked\"" ?>/></TD>
+								<TD> <input type="radio" name="sociabilite" value="Excellent" <?php if($sociabilite == "Excellence")echo "checked=\"checked\"" ?>/>   </TD>
+								<TD> <input type="radio" name="sociabilite" value="Bon" <?php if($sociabilite == "Bon")echo "checked=\"checked\"" ?>/> </TD>
+								<TD> <input type="radio" name="sociabilite" value="Moyen" <?php if($sociabilite == "Moyen")echo "checked=\"checked\"" ?>/> </TD>
+								<TD> <input type="radio" name="sociabilite" value="Insuffisant" <?php if($sociabilite == "Insuffisant")echo "checked=\"checked\"" ?>/></TD>
 							</TR>
 								
 							<TR>
 								<TD name="communicationTitre"> <label for="communicationTitre"> COMMUNICATION </label> </TD>
-								<TD> <input type="radio" name="communication" value="Excellent" <?php if($communication = "Excellence")echo "checked=\"checked\"" ?>/>   </TD>
-								<TD> <input type="radio" name="communication" value="Bon" <?php if($communication = "Bon")echo "checked=\"checked\"" ?>/> </TD>
-								<TD> <input type="radio" name="communication" value="Moyen" <?php if($communication = "Moyen")echo "checked=\"checked\"" ?>/> </TD>
-								<TD> <input type="radio" name="communication" value="Insuffisant" <?php if($communication = "Insuffisant")echo "checked=\"checked\"" ?>/></TD>
+								<TD> <input type="radio" name="communication" value="Excellent" <?php if($communication == "Excellence")echo "checked=\"checked\"" ?>/>   </TD>
+								<TD> <input type="radio" name="communication" value="Bon" <?php if($communication == "Bon")echo "checked=\"checked\"" ?>/> </TD>
+								<TD> <input type="radio" name="communication" value="Moyen" <?php if($communication == "Moyen")echo "checked=\"checked\"" ?>/> </TD>
+								<TD> <input type="radio" name="communication" value="Insuffisant" <?php if($communication == "Insuffisant")echo "checked=\"checked\"" ?>/></TD>
 							</TR>
 						</TABLE> 
 						
@@ -331,9 +331,9 @@
 						<label for="projetProfessionel"> 	Embaucheriez-vous le stagiaire si vous en aviez la possibilité ? (Ceci n'a pour but que
 						d'apprécier les services que pourrait rendre le candidat dans une entreprise.)</label>	
 						</br>
-						<input type="radio" name="remarque" value="news" <?php if($embauche = "Oui")echo "checked=\"checked\"" ?>/> Oui
-						<input type="radio" name="remarque" value="news" <?php if($embauche = "Peut-être")echo "checked=\"checked\"" ?>/> Peut-être
-						<input type="radio" name="remarque" value="news" <?php if($embauche = "Non")echo "checked=\"checked\"" ?>/> Non
+						<input type="radio" name="remarque" value="news" <?php if($embauche == "Oui")echo "checked=\"checked\"" ?>/> Oui
+						<input type="radio" name="remarque" value="news" <?php if($embauche == "Peut-être")echo "checked=\"checked\"" ?>/> Peut-être
+						<input type="radio" name="remarque" value="news" <?php if($embauche == "Non")echo "checked=\"checked\"" ?>/> Non
 						</br>
 						</br>
 						
