@@ -31,7 +31,11 @@
 		$resultat=mysqli_query($co,  "SELECT MAX(num_fiche) FROM fiche_tuteur");
 		$row = mysqli_fetch_row($resultat);
 		$num_fiche_tuteur=$row[0];
-		mysqli_query($co,  "UPDATE etudiant SET sa_fiche_tuteur=$num_fiche_tuteur WHERE login='$membre->login' AND mdp='$membre->mdp'");
+		mysqli_query($co,  "UPDATE etudiant SET sa_fiche_tuteur=$num_fiche_tuteur 
+							WHERE login IN (SELECT etudiant
+											FROM appariement_tuteur	A, tuteur_entreprise T
+											WHERE A.tuteur = T.login
+											AND T.login='$membre->login' ABD T.mdp='$membre->mdp'");
 	}
 	
 	echo "c'est good";
