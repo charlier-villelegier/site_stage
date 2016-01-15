@@ -146,7 +146,7 @@
       
 			<div class="ConteneurTexte">   
 				<div class="TitrePartie" id="titre1">FICHE D'APPRECIATION DU STAGIAIRE</div>
-					<form method="post" action="faille.php">
+					<form method="post" action="../../controleurs/tuteur/save_fiche_entreprise.php">
 					<p>
 						<label for="NomEtudiant"> Nom du stagiaire : </label>
 							<input type="text" name="nomEtudiant" value="<?php echo $prenom_etudiant." ".$nom_etudiant?>" disabled="disabled"/>
@@ -161,13 +161,13 @@
 						<br/>
 						<br/>
 							
-						<label for="ResponsableStage">Prénom du responsable du stage : </label>
-							<input type="text" name="ResponsableStage" value="<?php echo $prenom_tuteur?>"/>
+						<label for="PrenomResponsableStage">Prénom du responsable du stage : </label>
+							<input type="text" name="PrenomResponsableStage" value="<?php echo $prenom_tuteur?>"/>
 						<br/>
 						<br/>
 						
-						<label for="ResponsableStage">Nom du responsable du stage : </label>
-							<input type="text" name="ResponsableStage" value="<?php echo $nom_tuteur?>"/>
+						<label for="NomResponsableStage">Nom du responsable du stage : </label>
+							<input type="text" name="NomResponsableStage" value="<?php echo $nom_tuteur?>"/>
 					
 						<h3>APPRÉCIATIONS SUR LE STAGIAIRE : </h3>
 						
