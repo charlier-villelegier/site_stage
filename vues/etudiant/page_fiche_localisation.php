@@ -137,7 +137,7 @@
       
 			<div class="ConteneurTexte">   
 				<div class="TitrePartie" id="titre1">LOCALISATION DE STAGE</div>
-				<form method="post" action="faille.php">
+				<form method="post" action="../../controleurs/etudiant/save_fiche_localisation.php">
 				<p>
 					<label for="NomEtudiant">Nom : </label>
 						<input name="NomEtudiant" type="text" value="<?php echo $membre->nom ?>"/>
@@ -168,10 +168,10 @@
 					<br/>
 					
 					<label for="MailEtudiant">Courrier IUT : </label>
-						<input name="Tuteur" type="text"  value="<?php echo $mail_iut?>"/>
+						<input name="MailEtudiant" type="text"  value="<?php echo $mail_iut?>"/>
 						
-					<label for="TelFixe">Téléhphone : </label>
-						<input name="TelFixe" type="text"  value="<?php echo $tel?>"/>
+					<label for="TelEtudiant">Téléphone : </label>
+						<input name="TelEtudiant" type="text"  value="<?php echo $tel?>"/>
 					<br/>
 					<br/>
 					
@@ -220,18 +220,13 @@
 					<br/>
 					<br/>
 					
-					<label for="TelEtudiant">Numéro de téléphone portable : </label>
-						<input name="TelEtudiant" type="text" value="<?php echo $tel_portable?>"/>
-					<br/>
-					<br/>
-					
 					<label for="MailPerso">E-Mail personnel : </label>
 						<input name="MailPerso" type="text" value="<?php echo $mail_perso?>" size="35"/>
 					<br/>
 					<br/>
 					
 					<label>Sujet du stage : </label> <br/>
-						<textarea rows="20" cols="50"><?php echo $sujet_stage?></textarea>
+						<textarea rows="20" cols="50" name="SujetStage"><?php echo $sujet_stage?></textarea>
 					<br/>
 					
 				
