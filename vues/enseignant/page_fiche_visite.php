@@ -6,10 +6,8 @@
 		header('Location: ../../index.html'); 
 	}
 	else{
-		//POUR LEO MON AMOUR(COMMENTAIRE A SUPPRIMER)
-		$etudiant=$_GET['etudiant'];
-		
 		$membre=$_SESSION['membre'];
+		$etudiant = $_GET['etudiant'];
 		$bd = new Bd("site_stage");
 		$co = $bd->connexion();
 		
@@ -266,14 +264,21 @@
 			<div id="objet"></div>
 			<h3> OBJET PRINCIPAL DU STAGE (2 cases maximum à cocher) : </h3>
 			
-				<input name="ObjetStage" type="checkbox" value="Systeme" <?php if($systeme)echo "checked=\"checked\"" ?>/><label for="Systeme">Système </label>
-				<input name="ObjetStage" type="checkbox" value="Multimedia" <?php if($multimedia)echo "checked=\"checked\"" ?>/><label for="Multimedia">Multimedia </label>
-				<input name="ObjetStage" type="checkbox" value="Reseaux" <?php if($reseau)echo "checked=\"checked\"" ?>/><label for="Reseaux">Réseaux </label>
-				<input name="ObjetStage" type="checkbox" value="DeveloppementWEB" <?php if($web)echo "checked=\"checked\"" ?>/><label for="DeveloppementWEB">Développement WEB </label> <br/>
-				<input name="ObjetStage" type="checkbox" value="AutreDvpt" <?php if($autre_dev)echo "checked=\"checked\"" ?>/><label for="AutreDvpt">Autre Développement </label>
-				<input name="ObjetStage" type="checkbox" value="BD" <?php if($bd)echo "checked=\"checked\"" ?>/><label for="BD">Base de données </label>
-				<input name="ObjetStage" type="checkbox" value="Autre" <?php if(!empty($autre_objet))echo "checked=\"checked\"" ?>/><label for="Autre">Autre (préciser) </label>
-				<input name="ObjetStage" type="text" value="<?php echo $autre_objet?>"/>
+				<input name="Systeme" type="checkbox" value="Systeme"
+                    <?php if($systeme)echo "checked=\"checked\"" ?>/><label for="Systeme">Système </label>
+				<input name="Multimedia" type="checkbox" value="Multimedia"
+                    <?php if($multimedia)echo "checked=\"checked\"" ?>/><label for="Multimedia">Multimedia </label>
+				<input name="Reseaux" type="checkbox" value="Reseaux"
+                    <?php if($reseau)echo "checked=\"checked\"" ?>/><label for="Reseaux">Réseaux </label>
+				<input name="DeveloppementWEB" type="checkbox" value="DeveloppementWEB"
+                    <?php if($web)echo "checked=\"checked\"" ?>/><label for="DeveloppementWEB">Développement WEB </label> <br/>
+				<input name="AutreDvpt" type="checkbox" value="AutreDvpt"
+                    <?php if($autre_dev)echo "checked=\"checked\"" ?>/><label for="AutreDvpt">Autre Développement </label>
+				<input name="BD" type="checkbox" value="BD"
+                    <?php if($bd)echo "checked=\"checked\"" ?>/><label for="BD">Base de données </label>
+				<input name="AutreObjet" type="checkbox" value="Autre"
+                    <?php if($autre_objet)echo "checked=\"checked\"" ?>/><label for="Autre">Autre (préciser) </label>
+				<input name="AutreObjetText" type="text" value="<?php echo $autre_objet ?>"/>
 			
             <div id="avisEtu"></div>
 			<h3> AVIS DE L’ENTREPRISE SUR LE TRAVAIL ET LE COMPORTEMENT DE L’ETUDIANT </h3>
@@ -286,7 +291,7 @@
 			<br/>
 			
 			<label>Commentaires : </label> <br/>
-				<textarea rows="10" cols="50"><?php echo $commentaire_comportement?></textarea>
+				<textarea rows="10" cols="50" name="CommentaireAvis"><?php echo $commentaire_comportement?></textarea>
 			<br/>
 			<br/>
 			
@@ -301,22 +306,22 @@
 			<br/>
 			
 			<label>Si oui, précisez lesquelles : </label> <br/>
-				<textarea rows="10" cols="50"><?php echo $explication_formation?></textarea>
+				<textarea rows="10" cols="50" name="CommentaireManque"><?php echo $explication_formation?></textarea>
 			<br/>
 			<br/>
 			
             <div id="avisGeneral"></div>
 			<h3> AVIS DE GENERAL DE L'ENSEIGNANT SUR LE STAGE : </h3>
 			
-			<textarea rows="20" cols="50"><?php echo $avis_enseignant?></textarea>
+			<textarea rows="20" cols="50" name="AvisEnseignant"><?php echo $avis_enseignant?></textarea>
 			<br/>
 			<br/>
 			
 			<label>En conclusion, cette entreprise peut-elle les prochaines années accueillir dans des conditions correctes ses étudiants ?</label> <br/>
-				<input name="Accueil" type="radio" value="AccueilPossible" <?php if($accueil_entreprise == "Oui")echo "checked=\"checked\"" ?>/><label for="AccueilPossible">Oui </label> <br/>
-				<input name="Accueil" type="radio" value="AccueilImpossible" <?php if($accueil_entreprise == "Non")echo "checked=\"checked\"" ?>/><label for="AccueilImpossible">Non </label> <br/>
-				<input name="Accueil" type="radio" value="AccueilSousCondition" <?php if(!empty($precaution)) echo "checked=\"checked\"" ?>/><label for="AccueilSousCondition">Oui, mais en prenant quelques précautions. Quelles précautions ?</label> <br/>
-				<textarea rows="20" cols="50"><?php echo $precaution?></textarea>
+				<input name="Accueil" type="radio" value="AccueilPossible" <?php if($accueil_entreprise == "AccueilPossible")echo "checked=\"checked\"" ?>/><label for="AccueilPossible">Oui </label> <br/>
+				<input name="Accueil" type="radio" value="AccueilImpossible" <?php if($accueil_entreprise == "AccueilImpossible")echo "checked=\"checked\"" ?>/><label for="AccueilImpossible">Non </label> <br/>
+				<input name="Accueil" type="radio" value="AccueilSousCondition" <?php if($accueil_entreprise == "AccueilSousCondition") echo "checked=\"checked\"" ?>/><label for="AccueilSousCondition">Oui, mais en prenant quelques précautions. Quelles précautions ?</label> <br/>
+				<textarea rows="20" cols="50" name="Precaution"><?php echo $precaution?></textarea>
 			<br/>
 			<br/>
 		</p>
