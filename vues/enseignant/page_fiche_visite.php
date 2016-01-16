@@ -3,10 +3,12 @@
 	include("../../modeles/membre.php");
 	session_start();
 	if(!isset($_SESSION['membre'])){
-		echo"pas de membre";
 		header('Location: ../../index.html'); 
 	}
 	else{
+		//POUR LEO MON AMOUR(COMMENTAIRE A SUPPRIMER)
+		$etudiant=$_GET['etudiant'];
+		
 		$membre=$_SESSION['membre'];
 		$bd = new Bd("site_stage");
 		$co = $bd->connexion();
@@ -15,7 +17,8 @@
 		$resultat = mysqli_query($co,  "SELECT prenom, nom, tp
 										FROM appariement_enseignant A, etudiant E
 										WHERE A.etudiant = E.login
-										AND enseignant='$membre->login'");
+										AND enseignant='$membre->login'
+										AND A.etudiant='$etudiant'");
 		$row = mysqli_fetch_row($resultat);
 		$prenom_etudiant = $row[0];
 		$nom_etudiant = $row[1];
@@ -36,7 +39,8 @@
 										AND A.etudiant = AE.etudiant
 										AND AE.tuteur = T.login
 										AND A.enseignant = EN.login
-										AND EN.login='$membre->login'");
+										AND EN.login='$membre->login'
+										AND A.etudiant='$etudiant'");
 		$row = mysqli_fetch_row($resultat);
 		$nom_entreprise = $row[0];
 		$adresse_entreprise = $row[1];
@@ -48,7 +52,8 @@
 										FROM tuteur_entreprise T, appariement_enseignant A, appariement_tuteur AE
 										WHERE A.etudiant = AE.etudiant
 										AND AE.tuteur = T.login
-										AND A.enseignant='$membre->login'");
+										AND A.enseignant='$membre->login'
+										AND A.etudiant='$etudiant'");
 		$row = mysqli_fetch_row($resultat);
 		$prenom_tuteur = $row[0];
 		$nom_tuteur = $row[1];
@@ -63,7 +68,8 @@
 										FROM appariement_enseignant A, etudiant E, fiche_visite F
 										WHERE A.etudiant = E.login
 										AND F.num_fiche = E.sa_fiche_tuteur
-										AND enseignant='$membre->login'");
+										AND enseignant='$membre->login'
+										AND A.etudiant='$etudiant'");
 										
 		$row = mysqli_fetch_row($resultat);
 		$visite_stage = $row[0];
@@ -152,7 +158,7 @@
 				<div id="Ribbon">
 					<ul>
 						<li><a href="accueil.php">Accueil</a></li>
-						<li><a href="#" class="PageActive">Gérer mes étudiants</a></li>
+						<li><a href="page_mes_etudiants.php" class="PageActive">Gérer mes étudiants</a></li>
 						<li><a href="page_etudiant_disponible.php">Etudiants disponibles</a></li>
 						<li><a href="#">Mes disponibilités</a></li>
                         <li><a href="#">Contacts</a></li>
@@ -162,7 +168,7 @@
       
 			<div class="ConteneurTexte">   
 				<div class="TitrePartie" id="titre1">COMPTE-RENDU DE VISITE DE STAGE</div>
-	<form method="get" action="faille.php">
+	<form method="post" action="../../controleurs/enseignant/save_fiche_visite.php?etudiant=<?php echo $etudiant ?>">
 		<p>
 			<label for="NomEtudiant">Nom de l'étudiant : </label>
 				<input name="NomEtudiant" type="text" value="<?php echo $prenom_etudiant." ".$nom_etudiant?>" disabled="disabled"/>

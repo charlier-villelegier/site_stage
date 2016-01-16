@@ -86,6 +86,8 @@
 													WHERE E.login=A.etudiant
 													AND A.enseignant='$membre->login'
 													ORDER BY nom");
+													
+					
 					
 					echo"<table border='1' width=\"100%\" cellpadding=\"10\">";
 						echo"<tr>";
@@ -93,7 +95,7 @@
 							echo"<td><b>PRENOM</b></td>";		
 							echo"<td><b>TP</b></td>";
 						echo"</tr>";	
-													
+					if(mysqli_num_rows($resultat)>0){							
 						while($row = mysqli_fetch_row($resultat)){
 							$nom=$row[0];
 							$prenom=$row[1];
@@ -107,12 +109,18 @@
 								echo"<form>";
 								?>
                                 <td><input type="button" value="Remplir sa fiche de visite" 
-                                	onclick=""/></td>
+                                	onclick="self.location.href='page_fiche_visite.php?etudiant=<?php echo $login ?>'"/></td>
 								<td><input type="button" value="Supprimer" onclick="generate('<?php echo $nom.' '.$prenom?>','<?php echo $login ?>')"/></td>
                                 <?php
 								echo"</form>";
 							echo"</tr>";
 						}
+					}
+					else{
+						echo"<tr>";
+							echo"<td colspan=\"3\" align=\"center\">Vous n'êtes tuteur d'aucun étudiant</td>";
+						echo"</tr>";
+					}
 						
 					echo"</table>";
 					
