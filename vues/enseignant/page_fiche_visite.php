@@ -153,7 +153,7 @@
 					<ul>
 						<li><a href="accueil.php">Accueil</a></li>
 						<li><a href="#" class="PageActive">Gérer mes étudiants</a></li>
-						<li><a href="#">Etudiants disponibles</a></li>
+						<li><a href="page_etudiant_disponible.php">Etudiants disponibles</a></li>
 						<li><a href="#">Mes disponibilités</a></li>
                         <li><a href="#">Contacts</a></li>
 					</ul>

@@ -6,6 +6,9 @@
 		echo"pas de membre";
 		header('Location: ../../index.html'); 
 	}
+	//J'ouvre la connexion pour plus tard
+	$bd = new Bd("site_stage");
+	$co = $bd->connexion();
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -13,6 +16,9 @@
   <head> 
     <title>Gestion des stages - Accueil</title>
     <link href="../../style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../js/buttons.css"/>
+    <link rel="stylesheet" type="text/css" href="../../js/animate.css"/>
+    <link rel="stylesheet" href="../../js/font-awesome/css/font-awesome.min.css"/>
 	<script src="../../js/jquery-1.11.1.min.js" type="text/javascript"></script>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   </head>
@@ -60,9 +66,9 @@
 			<div class="Bleue">
 				<div id="Ribbon">
 					<ul>
-						<li><a href="accueil.php" class="PageActive">Accueil</a></li>
+						<li><a href="accueil.php">Accueil</a></li>
 						<li><a href="page_mes_etudiants.php" >Gérer mes étudiants</a></li>
-						<li><a href="page_etudiant_disponible.php">Etudiants disponibles</a></li>
+						<li><a href="page_etudiant_disponible.php" class="PageActive">Etudiants disponibles</a></li>
 						<li><a href="#">Mes disponibilités</a></li>
                         <li><a href="#">Contacts</a></li>
 					</ul>
@@ -70,7 +76,45 @@
 			</div>
       
 			<div class="ConteneurTexte">   
-				<div class="TitrePartie" id="titre1">Vos statistiques : </div>
+				<div class="TitrePartie" id="titre1">Etudiants sans professeur tuteur : </div>
+                <p>Voici la liste des étudiants <b>qui n'ont pas encore de professeur tuteur.</b></p>
+                <p>Pour demander à être tuteur d'un élève, vous pouvez appuyer sur "choisir" à côté de son nom.</p>
+                <?php
+					//Je récupère et j'affiche la liste des étudiants sans tuteurs
+					$resultat = mysqli_query($co,  "SELECT nom, prenom, tp, login
+													FROM etudiant E
+													WHERE E.login NOT IN (SELECT etudiant
+																		  FROM appariement_enseignant)
+													ORDER BY nom");
+					
+					echo"<table border='1' width=\"100%\" cellpadding=\"10\">";
+						echo"<tr>";
+							echo"<td><b>NOM</b></td>";	
+							echo"<td><b>PRENOM</b></td>";		
+							echo"<td><b>TP</b></td>";
+						echo"</tr>";	
+													
+						while($row = mysqli_fetch_row($resultat)){
+							$nom=$row[0];
+							$prenom=$row[1];
+							$tp=($row[2]==NULL? "Non renseigné" : $row[2]);
+							$login=$row[3];
+						
+							echo"<tr>";
+								echo"<td>$nom</td>";
+								echo"<td>$prenom</td>";
+								echo"<td>$tp</td>";
+								echo"<form>";
+								?>
+								<td><input type="button" value="Choisir" onclick="generate('<?php echo $nom.' '.$prenom?>','<?php echo $login ?>')"/></td>
+                                <?php
+								echo"</form>";
+							echo"</tr>";
+						}
+						
+					echo"</table>";
+					
+				?>
                 
 			</div>
 		</div>
@@ -86,6 +130,43 @@
             -->
 		</div>
 	</div>
+    
+    <script type="text/javascript" src="../../js/noty/packaged/jquery.noty.packaged.js"></script>
+    <script type="text/javascript">
+
+    function generate(name,login) {
+        var n = noty({
+            text        : 'Voulez vous vraiment être le tuteur de <b>' + name  + ' </b> ?',
+            type        : 'information',
+            dismissQueue: true,
+            layout      : 'center',
+            theme       : 'defaultTheme',
+			 animation   : {
+                    open  : 'animated flipInX',
+                    close : 'animated flipOutX',
+                    easing: 'swing',
+                    speed : 1000
+                },
+            buttons     : [
+                {addClass: 'btn btn-primary', text: 'Oui', onClick: function ($noty) {
+                    $noty.close();
+					document.location.href="../../controleurs/enseignant/add_etudiant.php?etudiant="+login
+                    
+                }
+                },
+                {addClass: 'btn btn-danger', text: 'Annuler', onClick: function ($noty) {
+                    $noty.close();
+                    
+                }
+                }
+            ]
+        });
+        console.log('html: ' + n.options.id);
+    }
+
+</script>
+
+	
     
     <!--Scripte pour que le menu verticale suive le scroll-->
 	<script type="text/javascript">
@@ -103,5 +184,6 @@
 			}
 		);
 	</script>
+    
   </body>
 </html>

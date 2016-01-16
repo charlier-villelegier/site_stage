@@ -148,7 +148,7 @@
 	
 	//On met à jour le membre et on redirige vers le forumaire
 	$membre->maj();
-	header("Location: ../../vues/etudiant/page_fiche_entreprise.php?saved=true");
+	header("Location: ../../vues/etudiant/page_fiche_avis.php?saved=true");
 	
 ?>
 
