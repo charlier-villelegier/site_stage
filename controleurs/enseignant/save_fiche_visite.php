@@ -24,9 +24,9 @@
 	}
 	
 	//Visite stage
-	if(isset($_POST['StagiaireRencontre']) && isset($_POST['DateRencontre'])){
+	if(isset($_POST['StagiaireRencontre'])){
 		$visite_stage = ($_POST['StagiaireRencontre']=="StagiaireRencontre"? true : false);
-		$date_visite = $_POST['DateRencontre'];
+		$date_visite = ($visite_stage ? $_POST['DateRencontre'] : NULL);
 		
 		mysqli_query($co,  "UPDATE fiche_visite
 							SET visite_stage='$visite_stage',
@@ -48,7 +48,7 @@
 	}
 	
 	//Encadrement
-	if(isset($_POST['Informaticien']) && isset($_POST['AppelInformaticien'])&& isset($_POST['Equipe'])&& isset($_POST['TailleEquipe'])){
+	if(isset($_POST['Informaticien']) && isset($_POST['AppelInformaticien'])&& isset($_POST['Equipe'])){
 		$encadre_informaticien = ($_POST['Informaticien']=="Informaticien"? true : false);
 		$appel_informaticien = ($_POST['AppelInformaticien']=="AppelInformaticien"? true : false);
 		$travail_seul = ($_POST['Equipe']=="Seul"? true : false);
@@ -63,25 +63,25 @@
 	}
 	
 	//Objet du stage
-	if(isset($_POST['AutreObjetText'])){
-		$systeme = (isset($_POST['Systeme']) ? true : false);
-		$multimedia = (isset($_POST['Multimedia']) ? true : false);
-		$reseau = (isset($_POST['Reseaux']) ? true : false);
-		$dev_web = (isset($_POST['DeveloppementWEB']) ? true : false);
-		$autre_dev = (isset($_POST['AutreDvpt']) ? true : false);
-		$bd = (isset($_POST['BD']) ? true : false);
-		$autre_objet = ((isset($_POST['AutreObjet']) ? mysqli_real_escape_string($co,$_POST['AutreObjetText']) : NULL));
+	
+	$systeme = (isset($_POST['Systeme']) ? true : false);
+	$multimedia = (isset($_POST['Multimedia']) ? true : false);
+	$reseau = (isset($_POST['Reseaux']) ? true : false);
+	$dev_web = (isset($_POST['DeveloppementWEB']) ? true : false);
+	$autre_dev = (isset($_POST['AutreDvpt']) ? true : false);
+	$bd = (isset($_POST['BD']) ? true : false);
+	$autre_objet = ((isset($_POST['AutreObjet']) ? mysqli_real_escape_string($co,$_POST['AutreObjetText']) : NULL));
 		
-		mysqli_query($co,  "UPDATE fiche_visite
-							SET systeme='$systeme', 
-							multimedia='$multimedia',
-							reseau='$reseau',
-							web='$dev_web', 
-							autre_dev='$autre_dev', 
-							bd='$bd',
-							autre_objet='$autre_objet'
-							WHERE num_fiche='$num_fiche_visite'");	
-	}
+	mysqli_query($co,  "UPDATE fiche_visite
+						SET systeme='$systeme', 
+						multimedia='$multimedia',
+						reseau='$reseau',
+						web='$dev_web', 
+						autre_dev='$autre_dev', 
+						bd='$bd',
+						autre_objet='$autre_objet'
+						WHERE num_fiche='$num_fiche_visite'");	
+	
 	
 	//Avis entreprise
 	if(isset($_POST['Satisfaction']) && isset($_POST['CommentaireAvis'])){
@@ -95,9 +95,9 @@
 	}
 	
 	//Avis formation
-	if(isset($_POST['Manque']) && isset($_POST['CommentaireManque'])){
-		$manque_formation = (isset($_POST['Manque']) ? true : false);
-		$explication_formation = mysqli_real_escape_string($co,$_POST['CommentaireManque']);
+	if(isset($_POST['Manque'])){
+		$manque_formation = (($_POST['Manque']=="Manque") ? true : false);
+		$explication_formation = ($manque_formation? mysqli_real_escape_string($co,$_POST['CommentaireManque']) : NULL);
 		
 		mysqli_query($co,  "UPDATE fiche_visite
 							SET manque_formation='$manque_formation',
@@ -109,9 +109,8 @@
 	if(isset($_POST['AvisEnseignant']) && isset($_POST['Accueil'])){
 		$avis_enseignant = mysqli_real_escape_string($co,$_POST['AvisEnseignant']);
 		$accueil_entreprise = $_POST['Accueil'];
-		$precaution=NULL;
-		if($accueil_entreprise == 'AccueilSousCondition')
-			if(isset($_POST['Precaution'])) $precaution=$_POST['Precaution'];
+		$precaution = ($accueil_entreprise == 'AccueilSousCondition'? $precaution=$_POST['Precaution'] : NULL);
+		
 		
 		mysqli_query($co,  "UPDATE fiche_visite
 							SET avis_enseignant='$avis_enseignant',
@@ -122,5 +121,5 @@
 	
 	//On met à jour le membre et on redirige vers le forumaire
 	$membre->maj();
-	header("Location: ../../vues/enseignant/page_fiche_visite.php?saved=true&etudiant=<?php echo $etudiant?>");
+	header("Location: ../../vues/enseignant/page_fiche_visite.php?saved=true&etudiant=".$etudiant);
 ?>

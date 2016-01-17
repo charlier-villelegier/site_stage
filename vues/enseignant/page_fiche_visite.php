@@ -101,6 +101,9 @@
   <head> 
     <title>Gestion des stages - Accueil</title>
     <link href="../../style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../js/buttons.css"/>
+    <link rel="stylesheet" type="text/css" href="../../js/animate.css"/>
+    <link rel="stylesheet" href="../../js/font-awesome/css/font-awesome.min.css"/>
 	<script src="../../js/jquery-1.11.1.min.js" type="text/javascript"></script>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   </head>
@@ -204,13 +207,13 @@
 			<br/>
 			
 			<label>Vous êtes vous rendu sur le lieu du stage pour rencontrer le stagiaire et son responsable de stage ? </label>
-				<input name="StagiaireRencontre" type="radio" value="StagiaireRencontre" <?php if($visite_stage)echo "checked=\"checked\"" ?>/><label for="StagiaireRencontre">Oui </label>
-				<input name="StagiaireRencontre" type="radio" value="StagiaireNonRencontre" <?php if(!$visite_stage)echo "checked=\"checked\"" ?>/><label for="StagiaireNonRencontre">Non </label>
+				<input name="StagiaireRencontre" type="radio" id="StagiaireRencontre" onclick="stagiaireRencontre()" value="StagiaireRencontre" <?php if($visite_stage)echo "checked=\"checked\"" ?>/><label for="StagiaireRencontre">Oui </label>
+				<input name="StagiaireRencontre" type="radio" id="StagiaireNonRencontre" onclick="stagiaireRencontre()" value="StagiaireNonRencontre" <?php if(!$visite_stage)echo "checked=\"checked\"" ?>/><label for="StagiaireNonRencontre">Non </label>
 			<br/>
 			<br/>
 			
-			<label for="DateRencontre">Si oui, le : </label>
-			<input name="DateRencontre" type="text" value="<?php echo $date_visite?>"/>
+			<label for="DateRencontre" id="LabelDateRencontre">Si oui, le : </label>
+			<input name="DateRencontre" id="DateRencontre" type="date" value="<?php if($date_visite)echo $date_visite?>"/>
 			<br/>
 			<br/>
 			
@@ -251,13 +254,13 @@
 			<br/>
 			
 			<label>Dans le cadre de votre stage, l'étudiant a-t-il travaillé seul ? </label>
-				<input name="Equipe" type="radio" value="Seul" <?php if($travail_seul)echo "checked=\"checked\"" ?>/><label for="Seul">Oui </label>
-				<input name="Equipe" type="radio" value="Groupe" <?php if(!$travail_seul)echo "checked=\"checked\"" ?>/><label for="Groupe">Non </label>
+				<input name="Equipe" type="radio" value="Seul" id="Seul" onclick="tailleEquipe()" <?php if($travail_seul)echo "checked=\"checked\"" ?>/><label for="Seul">Oui </label>
+				<input name="Equipe" type="radio" value="Groupe" id="Groupe" onclick="tailleEquipe()" <?php if(!$travail_seul)echo "checked=\"checked\"" ?>/><label for="Groupe">Non </label>
 			<br/>
 			<br/>
 			
-			<label for="TailleEquipe">Si non, taille de l'équipe : </label>
-				<input name="TailleEquipe" type="text" value="<?php echo $taille_equipe?>"/>
+			<label for="TailleEquipe" id="LabelTailleEquipe">Si non, taille de l'équipe : </label>
+				<input name="TailleEquipe" id="TailleEquipe" type="text" value="<?php echo $taille_equipe?>"/>
 			<br/>
 			<br/>
 			
@@ -276,9 +279,9 @@
                     <?php if($autre_dev)echo "checked=\"checked\"" ?>/><label for="AutreDvpt">Autre Développement </label>
 				<input name="BD" type="checkbox" value="BD"
                     <?php if($bd)echo "checked=\"checked\"" ?>/><label for="BD">Base de données </label>
-				<input name="AutreObjet" type="checkbox" value="Autre"
+				<input name="AutreObjet" id="AutreObjet" onclick="autreObjet()" type="checkbox" value="Autre"
                     <?php if($autre_objet)echo "checked=\"checked\"" ?>/><label for="Autre">Autre (préciser) </label>
-				<input name="AutreObjetText" type="text" value="<?php echo $autre_objet ?>"/>
+				<input name="AutreObjetText" id="AutreObjetText" type="text" value="<?php echo $autre_objet ?>"/>
 			
             <div id="avisEtu"></div>
 			<h3> AVIS DE L’ENTREPRISE SUR LE TRAVAIL ET LE COMPORTEMENT DE L’ETUDIANT </h3>
@@ -300,13 +303,13 @@
 			
 			<label>Dans la formation telle que vous l'avez perçue lors de la présence du stagiaire dans votre entreprise avez-vous constaté des manques handicapants pour un futur informaticien ?</label>
             <br/>
-				<input name="Manque" type="radio" value="Manque" <?php if($manque_formation)echo "checked=\"checked\"" ?>/><label for="Manque">Oui </label>
-				<input name="Manque" type="radio" value="PasDeManque" <?php if(!$manque_formation)echo "checked=\"checked\"" ?>/><label for="PasDeManque">Non </label>
+				<input name="Manque" type="radio" value="Manque" id="Manque" onclick="avisEntreprise()" <?php if($manque_formation)echo "checked=\"checked\"" ?>/><label for="Manque">Oui </label>
+				<input name="Manque" type="radio" value="PasDeManque" id="PasDeManque" onclick="avisEntreprise()" <?php if(!$manque_formation)echo "checked=\"checked\"" ?>/><label for="PasDeManque">Non </label>
 			<br/>
 			<br/>
 			
-			<label>Si oui, précisez lesquelles : </label> <br/>
-				<textarea rows="10" cols="50" name="CommentaireManque"><?php echo $explication_formation?></textarea>
+			<label id="LabelAvis">Si oui, précisez lesquelles : </label> <br/>
+				<textarea rows="10" cols="50" name="CommentaireManque" id="CommentaireManque"><?php echo $explication_formation?></textarea>
 			<br/>
 			<br/>
 			
@@ -318,10 +321,18 @@
 			<br/>
 			
 			<label>En conclusion, cette entreprise peut-elle les prochaines années accueillir dans des conditions correctes ses étudiants ?</label> <br/>
-				<input name="Accueil" type="radio" value="AccueilPossible" <?php if($accueil_entreprise == "AccueilPossible")echo "checked=\"checked\"" ?>/><label for="AccueilPossible">Oui </label> <br/>
-				<input name="Accueil" type="radio" value="AccueilImpossible" <?php if($accueil_entreprise == "AccueilImpossible")echo "checked=\"checked\"" ?>/><label for="AccueilImpossible">Non </label> <br/>
-				<input name="Accueil" type="radio" value="AccueilSousCondition" <?php if($accueil_entreprise == "AccueilSousCondition") echo "checked=\"checked\"" ?>/><label for="AccueilSousCondition">Oui, mais en prenant quelques précautions. Quelles précautions ?</label> <br/>
-				<textarea rows="20" cols="50" name="Precaution"><?php echo $precaution?></textarea>
+				<input name="Accueil" type="radio" value="AccueilPossible" id="AccueilPossible" onclick="accueilCondition()"
+                 <?php if($accueil_entreprise == "AccueilPossible")echo "checked=\"checked\"" ?>/><label for="AccueilPossible">Oui </label> <br/>
+                 
+				<input name="Accueil" type="radio" value="AccueilImpossible" id="AccueilImpossible" onclick="accueilCondition()" 
+				<?php if($accueil_entreprise == "AccueilImpossible")echo "checked=\"checked\"" ?>/><label for="AccueilImpossible">Non </label> <br/>
+                
+				<input name="Accueil" type="radio" value="AccueilSousCondition" id="AccueilSousCondition" onclick="accueilCondition()"
+                 <?php if($accueil_entreprise == "AccueilSousCondition") echo "checked=\"checked\"" ?>/>
+                 <label for="AccueilSousCondition">Oui, mais en prenant quelques précautions.</label><br/>
+                 
+                 <label for="AccueilSousCondition" id="LabelAccueilSousCondition">Quelles précautions ?</label> <br/>
+				<textarea rows="20" cols="50" name="Precaution" id="Precaution"><?php echo $precaution?></textarea>
 			<br/>
 			<br/>
 		</p>
@@ -344,6 +355,132 @@
             -->
 		</div>
 	</div>
+    
+    <!-- Script pour activer ou non les text input-->
+    <script type="text/javascript">
+		function stagiaireRencontre(){
+			if(document.getElementById('StagiaireRencontre').checked==true){
+				document.getElementById('DateRencontre').hidden=false;
+				document.getElementById('LabelDateRencontre').hidden=false;
+				
+			}
+			else{
+				document.getElementById('DateRencontre').hidden=true;
+				document.getElementById('LabelDateRencontre').hidden=true;
+				
+			}
+			
+		}
+		
+		function tailleEquipe(){
+			if(document.getElementById('Seul').checked==true){
+				document.getElementById('TailleEquipe').hidden=true;
+				document.getElementById('LabelTailleEquipe').hidden=true;
+			}
+			else{
+				document.getElementById('TailleEquipe').hidden=false;
+				document.getElementById('LabelTailleEquipe').hidden=false;
+			}
+			
+		}
+		
+		function autreObjet(){
+			if(document.getElementById('AutreObjet').checked==true){
+				document.getElementById('AutreObjetText').hidden=false;
+			}
+			else{
+				document.getElementById('AutreObjetText').hidden=true;
+			}
+			
+		}
+		
+		function avisEntreprise(){
+			if(document.getElementById('PasDeManque').checked==true){
+				document.getElementById('CommentaireManque').hidden=true;
+				document.getElementById('LabelAvis').hidden=true;
+			}
+			else{
+				document.getElementById('CommentaireManque').hidden=false;
+				document.getElementById('LabelAvis').hidden=false;
+			}
+			
+		}
+		
+		function accueilCondition(){
+			if(document.getElementById('AccueilSousCondition').checked==true){
+				document.getElementById('Precaution').hidden=false;
+				document.getElementById('LabelAccueilSousCondition').hidden=false;
+			}
+			else{
+				document.getElementById('Precaution').hidden=true;
+				document.getElementById('LabelAccueilSousCondition').hidden=true;
+			}
+			
+		}
+		
+		
+		
+		$(document).ready(function(e) {
+                verifyAll();
+           });
+		   
+		function verifyAll(){
+			stagiaireRencontre();
+			tailleEquipe();
+			autreObjet();
+			avisEntreprise();
+			accueilCondition();
+		}
+	</script>
+    
+    
+    <!-- Affiche la popup de données enregistrées si nécessaire--!>
+    <?php
+		if(isset($_GET['saved'])){
+		echo"
+    <script type=\"text/javascript\" src=\"../../js/noty/packaged/jquery.noty.packaged.js\"></script>
+    <script type=\"text/javascript\">
+
+
+        function generate(type, text) {
+
+            var n = noty({
+                text        : text,
+                type        : type,
+                dismissQueue: true,
+                layout      : 'bottomRight',
+                theme       : 'relax',
+                maxVisible  : 10,
+                animation   : {
+                    open  : 'animated bounceInRight',
+                    close : 'animated bounceOutRight',
+                    easing: 'swing',
+                    speed : 500
+                }
+            });
+            console.log('html: ' + n.options.id);
+        }
+
+        function generateAll() {
+            generate('success', '<div class=\"activity-item\"> <i class=\"fa fa-check text-success\"></i> <div class=\"activity\"> Vos changements ont bien été enregistrés </div> </div>');
+        }
+
+        $(document).ready(function () {
+
+            setTimeout(function() {
+                generateAll();
+            }, 200);
+			
+			setTimeout(function () {
+           		$.noty.closeAll();
+        	}, 3000);
+		
+        });
+
+    </script>
+    ";
+    }
+    ?>
     
     <!--Scripte pour que le menu verticale suive le scroll-->
 	<script type="text/javascript">
