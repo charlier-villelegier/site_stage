@@ -262,15 +262,15 @@
 						<h3> REMUNERATION : </h3>
 						
 						<label>Votre stage a-t-il été rémunéré ? </label>
-							<input name="Remuneration" type="radio" value="Remunere" 
+							<input name="Remuneration" type="radio" id="Remuneration" onclick=remuneration() value="Remunere" 
 							<?php if($remuneration)echo "checked=\"checked\"" ?>/><label for="Remunere">Oui </label>
-							<input name="Remuneration" type="radio" value="NonRemunere" 
+							<input name="Remuneration" type="radio" id="NonRemuneration" onclick=remuneration() value="NonRemunere" 
 							<?php if(!$remuneration)echo "checked=\"checked\"" ?>/><label for="NonRemunere">Non </label>
 						<br/>
 						<br/>
 						
-						<label for="Salaire">Si oui, combien ? </label>
-							<input name="Salaire" type="text" value="<?php echo $salaire ?>"/>
+						<label for="Salaire" id="LabelSalaire">Si oui, combien ? </label>
+							<input name="Salaire" type="text" id="Salaire" value="<?php echo $salaire ?>"/>
 						<br/>
 						<br/>
 						
@@ -278,43 +278,41 @@
 						<h3> ENCADREMENT : </h3>
 						
 						<label>Avez-vous été encadré directement par un informaticien ? </label>
-							<input name="Informaticien" type="radio" value="Informaticien" 
+							<input name="Informaticien" type="radio" id="Informaticien" onclick=informaticien() value="Informaticien" 
 							<?php if($encadre_informaticien)echo "checked=\"checked\"" ?>/><label for="Informaticien">Oui </label>
-							<input name="Informaticien" type="radio" value="NonInformaticien" 
+							<input name="Informaticien" type="radio" id="NonInformaticien" onclick=informaticien() value="NonInformaticien" 
 							<?php if(!$encadre_informaticien)echo "checked=\"checked\"" ?>/><label for="NonInformaticien">Non </label>
 						<br/>
 						<br/>
 						
-						<label>Si non, en cas de besoin pouviez-vous faire appel à un informaticien ? </label>
-							<input name="AppelInformaticien" type="radio" value="AppelInformaticien" 
-							<?php if($appel_informaticien)echo "checked=\"checked\"" ?>/><label for="AppelInformaticien">Oui </label>
-							<input name="AppelInformaticien" type="radio" value="NonAppelInformaticien" 
-							<?php if(!$appel_informaticien)echo "checked=\"checked\"" ?>/><label for="NonAppelInformaticien">Non </label>
+						<label id="LabelAppelInfo">Si non, en cas de besoin pouviez-vous faire appel à un informaticien ? </label>
+							<input name="AppelInformaticien" type="radio" id="Appel" value="AppelInformaticien" 
+							<?php if($appel_informaticien)echo "checked=\"checked\"" ?>/><label id="LabelAppel" for="AppelInformaticien">Oui </label>
+							<input name="AppelInformaticien" type="radio" id="NonAppel" value="NonAppelInformaticien" 
+							<?php if(!$appel_informaticien)echo "checked=\"checked\"" ?>/><label id="LabelNonAppel" for="NonAppelInformaticien">Non </label>
 						<br/>
 						<br/>
 						
-						<label>Dans le cadre de votre stage, avez-vous travaillé seul ? </label>
-							<input name="Equipe" type="radio" value="Seul" 
-							<?php if($travail_seul)echo "checked=\"checked\"" ?>/><label for="Seul">Oui </label>
-							<input name="Equipe" type="radio" value="Groupe" 
-                            <?php if(!$travail_seul)echo "checked=\"checked\"" ?>/><label for="Groupe">Non </label>
+						<label>Dans le cadre de votre stage, l'étudiant a-t-il travaillé seul ? </label>
+							<input name="Equipe" type="radio" value="Seul" id="Seul" onclick="tailleEquipe()" <?php if($travail_seul)echo "checked=\"checked\"" ?>/><label for="Seul">Oui </label>
+							<input name="Equipe" type="radio" value="Groupe" id="Groupe" onclick="tailleEquipe()" <?php if(!$travail_seul)echo "checked=\"checked\"" ?>/><label for="Groupe">Non </label>
 						<br/>
 						<br/>
 						
-						<label for="TailleEquipe">Si non, taille de l'équipe : </label>
-							<input name="TailleEquipe" type="text" value="<?php echo $taille_equipe ?>"/>
+						<label for="TailleEquipe" id="LabelTailleEquipe">Si non, taille de l'équipe : </label>
+							<input name="TailleEquipe" id="TailleEquipe" type="text" value="<?php echo $taille_equipe?>"/>
 						<br/>
 						<br/>
-						
+									
 						<div id="environnement"> </div>
 						<h3> ENVIRONNEMENT GENERAL : </h3>
 						
 						<label>Type de matériel : </label>
-							<input name="Materiel" type="radio" value="PC" 
+							<input name="Materiel" type="radio" value="PC" onclick="autreMateriel()"
 							<?php if($type_materiel=="PC")echo "checked=\"checked\"" ?>/><label for="PC">PC </label>
-							<input name="Materiel" type="radio" value="Autre"
+							<input name="Materiel" type="radio" value="Autre" onclick="autreMateriel()" id="AutreMateriel"
                             <?php if($type_materiel!="PC")echo "checked=\"checked\"" ?>/><label for="Autre">Autre (préciser) </label>
-							<input name="MaterielText" type="text" value="<?php if($type_materiel!="PC")echo $type_materiel ?>"/>
+							<input name="MaterielText" type="text" id="TextAutreMateriel" value="<?php if($type_materiel!="PC")echo $type_materiel ?>"/>
 						<br/>
 						<br/>
 						
@@ -327,9 +325,9 @@
                             <?php if($nt)echo "checked=\"checked\"" ?>/><label for="UNIX">NT </label>
 							<input name="WINDOWS" type="checkbox" value="WINDOWS"
                             <?php if($windows)echo "checked=\"checked\"" ?>/><label for="LINUX">WINDOWS </label> <br/>
-							<input name="Autre" type="checkbox" value="Autre"
+							<input name="Autre" type="checkbox" value="Autre" onclick="autreSysteme()" id="AutreSysteme"
                             <?php if($autre_systeme)echo "checked=\"checked\"" ?>/><label for="Autre">Autre (préciser) </label>
-							<input name="AutreSystemeText" type="text" value="<?php echo $autre_systeme ?>"/>
+							<input name="AutreSystemeText" id="AutreSystemeText" type="text" value="<?php echo $autre_systeme ?>"/>
 						<br/>
 						<br/>
 						
@@ -342,35 +340,35 @@
 						<h3> OBJET PRINCIPAL DU STAGE (2 cases maximum à cocher) : </h3>
 						
 							<input name="Systeme" type="checkbox" value="Systeme"
-                            <?php if($systeme)echo "checked=\"checked\"" ?>/><label for="Systeme">Système </label>
+								<?php if($systeme)echo "checked=\"checked\"" ?>/><label for="Systeme">Système </label>
 							<input name="Multimedia" type="checkbox" value="Multimedia"
-                            <?php if($multimedia)echo "checked=\"checked\"" ?>/><label for="Multimedia">Multimedia </label>
+								<?php if($multimedia)echo "checked=\"checked\"" ?>/><label for="Multimedia">Multimedia </label>
 							<input name="Reseaux" type="checkbox" value="Reseaux"
-                            <?php if($reseau)echo "checked=\"checked\"" ?>/><label for="Reseaux">Réseaux </label>
+								<?php if($reseau)echo "checked=\"checked\"" ?>/><label for="Reseaux">Réseaux </label>
 							<input name="DeveloppementWEB" type="checkbox" value="DeveloppementWEB"
-                            <?php if($web)echo "checked=\"checked\"" ?>/><label for="DeveloppementWEB">Développement WEB </label> <br/>
+								<?php if($web)echo "checked=\"checked\"" ?>/><label for="DeveloppementWEB">Développement WEB </label> <br/>
 							<input name="AutreDvpt" type="checkbox" value="AutreDvpt"
-                            <?php if($autre_dev)echo "checked=\"checked\"" ?>/><label for="AutreDvpt">Autre Développement </label>
+								<?php if($autre_dev)echo "checked=\"checked\"" ?>/><label for="AutreDvpt">Autre Développement </label>
 							<input name="BD" type="checkbox" value="BD"
-                            <?php if($bd)echo "checked=\"checked\"" ?>/><label for="BD">Base de données </label>
-							<input name="AutreObjet" type="checkbox" value="Autre"
-                            <?php if($autre_objet)echo "checked=\"checked\"" ?>/><label for="Autre">Autre (préciser) </label>
-							<input name="AutreObjetText" type="text" value="<?php echo $autre_objet ?>"/>
+								<?php if($bd)echo "checked=\"checked\"" ?>/><label for="BD">Base de données </label>
+							<input name="AutreObjet" id="AutreObjet" onclick="autreObjet()" type="checkbox" value="Autre"
+								<?php if($autre_objet)echo "checked=\"checked\"" ?>/><label for="Autre">Autre (préciser) </label>
+							<input name="AutreObjetText" id="AutreObjetText" type="text" value="<?php echo $autre_objet ?>"/>
 						
 						<div id="avis_stage"> </div>
 						<h3> AVIS DE L'ETUDIANT SUR LE STAGE : </h3>
 						
 						<label>Etes-vous totalement satisfait des conditions dans lesquelles ce sont déroulées votre stage : </label>
                         <br/>
-							<input name="Satisfait" type="radio" value="Satisfait"
+							<input name="Satisfait" type="radio" value="Satisfait" id="Satisfait" onclick="avisEtudiant()"
                             <?php if($satisfait_condition)echo "checked=\"checked\"" ?>/><label for="Satisfait">Oui </label>
-							<input name="Satisfait" type="radio" value="NonSatisfait"
+							<input name="Satisfait" type="radio" value="NonSatisfait" id="NonSatisfait" onclick="avisEtudiant()"
                             <?php if(!$satisfait_condition)echo "checked=\"checked\"" ?>/><label for="NonSatisfait">Non </label>
 						<br/>
 						<br/>
 						
-						<label>Si non expliquez en quelques mots pourquoi : </label> <br/>
-							<textarea name="ExplicationSatisfaction" rows="10" cols="50" ><?php echo $explication_satisfaction ?></textarea>
+						<label id="LabelSatisfait">Si non expliquez en quelques mots pourquoi : </label> <br/>
+							<textarea name="ExplicationSatisfaction" rows="10" cols="50" id="TextSatisfait"><?php echo $explication_satisfaction ?></textarea>
 						<br/>
 						<br/>
 						
@@ -388,15 +386,15 @@
 						<br/>
 						
 						<label>Ces objectifs ont-ils été atteints : </label>
-							<input name="ObjectifAtteint" type="radio" value="ObjectifAtteint"
+							<input name="ObjectifAtteint" type="radio" value="ObjectifAtteint" id="ObjectifAtteint" onclick="objectif()"
                             <?php if($objectif_atteint)echo "checked=\"checked\"" ?>/><label for="ObjectifAtteint">Oui </label>
-							<input name="ObjectifAtteint" type="radio" value="ObjectifNonAtteint"
+							<input name="ObjectifAtteint" type="radio" value="ObjectifNonAtteint" id="ObjectifNonAtteint" onclick="objectif()"
                             <?php if(!$objectif_atteint)echo "checked=\"checked\"" ?>/><label for="ObjectifNonAtteint">Non </label>
 						<br/>
 						<br/>
 						
-						<label>Si non expliquez en quelques mots pourquoi : </label> <br/>
-							<textarea rows="10" cols="50" name="ExplicationObjectif"><?php echo $explication_objectif ?></textarea>
+						<label id="LabelObjectif">Si non expliquez en quelques mots pourquoi : </label> <br/>
+							<textarea rows="10" cols="50" name="ExplicationObjectif" id="TextObjectif"><?php echo $explication_objectif ?></textarea>
 						<br/>
 						<br/>
 						
@@ -404,15 +402,15 @@
 						<h3> AVIS DE L'ETUDIANT SUR LES ENSEIGNEMENTS DISPENSES A L'IUT : </h3>
 						
 						<label>Après cette expérience dans l'entreprise, estimez-vous que certaines matières enseignées n'ont pas été assez développées ? </label>
-							<input name="AvisIUT" type="radio" value="AvisIUTPositif"
+							<input name="AvisIUT" type="radio" value="AvisIUTPositif" id="Manque" onclick="formation()"
                             <?php if($matiere_dev)echo "checked=\"checked\"" ?>/><label for="AvisIUTPositif">Oui </label>
-							<input name="AvisIUT" type="radio" value="AvisIUTNegatif"
+							<input name="AvisIUT" type="radio" value="AvisIUTNegatif" id="PasManque" onclick="formation()"
                             <?php if(!$matiere_dev)echo "checked=\"checked\"" ?>/><label for="AvisIUTNegatif">Non </label>
 						<br/>
 						<br/>
 						
-						<label>Si oui, précisez lesquelles : </label> <br/>
-							<textarea rows="10" cols="50" name="ExplicationAvis"><?php echo $explication_matiere ?></textarea>
+						<label id="LabelManque">Si oui, précisez lesquelles : </label> <br/>
+							<textarea rows="10" cols="50" name="ExplicationAvis" id="TextManque"><?php echo $explication_matiere ?></textarea>
 						<br/>
 						<br/>
 						
@@ -445,6 +443,136 @@
 		</div>
 	</div>
     
+	<!-- Script pour activer ou non les text input-->
+    <script type="text/javascript">
+		function remuneration(){
+			if(document.getElementById('Remuneration').checked==true){
+				document.getElementById('Salaire').hidden=false;
+				document.getElementById('LabelSalaire').hidden=false;
+				
+			}
+			else{
+				document.getElementById('LabelSalaire').hidden=true;
+				document.getElementById('Salaire').hidden=true;
+				
+			}
+			
+		}
+		
+		function informaticien(){
+			if(document.getElementById('Informaticien').checked==true){
+				document.getElementById('LabelAppelInfo').hidden=true;
+				document.getElementById('LabelAppel').hidden=true;
+				document.getElementById('Appel').hidden=true;
+				document.getElementById('LabelNonAppel').hidden=true;
+				document.getElementById('NonAppel').hidden=true;
+			}
+			else{
+				document.getElementById('LabelAppelInfo').hidden=false;
+				document.getElementById('LabelAppel').hidden=false;
+				document.getElementById('Appel').hidden=false;
+				document.getElementById('LabelNonAppel').hidden=false;
+				document.getElementById('NonAppel').hidden=false;
+			}
+			
+		}
+		
+		function tailleEquipe(){
+			if(document.getElementById('Seul').checked==true){
+				document.getElementById('TailleEquipe').hidden=true;
+				document.getElementById('LabelTailleEquipe').hidden=true;
+			}
+			else{
+				document.getElementById('TailleEquipe').hidden=false;
+				document.getElementById('LabelTailleEquipe').hidden=false;
+			}
+			
+		}
+		
+		function autreMateriel(){
+			if(document.getElementById('AutreMateriel').checked==true){
+				document.getElementById('TextAutreMateriel').hidden=false;
+			}
+			else{
+				document.getElementById('TextAutreMateriel').hidden=true;
+			}
+			
+		}
+		
+		function autreSysteme(){
+			if(document.getElementById('AutreSysteme').checked==true){
+				document.getElementById('AutreSystemeText').hidden=false;
+			}
+			else{
+				document.getElementById('AutreSystemeText').hidden=true;
+			}
+		}
+		
+		function autreObjet(){
+			if(document.getElementById('AutreObjet').checked==true){
+				document.getElementById('AutreObjetText').hidden=false;
+			}
+			else{
+				document.getElementById('AutreObjetText').hidden=true;
+			}
+			
+		}
+		
+		function avisEtudiant(){
+			if(document.getElementById('Satisfait').checked==true){
+				document.getElementById('LabelSatisfait').hidden=true;
+				document.getElementById('TextSatisfait').hidden=true;
+			}
+			else{
+				document.getElementById('LabelSatisfait').hidden=false;
+				document.getElementById('TextSatisfait').hidden=false;
+			}
+			
+		}
+		
+		function objectif(){
+			if(document.getElementById('ObjectifAtteint').checked==true){
+				document.getElementById('LabelObjectif').hidden=true;
+				document.getElementById('TextObjectif').hidden=true;
+			}
+			else{
+				document.getElementById('LabelObjectif').hidden=false;
+				document.getElementById('TextObjectif').hidden=false;
+			}
+			
+		}
+		
+		function formation(){
+			if(document.getElementById('Manque').checked==false){
+				document.getElementById('LabelManque').hidden=true;
+				document.getElementById('TextManque').hidden=true;
+			}
+			else{
+				document.getElementById('LabelManque').hidden=false;
+				document.getElementById('TextManque').hidden=false;
+			}
+			
+		}
+		
+		
+		
+		$(document).ready(function(e) {
+                verifyAll();
+           });
+		   
+		function verifyAll(){
+			remuneration();
+			informaticien();
+			tailleEquipe();
+			autreMateriel();
+			autreSysteme();
+			autreObjet();
+			avisEtudiant();
+			objectif();
+			formation();
+		}
+	</script>
+	
     <!-- Affiche la popup de données enregistrées si nécessaire--!>
     <?php
 		if(isset($_GET['saved'])){
