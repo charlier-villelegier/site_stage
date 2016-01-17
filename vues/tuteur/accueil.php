@@ -60,9 +60,9 @@
 			<div class="Bleue">
 				<div id="Ribbon">
 					<ul>
-						<li><a href="#" class="PageActive">Accueil</a></li>
+						<li><a href="accueil.php" class="PageActive">Accueil</a></li>
 						<li><a href="page_fiche_entreprise.php">Mes fiches</a></li>
-						<li><a href="#">Disponibilités</a></li>
+						<li><a href="page_mes_dispo.php">Mes disponibilités</a></li>
 						<li><a href="#">Contacts</a></li>
 					</ul>
 				</div>

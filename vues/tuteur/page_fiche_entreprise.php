@@ -3,7 +3,7 @@
 	include("../../modeles/membre.php");
 	session_start();
 	if(!isset($_SESSION['membre'])){
-		echo"pas de membre";
+		
 		header('Location: ../../index.html'); 
 	}
 	else{
@@ -140,8 +140,8 @@
 				<div id="Ribbon">
 					<ul>
 						<li><a href="accueil.php">Accueil</a></li>
-						<li><a href="#" class="PageActive">Mes fiches</a></li>
-						<li><a href="#">Disponibilités</a></li>
+						<li><a href="page_fiche_entreprise.php" class="PageActive">Mes fiches</a></li>
+						<li><a href="page_mes_dispo.php">Mes disponibilités</a></li>
 						<li><a href="#">Contacts</a></li>
 					</ul>
 				</div>
