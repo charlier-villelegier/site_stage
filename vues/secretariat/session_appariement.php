@@ -38,7 +38,7 @@
                     </div>
               
                     <p>
-                    	Statut : Professeur
+                    	Statut : Secrétariat
                     </p>
                     <p>
 						<input name="Deconnexion" type="submit" value="Déconnexion"/>
@@ -66,65 +66,36 @@
 			<div class="Bleue">
 				<div id="Ribbon">
 					<ul>
-						<li><a href="accueil.php">Accueil</a></li>
-						<li><a href="page_mes_etudiants.php" >Gérer mes étudiants</a></li>
-						<li><a href="page_etudiant_disponible.php" class="PageActive">Etudiants disponibles</a></li>
-						<li><a href="page_mes_dispo.php">Mes disponibilités</a></li>
-                        <li><a href="#">Contacts</a></li>
+						<li><a href="accueil.php" >Accueil</a></li>
+						<li><a href="statistiques.php">Statistiques fiches</a></li>
+						<li><a href="session_appariement.php" class="PageActive">Session d'appariement</a></li>
+						<li><a href="statistiques_tuteurs.php">Statistiques Tuteurs</a></li>
 					</ul>
 				</div>
 			</div>
       
 			<div class="ConteneurTexte">   
-				<div class="TitrePartie" id="titre1">Etudiants sans professeur tuteur : </div>
-                <p>Voici la liste des étudiants <b>qui n'ont pas encore de professeur tuteur.</b></p>
-                <p>Pour demander à être tuteur d'un élève, vous pouvez appuyer sur "choisir" à côté de son nom.</p>
+				<div class="TitrePartie" id="titre1">Session d'appariement : </div>
+                <p>Vous pouvez ici ouvrir ou fermer les sessions d'appariement, afin que les enseignants puissent choisir d'être le tuteur des élèves.</p><br/>
                 <?php
-				
-					//Je vérifie si les session d'admissions sont ouvertes
+					//Je récupère et j'affiche la liste des disponibilités
 					$resultat = mysqli_query($co,  "SELECT session_appariement
-													FROM secretariat");
-					$row=mysqli_fetch_row($resultat);
-					$session_ouverte=$row[0];
-					
-					if($session_ouverte){
-						//Je récupère et j'affiche la liste des étudiants sans tuteurs
-						$resultat = mysqli_query($co,  "SELECT nom, prenom, tp, login
-														FROM etudiant E
-														WHERE E.login NOT IN (SELECT etudiant
-																			  FROM appariement_enseignant)
-														ORDER BY nom");
-					
-						echo"<table border='1' width=\"100%\" cellpadding=\"10\">";
-							echo"<tr>";
-								echo"<td><b>NOM</b></td>";	
-								echo"<td><b>PRENOM</b></td>";		
-								echo"<td><b>TP</b></td>";
-							echo"</tr>";	
+													FROM secretariat
+													WHERE login='$membre->login'");
 													
-							while($row = mysqli_fetch_row($resultat)){
-								$nom=$row[0];
-								$prenom=$row[1];
-								$tp=($row[2]==NULL? "Non renseigné" : $row[2]);
-								$login=$row[3];
-						
-								echo"<tr>";
-									echo"<td>$nom</td>";
-									echo"<td>$prenom</td>";
-									echo"<td>$tp</td>";
-									echo"<form>";
-									?>
-									<td><input type="button" value="Choisir" onclick="generate('<?php echo $nom.' '.$prenom?>','<?php echo $login ?>')"/></td>
-                                	<?php
-									echo"</form>";
-								echo"</tr>";
-							}
-						
-						echo"</table>";
+					$row=mysqli_fetch_row($resultat);
+					
+					if($row[0]){
+						echo "<p>Les appariements sont actuellement <b>ouverts</b></p>";
+						echo "<p>Vous pouvez les fermer en appuyant ici : </p>";
+						echo "<input type=\"button\" value=\"Fermer les appariements\" onclick=\"confirmClose()\"/>";
 					}
 					else{
-						echo "<h3>Les appariements sont actuellement <b>fermés</b>. Veuillez revenir lors de la prochaine session d'appariement.</h2>";	
+						echo "<p>Les appariements sont actuellement <b>fermés</b></p>";
+						echo "<p>Vous pouvez les ouvrir en appuyant ici : </p>";
+						echo "<input type=\"button\" value=\"Ouvrir les appariements\" onclick=\"confirmOpen()\"/>";
 					}
+					
 				?>
                 
 			</div>
@@ -142,12 +113,14 @@
 		</div>
 	</div>
     
+     <!--Fonctions javascript pour les popup-->
     <script type="text/javascript" src="../../js/noty/packaged/jquery.noty.packaged.js"></script>
     <script type="text/javascript">
-
-    function generate(name,login) {
+	
+	//Ouvrir les appariements
+	function confirmOpen() {
         var n = noty({
-            text        : 'Voulez vous vraiment être le tuteur de <b>' + name  + ' </b> ?',
+            text        : 'Voulez vous vraiment <b>ouvrir</b> les appariements ?',
             type        : 'information',
             dismissQueue: true,
             layout      : 'center',
@@ -161,8 +134,7 @@
             buttons     : [
                 {addClass: 'btn btn-primary', text: 'Oui', onClick: function ($noty) {
                     $noty.close();
-					document.location.href="../../controleurs/enseignant/add_etudiant.php?etudiant="+login
-                    
+					document.location.href="../../controleurs/secretariat/appariement.php?state=open";
                 }
                 },
                 {addClass: 'btn btn-danger', text: 'Annuler', onClick: function ($noty) {
@@ -172,12 +144,124 @@
                 }
             ]
         });
+		
+		
         console.log('html: ' + n.options.id);
     }
-
-</script>
-
 	
+	//Fermer les appariements
+	function confirmClose() {
+        var n = noty({
+            text        : 'Voulez vous vraiment <b>fermer</b> les appariements ?',
+            type        : 'information',
+            dismissQueue: true,
+            layout      : 'center',
+            theme       : 'defaultTheme',
+			 animation   : {
+                    open  : 'animated flipInX',
+                    close : 'animated flipOutX',
+                    easing: 'swing',
+                    speed : 1000
+                },
+            buttons     : [
+                {addClass: 'btn btn-primary', text: 'Oui', onClick: function ($noty) {
+                    $noty.close();
+					document.location.href="../../controleurs/secretariat/appariement.php?state=close";
+                }
+                },
+                {addClass: 'btn btn-danger', text: 'Annuler', onClick: function ($noty) {
+                    $noty.close();
+                    
+                }
+                }
+            ]
+        });
+		
+		
+        console.log('html: ' + n.options.id);
+    }
+	
+	function generatePopup(type, text) {
+
+            var popup = noty({
+                text        : text,
+                type        : type,
+                dismissQueue: true,
+                layout      : 'bottomRight',
+                theme       : 'relax',
+                maxVisible  : 10,
+                animation   : {
+                    open  : 'animated bounceInRight',
+                    close : 'animated bounceOutRight',
+                    easing: 'swing',
+                    speed : 500
+                }
+            });
+            console.log('html: ' + n.options.id);
+			
+        }
+		
+		function generateOpened() {
+			
+            generatePopup('success', 
+			'<div class=\"activity-item\"> <i class=\"fa fa-check text-success\"></i> <div class=\"activity\"> Les appariements ont bien été <b>ouverts</b> </div> </div>');
+			
+		 }
+		 
+		 function generateClosed() {
+			
+            generatePopup('success', 
+			'<div class=\"activity-item\"> <i class=\"fa fa-check text-success\"></i> <div class=\"activity\"> Les appariements ont bien été <b>fermés</b> </div> </div>');
+		 }
+	
+	</script>
+    
+     <!-- Affiche la popup de la appariements ouverts ou fermés-->
+    <?php
+		if(isset($_GET['state'])){
+			if($_GET['state']=="open"){
+				echo"
+		 
+   				 <script type=\"text/javascript\">
+
+					$(document).ready(function () {
+
+           			 setTimeout(function() {
+              			 generateOpened();
+           			 }, 200);
+			
+					setTimeout(function () {
+           				$.noty.closeAll();
+        			}, 3000);
+		
+       			 });
+
+    		</script>
+   			";
+			}
+			else{
+				echo"
+		 
+   				 <script type=\"text/javascript\">
+
+					$(document).ready(function () {
+
+           			 setTimeout(function() {
+              			 generateClosed();
+           			 }, 200);
+			
+					setTimeout(function () {
+           				$.noty.closeAll();
+        			}, 3000);
+		
+       			 });
+
+    		</script>
+   			";
+			}
+		
+    }
+    ?>
     
     <!--Scripte pour que le menu verticale suive le scroll-->
 	<script type="text/javascript">
@@ -195,6 +279,5 @@
 			}
 		);
 	</script>
-    
   </body>
 </html>

@@ -28,7 +28,14 @@
 					header('Location: ../vues/tuteur/accueil.php');
 				}
 				else{
-					header('Location: ../index.html'); 
+					$resultat = mysqli_query($co, "SELECT login FROM secretariat WHERE login='$login' AND mdp='$mdp'");
+					if(mysqli_num_rows($resultat)>0){
+						$function="secretariat";
+						header('Location: ../vues/secretariat/accueil.php');
+					}
+					else{
+						header('Location: ../index.html'); 
+					}
 				}
 			}
 		}

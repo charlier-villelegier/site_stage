@@ -28,6 +28,10 @@
 				case "tuteur":
 					$resultat = mysqli_query($co, "SELECT nom,prenom FROM tuteur_entreprise WHERE login='$this->login' AND mdp='$this->mdp'");
 					break;
+					
+				case "secretariat":
+					$resultat = mysqli_query($co, "SELECT nom,prenom FROM secretariat WHERE login='$this->login' AND mdp='$this->mdp'");
+					break;
 							
 			}
 			$row = mysqli_fetch_row($resultat);
