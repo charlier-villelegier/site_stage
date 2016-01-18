@@ -61,7 +61,7 @@
 				<div id="Ribbon">
 					<ul>
 						<li><a href="accueil.php" class="PageActive">Accueil</a></li>
-						<li><a href="statistiques.php">Statistiques fiches</a></li>
+						<li><a href="page_stat_fiche.php">Statistiques fiches</a></li>
 						<li><a href="session_appariement.php">Session d'appariement</a></li>
 						<li><a href="statistiques_tuteurs.php">statistiques Tuteurs</a></li>
 					</ul>
@@ -70,6 +70,8 @@
       
 			<div class="ConteneurTexte">   
 				<div class="TitrePartie" id="titre1">Statistiques générales : </div>
+				
+				
 			</div>
 		</div>
     
