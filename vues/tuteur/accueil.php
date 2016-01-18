@@ -6,6 +6,89 @@
 		echo"pas de membre";
 		header('Location: ../../index.html'); 
 	}
+	else{
+		$membre=$_SESSION['membre'];
+		$bd = new Bd("site_stage");
+		$co = $bd->connexion();
+		$stat = 0;
+		$nb_champ = 14;
+		
+		//Remplissage de la fiche d'appreciation sur le stagiaire
+		//Etudiant
+		$resultat = mysqli_query($co,  "SELECT prenom, nom
+										FROM appariement_tuteur A, etudiant E
+										WHERE A.etudiant = E.login
+										AND tuteur='$membre->login'");
+		$row = mysqli_fetch_row($resultat);
+	   	$prenom_etudiant = $row[0];
+		$nom_etudiant = $row[1];
+		
+		//Entreprise
+		$resultat = mysqli_query($co,  "SELECT E.nom_entreprise
+										FROM tuteur_entreprise T, entreprise E
+										WHERE T.entreprise = E.num_entreprise
+										AND T.login='$membre->login'");
+		$row = mysqli_fetch_row($resultat);
+		$nom_entreprise = $row[0];
+		
+		if($nom_entreprise!=NULL) $stat+=1;
+		
+		//Tuteur
+		$resultat = mysqli_query($co,  "SELECT prenom, nom
+										FROM tuteur_entreprise
+										WHERE login='$membre->login'");
+		$row = mysqli_fetch_row($resultat);
+		$prenom_tuteur = $row[0];
+		$nom_tuteur = $row[1];
+		
+		if($prenom_tuteur!=NULL) $stat+=1;
+		if($nom_tuteur!=NULL) $stat+=1;
+		
+		//NumJury
+		$resultat = mysqli_query($co,  "SELECT num_jury, raison_embauche
+										FROM appariement_tuteur A, etudiant E, fiche_tuteur F
+										WHERE A.etudiant = E.login
+										AND F.num_fiche = E.sa_fiche_tuteur
+										AND tuteur='$membre->login'");
+										
+		$row = mysqli_fetch_row($resultat);
+		$num_jury = $row[0];
+		$raison_embauche = $row[1];
+		
+		if($num_jury!=NULL) $stat+=1;
+		if($raison_embauche!=NULL) $stat+=1;
+		
+		//Contacts
+		$resultat = mysqli_query($co,  "SELECT nom_rh, mail_rh, telephone_rh,
+										nom_taxe, mail_taxe, telephone_taxe,
+										nom_relation, mail_relation, telephone_relation
+										FROM appariement_tuteur A, etudiant E, fiche_tuteur F
+										WHERE A.etudiant = E.login
+										AND F.num_fiche = E.sa_fiche_tuteur
+										AND tuteur='$membre->login'");				
+		$row = mysqli_fetch_row($resultat);
+		$nom_rh = $row[0];
+		$mail_rh = $row[1];
+		$telephone_rh = $row[2];
+		$nom_taxe = $row[3];
+		$mail_taxe = $row[4];
+		$telephone_taxe = $row[5];
+		$nom_relation = $row[6];
+		$mail_relation = $row[7];
+		$telephone_relation = $row[8];
+		
+		if($nom_rh!=NULL) $stat+=1;
+		if($mail_rh!=NULL) $stat+=1;
+		if($telephone_rh!=NULL) $stat+=1;
+		if($nom_taxe!=NULL) $stat+=1;
+		if($mail_taxe!=NULL) $stat+=1;
+		if($telephone_taxe!=NULL) $stat+=1;
+		if($nom_relation!=NULL) $stat+=1;
+		if($mail_relation!=NULL) $stat+=1;
+		if($telephone_relation!=NULL) $stat+=1;
+		
+		$pourcentage_fiche = intval(($stat/$nb_champ)*100);
+	}
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -45,15 +128,6 @@
 			
         </div>
     </div>
-    <div class="menu">
-		<div class="ConteneurHautPetit"></div>
-		<div class="ConteneurPrincipalePetit">
-			<div class="ConteneurPetitPlan">
-				
-			</div>
-		</div>
-		<div class="ConteneurBasPetit"></div>
-    </div>
     <div class="contenu_page">
 		<div class="ConteneurHaut"></div>
 		<div class="ConteneurPrincipale">
@@ -69,7 +143,12 @@
 			</div>
       
 			<div class="ConteneurTexte">   
-				<div class="TitrePartie" id="titre1">Vos statistiques : </div>
+				<p>Bienvenue <?php echo $membre->prenom." ".$membre->nom?>.</br>
+				Vous êtes le tuteur en entreprise de <b><?php echo $prenom_etudiant." ".$nom_etudiant?></b>. 
+				Grâce à votre espace, vous pourrez saisir la fiche d'appréciation sur votre stagiaire dans l'onglet "Mes fiches"
+				Si vous pensez venir assister à la soutenance de fin de stage de l'étudiant, nous vous demanderons également de saisir vos disponibilités (via l'onglet "Mes disponibilités") pour établir un planning des soutenances. <br/><br/>
+				Pour le moment, la fiche concernant votre stagiaire est rempli à <b><?php echo $pourcentage_fiche?>%</b>.
+				</p> 
 			</div>
 		</div>
     

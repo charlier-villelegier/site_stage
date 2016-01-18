@@ -20,6 +20,11 @@
     <link href="../../style.css" rel="stylesheet" type="text/css" />
 	<script src="../../js/jquery-1.11.1.min.js" type="text/javascript"></script>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<style type="text/css">
+		.tab  {border-collapse:collapse;border-spacing:0;}
+		.tab td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+		.tab th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal; background-color:#26ade4;}
+	</style>
   </head>
   
   <body>
@@ -83,11 +88,11 @@
 													
 					
 					
-					echo"<table border='1' width=\"100%\" cellpadding=\"10\">";
+					echo"<table class=\"tab\" width=\"100%\" cellpadding=\"10\">";
 						echo"<tr>";
-							echo"<td align=\"center\"><b>Nom</b></td>";	
-							echo"<td align=\"center\"><b>Prénom</b></td>";		
-							echo"<td align=\"center\"><b>Remplissage de sa fiche de visite de stage</b></td>";	
+							echo"<th align=\"center\"><b><font color=\"white\">Nom</font></b></th>";	
+							echo"<th align=\"center\"><b><font color=\"white\">Prenom</font></b></th>";		
+							echo"<th align=\"center\"><b><font color=\"white\">Remplissage de sa fiche de visite de stage</font></b></th>";	
 						echo"</tr>";	
 					if(mysqli_num_rows($resultat)>0){							
 						while($row = mysqli_fetch_row($resultat)){
