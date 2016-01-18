@@ -65,9 +65,9 @@
 				<div id="Ribbon">
 					<ul>
 						<li><a href="accueil.php">Accueil</a></li>
-						<li><a href="page_mes_etudiants.php" >Gérer mes étudiants</a></li>
-						<li><a href="page_etudiant_disponible.php">Etudiants disponibles</a></li>
-						<li><a href="page_mes_dispo.php">Mes disponibilités</a></li>
+						<li><a href="page_stat_fiche.php">Statistiques fiches</a></li>
+						<li><a href="session_appariement.php">Session d'appariement</a></li>
+						<li><a href="statistiques_tuteurs.php">statistiques Tuteurs</a></li>
 					</ul>
 				</div>
 			</div>

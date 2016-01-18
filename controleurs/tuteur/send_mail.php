@@ -31,5 +31,5 @@
 	}
 	
 	//On redirige vers la bonnne page
-	header("Location: ../../vues/tuteur/page_contact.php");
+	header("Location: ../../vues/tuteur/page_contact.php?sent=true");
 ?>
