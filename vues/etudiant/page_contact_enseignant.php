@@ -90,7 +90,7 @@
 			<div class="ConteneurTexte">   
 				<div class="TitrePartie" id="titre1">Envoyez un e-mail à votre tuteur en entreprise</div>
 				
-				<form method="post" action="../../controleurs/etudiant/send_mail.php">
+				<form method="post" action="../../controleurs/tuteur/send_mail.php">
 				<p>
 					<label for="MailEtudiant"> Envoyé à : </label>
 						<input type="text" name="to" value="<?php echo $mail_tuteur?>" disabled="disabled"/>

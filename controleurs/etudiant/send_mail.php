@@ -20,8 +20,8 @@
 		$corps=$_POST['corps'];
 		
 		//On spécifie les headers
-		$resultat=mysqli_query($co,  "SELECT mail
-									  FROM tuteur_entreprise
+		$resultat=mysqli_query($co,  "SELECT mail_iut
+									  FROM etudiant
 									  WHERE login='$membre->login'");
 		$row=mysqli_fetch_row($resultat);
 		$mail=$row[0];
