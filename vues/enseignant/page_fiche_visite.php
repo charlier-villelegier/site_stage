@@ -65,7 +65,7 @@
 										manque_formation, explication_formation, avis_enseignant, accueil_entreprise, precaution
 										FROM appariement_enseignant A, etudiant E, fiche_visite F
 										WHERE A.etudiant = E.login
-										AND F.num_fiche = E.sa_fiche_tuteur
+										AND F.num_fiche = E.sa_fiche_visite
 										AND enseignant='$membre->login'
 										AND A.etudiant='$etudiant'");
 										

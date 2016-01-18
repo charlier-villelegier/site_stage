@@ -7,7 +7,7 @@
 	$etudiant=$_GET['etudiant'];
 	$bd = new Bd("site_stage");
 	$co = $bd->connexion();
-	
+
 	//On vérifie s'il a déjà une fiche_avis dans la base de donnée
 	$resultat = mysqli_query($co,  "SELECT sa_fiche_visite
 									FROM etudiant e
