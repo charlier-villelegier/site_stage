@@ -86,7 +86,7 @@
 				<form method="post" action="../../controleurs/tuteur/send_mail.php">
 				<p>
 					<label for="MailEtudiant"> Envoyé à : </label>
-						<input type="text" name="to" value="<?php echo $mail_iut?>"/>
+						<input type="text" name="to" value="<?php echo $mail_iut?>" disabled="disabled"/>
 					<br/>
 					<br/>
 					

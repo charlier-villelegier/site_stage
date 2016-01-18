@@ -7,9 +7,14 @@
 	$co = $bd->connexion();
 	$membre=$_SESSION['membre'];
 	
-	if(isset($_POST['objet']) && isset($_POST['corps']) &&   isset($_POST['to'])){
+	if(isset($_POST['objet']) && isset($_POST['corps'])){
 		
-		$destinataire=$_POST['to'];
+		$resultat=mysqli_query($co,  "SELECT mail_iut
+									  FROM appariement_tuteur A, etudiant E
+									  WHERE A.etudiant = E.login
+									  AND tuteur='$membre->login'");
+		$row=mysqli_fetch_row($resultat);
+		$destinataire=$row[0];
 		$objet=$_POST['objet'];
 		$corps=$_POST['corps'];
 		
