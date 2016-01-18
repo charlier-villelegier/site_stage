@@ -169,7 +169,7 @@ a:active {
     margin-top:10px;
     text-align:center;
     font-size:14px;
-    width:500px
+    width:500px;
 }
 
 .PlanMenu {
@@ -182,7 +182,7 @@ a:active {
     margin-top:10px;
     text-align:center;
     font-size:14px;
-    width:206px
+    width:206px;
 } 
 
 .TitrePlan {
@@ -218,7 +218,7 @@ a:active {
 
 .Bleue #Ribbon ul li {
     display:block;
-    margin:0 1px 0 0
+    margin:0 1px 0 0;
 }
 
 .Bleue #Ribbon ul li a {
@@ -227,18 +227,15 @@ a:active {
     color:#D5F1FF;
     text-decoration:none;
     padding:14px 22px 0 22px;
-    height:28px
+    height:28px;
 }
 
 .Bleue #Ribbon ul li a:hover,.Bleue #Ribbon ul li a.PageActive {
     color:#fff;
-    background:transparent url(images/ribbon_button.png) no-repeat top center
+    background:transparent url(images/ribbon_button.png) no-repeat top center;
 }
 
 
-
-
-
 .SansBordure {
-    border: none
+    border: none;
 }

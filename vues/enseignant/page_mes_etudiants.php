@@ -96,9 +96,9 @@
 					
 					echo"<table class=\"tab\" width=\"100%\" cellpadding=\"10\">";
 						echo"<tr>";
-							echo"<th><b>NOM</b></th>";	
-							echo"<th><b>PRENOM</b></th>";		
-							echo"<th><b>TP</b></th>";
+							echo"<th><b><font color=\"white\">NOM</font></b></th>";	
+							echo"<th><b><font color=\"white\">PRENOM</font></b></th>";		
+							echo"<th><b><font color=\"white\">TP</font></b></th>";
 						echo"</tr>";	
 					if(mysqli_num_rows($resultat)>0){							
 						while($row = mysqli_fetch_row($resultat)){
@@ -113,9 +113,9 @@
 								echo"<td>$tp</td>";
 								echo"<form>";
 								?>
-                                <td><input type="button" value="Remplir sa fiche de visite" 
+                                <td align="center"><input type="button" value="Remplir sa fiche de visite" 
                                 	onclick="self.location.href='page_fiche_visite.php?etudiant=<?php echo $login ?>'"/></td>
-								<td><input type="button" value="Supprimer" onclick="generate('<?php echo $nom.' '.$prenom?>','<?php echo $login ?>')"/></td>
+								<td align="center"><input type="button" value="Supprimer" onclick="generate('<?php echo $nom.' '.$prenom?>','<?php echo $login ?>')"/></td>
                                 <?php
 								echo"</form>";
 							echo"</tr>";
