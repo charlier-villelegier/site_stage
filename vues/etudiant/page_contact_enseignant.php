@@ -90,7 +90,7 @@
 			</div>
       
 			<div class="ConteneurTexte">   
-				<div class="TitrePartie" id="titre1">Envoyez un e-mail à votre tuteur en entreprise</div>
+				<div class="TitrePartie" id="titre1">Envoyez un e-mail à votre tuteur enseignant responsable</div>
 				
 				<form method="post" action="../../controleurs/tuteur/send_mail.php">
 				<p>
