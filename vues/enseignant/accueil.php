@@ -10,8 +10,6 @@
 		$membre=$_SESSION['membre'];
 		$bd = new Bd("site_stage");
 		$co = $bd->connexion();
-		
-		$stat = 0;
 	}
 ?>
 
@@ -75,23 +73,72 @@
 				</p>
 				<div class="TitrePartie" id="titre1">Vos statistiques : </div>
 				
-				<TABLE BORDER align="center">
-			
-						<TR>
-							<TD name="FicheTitre" align="center"><b>Vos fiches</b></TD>
-							<TD name="RemplissageTitre" align="center"><b>Remplissage</b></TD>
-						</TR>
+				<?php
+					//Je récupère et j'affiche la liste des étudiants sans tuteurs
+					$resultat = mysqli_query($co,  "SELECT nom, prenom, login
+													FROM etudiant E, appariement_enseignant A
+													WHERE E.login=A.etudiant
+													AND A.enseignant='$membre->login'
+													ORDER BY nom");
+													
+					
+					
+					echo"<table border='1' width=\"100%\" cellpadding=\"10\">";
+						echo"<tr>";
+							echo"<td align=\"center\"><b>Nom</b></td>";	
+							echo"<td align=\"center\"><b>Prénom</b></td>";		
+							echo"<td align=\"center\"><b>Remplissage de sa fiche de visite de stage</b></td>";	
+						echo"</tr>";	
+					if(mysqli_num_rows($resultat)>0){							
+						while($row = mysqli_fetch_row($resultat)){
+							$nom=$row[0];
+							$prenom=$row[1];
+							$login=$row[2];
+							
+							//Remplissage de la fiche de chaque étudiant
+							$stat = 0;
+							$nb_champ = 5;
+							
+							$resultat2 = mysqli_query($co,  "SELECT drh, telephone_drh, mail_drh, commentaire_comportement, avis_enseignant
+															FROM appariement_enseignant A, etudiant E, fiche_visite F
+															WHERE A.etudiant = E.login
+															AND F.num_fiche = E.sa_fiche_tuteur
+															AND enseignant='$membre->login'
+															AND A.etudiant='$login'");
+															
+							$row2 = mysqli_fetch_row($resultat2);
+							$drh = $row2[0];
+							$telephone_drh = $row2[1];
+							$mail_drh = $row2[2];
+							$commentaire_comportement = $row2[3];
+							$avis_enseignant = $row2[4];
+							
+							if($drh!=NULL) $stat+=1;
+							if($telephone_drh!=NULL) $stat+=1;
+							if($mail_drh!=NULL) $stat+=1;
+							if($commentaire_comportement!=NULL) $stat+=1;
+							if($avis_enseignant!=NULL) $stat+=1;
+							
+							$pourcentage_fiche = intval(($stat/$nb_champ)*100);
+							
+							echo"<tr>";
+								echo"<td>$nom</td>";
+								echo"<td>$prenom</td>";
+								echo"<td align=\"center\">$pourcentage_fiche %</td>";
+								?>
+                                <?php
+							echo"</tr>";
+						}
+					}
+					else{
+						echo"<tr>";
+							echo"<td colspan=\"3\" align=\"center\">Vous n'êtes tuteur d'aucun étudiant</td>";
+						echo"</tr>";
+					}
 						
-						<TR>
-							<TD name="LabelFicheLocalisation">Fiche de localisation</p> </TD>
-							<TD align="center"><?php echo $pourcentage_localisation?>%</TD>
-						</TR>
-						
-						<TR>
-							<TD name="LabelFicheAvis">Fiche d'avis sur le stage</TD>
-							<TD name="PourcentageFicheAvis" align="center">Environ <?php echo $pourcentage_avis?>%</TD>
-						</TR>
-				</TABLE>	
+					echo"</table>";
+					
+				?>
 			</div>
 		</div>
     
