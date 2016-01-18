@@ -6,6 +6,13 @@
 		echo"pas de membre";
 		header('Location: ../../index.html'); 
 	}
+	else{
+		$membre=$_SESSION['membre'];
+		$bd = new Bd("site_stage");
+		$co = $bd->connexion();
+		
+		$stat = 0;
+	}
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -45,15 +52,6 @@
 			
         </div>
     </div>
-    <div class="menu">
-		<div class="ConteneurHautPetit"></div>
-		<div class="ConteneurPrincipalePetit">
-			<div class="ConteneurPetitPlan">
-				
-			</div>
-		</div>
-		<div class="ConteneurBasPetit"></div>
-    </div>
     <div class="contenu_page">
 		<div class="ConteneurHaut"></div>
 		<div class="ConteneurPrincipale">
@@ -70,8 +68,30 @@
 			</div>
       
 			<div class="ConteneurTexte">   
+				<p>Bienvenue <?php echo $membre->prenom." ".$membre->nom?>.</br>
+				Vous pouvez via ce site gérer les étudiants dont vous êtes le tuteur, c'est-à-dire pouvoir remplir leur fiche de visite de stage et supprimer un appariement avec un étudiant. <br/>
+				Vous pouvez également grâce à l'onglet "Etudiants disponibles", effectuer des demandes d'appariement avec un étudiant pour devenir son tuteur de stage. <br/>
+				Enfin vous pouvez contacter les différents membres du stage via l'onglet "Contacts" (Responsable du stage, étudiants, secrétariat etc.).
+				</p>
 				<div class="TitrePartie" id="titre1">Vos statistiques : </div>
-                
+				
+				<TABLE BORDER align="center">
+			
+						<TR>
+							<TD name="FicheTitre" align="center"><b>Vos fiches</b></TD>
+							<TD name="RemplissageTitre" align="center"><b>Remplissage</b></TD>
+						</TR>
+						
+						<TR>
+							<TD name="LabelFicheLocalisation">Fiche de localisation</p> </TD>
+							<TD align="center"><?php echo $pourcentage_localisation?>%</TD>
+						</TR>
+						
+						<TR>
+							<TD name="LabelFicheAvis">Fiche d'avis sur le stage</TD>
+							<TD name="PourcentageFicheAvis" align="center">Environ <?php echo $pourcentage_avis?>%</TD>
+						</TR>
+				</TABLE>	
 			</div>
 		</div>
     

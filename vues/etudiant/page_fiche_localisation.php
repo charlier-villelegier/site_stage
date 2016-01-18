@@ -15,7 +15,6 @@
 										FROM appariement_enseignant ae, enseignant e
 										WHERE ae.enseignant=e.login
 										AND etudiant='$membre->login'");
-		$nom_enseignant = $resultat;
 		$row = mysqli_fetch_row($resultat);
 		$nom_enseignant = $row[0];
 		$prenom_enseignant = $row[1];
@@ -24,7 +23,6 @@
 		$resultat = mysqli_query($co,  "SELECT adresse,ville,code_postal,mail_iut,tel_portable
 										FROM etudiant 
 										WHERE login='$membre->login'");
-		$adresse_etudiant = $resultat;
 		$row = mysqli_fetch_row($resultat);
 		$adresse_etudiant = $row[0];
 		$ville_etudiant = $row[1];
@@ -38,7 +36,6 @@
 										WHERE at.tuteur=t.login
 										AND t.entreprise=e.num_entreprise
 										AND etudiant='$membre->login'");
-		$nom_entreprise = $resultat;
 		$row = mysqli_fetch_row($resultat);
 		$nom_entreprise = $row[0];
 		$adresse_entreprise = $row[1];
@@ -50,7 +47,6 @@
 										FROM appariement_tuteur at, tuteur_entreprise t
 										WHERE at.tuteur=t.login
 										AND etudiant='$membre->login'");
-		$nom_tuteur = $resultat;
 		$row = mysqli_fetch_row($resultat);
 		$nom_tuteur = $row[0];
 		$prenom_tuteur = $row[1];
@@ -61,7 +57,6 @@
 		$resultat = mysqli_query($co,  "SELECT tel_entreprise, tel_portable, mail_perso, sujet_stage 
 										FROM etudiant 
 										WHERE login='$membre->login'");
-		$tel_entreprise = $resultat;
 		$row = mysqli_fetch_row($resultat);
 		$tel_entreprise = $row[0];
 		$tel_portable = $row[1];

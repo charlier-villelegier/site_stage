@@ -4,7 +4,78 @@
 	session_start();
 	if(!isset($_SESSION['membre'])){
 		echo"pas de membre";
-		header('Location: ../../index.html'); 
+		header('Location: ../../index.html');
+	}
+	else{
+		$membre=$_SESSION['membre'];
+		$bd = new Bd("site_stage");
+		$co = $bd->connexion();
+		
+		$stat_localisation = 0;
+		$stat_avis = 0;
+		//Remplissage de la fiche de localisation
+		$nb_champ_localisation = 14;
+		$resultat=mysqli_query($co,  "SELECT nom, prenom, adresse, ville, code_postal, mail_iut,
+									  mail_perso, tel_portable, tel_entreprise, sujet_stage, tp
+									  FROM etudiant
+									  WHERE login='$membre->login' AND mdp='$membre->mdp'");
+		$row = mysqli_fetch_row($resultat);
+		$nom = $row[0];
+		$prenom = $row[1];
+		$adresse = $row[2];
+		$ville = $row[3];
+		$code_postal = $row[4];
+		$mail_iut = $row[5];
+		$mail_perso = $row[6];
+		$tel_portable = $row[7];
+		$tel_entreprise = $row[8];
+		$sujet_stage = $row[9];
+		$tp = $row[10];
+		
+		if($nom!=NULL) {$stat_localisation+=1; $stat_avis+=1;}
+		if($prenom!=NULL) {$stat_localisation+=1; $stat_avis+=1;}
+		if($adresse!=NULL) $stat_localisation+=1;
+		if($ville!=NULL) $stat_localisation+=1;
+		if($code_postal!=NULL) $stat_localisation+=1;
+		if($mail_iut!=NULL) {$stat_localisation+=1; $stat_avis+=1;}
+		if($mail_perso!=NULL) $stat_localisation+=1;
+		if($tel_portable!=NULL) $stat_localisation+=1;
+		if($tel_entreprise!=NULL) $stat_localisation+=1;
+		if($sujet_stage!=NULL) $stat_localisation+=1;
+		
+		$resultat=mysqli_query($co,  "SELECT nom_entreprise, adresse, ville, code_postal
+									  FROM appariement_tuteur at, tuteur_entreprise t, entreprise e
+									  WHERE at.tuteur=t.login
+									  AND t.entreprise=e.num_entreprise
+									  AND etudiant='$membre->login'");
+		$row = mysqli_fetch_row($resultat);
+		$nom_entreprise = $row[0];
+		$adresse_entreprise = $row[1];
+		$ville_entreprise = $row[2];
+		$cp_entreprise = $row[3];
+		
+		if($nom_entreprise!=NULL) {$stat_localisation+=1; $stat_avis+=1;}
+		if($adresse_entreprise!=NULL) {$stat_localisation+=1; $stat_avis+=1;}
+		if($ville_entreprise!=NULL) {$stat_localisation+=1; $stat_avis+=1;}
+		if($cp_entreprise!=NULL) {$stat_localisation+=1; $stat_avis+=1;}
+		
+		$pourcentage_localisation = intval(($stat_localisation/$nb_champ_localisation)*100);
+		
+		//Remplissage de la fiche d'avis
+		$nb_champ_avis = 10;
+		$resultat = mysqli_query($co, "SELECT f.langage, f.apport_stage 
+									   FROM etudiant e, fiche_avis f
+									   WHERE e.sa_fiche_avis=f.num_fiche
+									   AND e.login='$membre->login' AND e.mdp='$membre->mdp'");
+		$row = mysqli_fetch_row($resultat);
+		$langage=$row[0];
+		$apport_stage=$row[1];
+		
+		if($tp!=NULL) $stat_avis+=1;
+		if($langage!=NULL) $stat_avis+=1;
+		if($apport_stage!=NULL) $stat_avis+=1;
+		
+		$pourcentage_avis = intval(($stat_avis/$nb_champ_avis)*100);
 	}
 ?>
 
@@ -45,15 +116,7 @@
 			
         </div>
     </div>
-    <div class="menu">
-		<div class="ConteneurHautPetit"></div>
-		<div class="ConteneurPrincipalePetit">
-			<div class="ConteneurPetitPlan">
-				
-			</div>
-		</div>
-		<div class="ConteneurBasPetit"></div>
-    </div>
+
     <div class="contenu_page">
 		<div class="ConteneurHaut"></div>
 		<div class="ConteneurPrincipale">
@@ -68,8 +131,31 @@
 				</div>
 			</div>
       
-			<div class="ConteneurTexte">   
+			<div class="ConteneurTexte">
+				<p>Bienvenue <?php echo $membre->prenom." ".$membre->nom?>.</br>
+				Vous pouvez via ce site remplir les fiches concernant votre stage du dernier semestre de l'IUT grâce à l'onglet "Mes fiches" ci-dessus. </br>
+				Vous pouvez également saisir vos différentes disponibilités pour la soutenance de votre rapport de stage via l'onglet "Mes disponibilités". </br>
+				Enfin, vous pourrez contacter les différents membres qui concerne votre stage (tuteur, reponsable en entreprise, secrétariat, etc.) via l'onglet "Contact".
+				</p>
 				<div class="TitrePartie" id="titre1">Vos statistiques : </div>
+				
+				<TABLE BORDER align="center">
+			
+						<TR>
+							<TD name="FicheTitre" align="center"><b>Vos fiches</b></TD>
+							<TD name="RemplissageTitre" align="center"><b>Remplissage</b></TD>
+						</TR>
+						
+						<TR>
+							<TD name="LabelFicheLocalisation">Fiche de localisation</p> </TD>
+							<TD align="center"><?php echo $pourcentage_localisation?>%</TD>
+						</TR>
+						
+						<TR>
+							<TD name="LabelFicheAvis">Fiche d'avis sur le stage</TD>
+							<TD name="PourcentageFicheAvis" align="center">Environ <?php echo $pourcentage_avis?>%</TD>
+						</TR>
+				</TABLE>		
 			</div>
 		</div>
     
