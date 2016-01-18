@@ -146,7 +146,8 @@
 				<p>Bienvenue <?php echo $membre->prenom." ".$membre->nom?>.</br>
 				Vous êtes le tuteur en entreprise de <b><?php echo $prenom_etudiant." ".$nom_etudiant?></b>. 
 				Grâce à votre espace, vous pourrez saisir la fiche d'appréciation sur votre stagiaire dans l'onglet "Mes fiches"
-				Si vous pensez venir assister à la soutenance de fin de stage de l'étudiant, nous vous demanderons également de saisir vos disponibilités (via l'onglet "Mes disponibilités") pour établir un planning des soutenances. <br/><br/>
+				Si vous pensez venir assister à la soutenance de fin de stage de l'étudiant, nous vous demanderons également de saisir vos disponibilités (via l'onglet "Mes disponibilités") pour établir un planning des soutenances.
+				Vous pouvez également contacter votre étudiant par mail via l'onglet "Contacts".<br/><br/>
 				Pour le moment, la fiche concernant votre stagiaire est rempli à <b><?php echo $pourcentage_fiche?>%</b>.
 				</p> 
 			</div>

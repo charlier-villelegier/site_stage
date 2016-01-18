@@ -80,7 +80,6 @@
 						<li><a href="page_mes_etudiants.php" >Gérer mes étudiants</a></li>
 						<li><a href="page_etudiant_disponible.php" class="PageActive">Etudiants disponibles</a></li>
 						<li><a href="page_mes_dispo.php">Mes disponibilités</a></li>
-                        <li><a href="#">Contacts</a></li>
 					</ul>
 				</div>
 			</div>
