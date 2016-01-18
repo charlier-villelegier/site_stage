@@ -9,10 +9,10 @@
 	
 	if(isset($_POST['objet']) && isset($_POST['corps'])){
 		
-		$resultat=mysqli_query($co,  "SELECT t.mail
-									  FROM etudiant e, appariement_tuteur at, tuteur_entreprise t
-									  WHERE e.login=at.etudiant
-									  AND at.tuteur=t.login
+		$resultat=mysqli_query($co,  "SELECT en.mail
+									  FROM etudiant e, appariement_enseignant ae, enseignant en
+									  WHERE e.login=ae.etudiant
+									  AND ae.enseignant=en.login
 									  AND e.login='$membre->login' AND e.mdp='$membre->mdp'");
 		$row=mysqli_fetch_row($resultat);
 		$destinataire=$row[0];
@@ -32,5 +32,5 @@
 	}
 	
 	//On redirige vers la bonnne page
-	header("Location: ../../vues/etudiant/page_contact.php");
+	header("Location: ../../vues/etudiant/page_contact_enseignant.php");
 ?>

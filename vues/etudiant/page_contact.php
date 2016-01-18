@@ -67,7 +67,7 @@
 				<div class="PlanMenu">Mes contacts</div>
 				<ul>
 					<li><div class="TitrePlan"><a href="#">Tuteur en entreprise</a></div></li>
-					<li><div class="TitrePlan"><a href="page_fiche_avis.php">Enseignant responsable</a></div></li>
+					<li><div class="TitrePlan"><a href="page_contact_enseignant.php">Enseignant responsable</a></div></li>
 				</ul>
 			</div>
 		</div>
