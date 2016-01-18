@@ -8,7 +8,7 @@
 	
 	
 	
-	//On associe l'élève et l'étudiant
+	//On associe l'élève et l'enseignant
 	if(isset($_SESSION['membre']) && isset($_GET['to']) && isset($_GET['objet']) && isset($_GET['corps']) && isset($_GET['page'])){
 		
 		$membre=$_SESSION['membre'];
