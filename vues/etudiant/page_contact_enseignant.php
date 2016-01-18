@@ -9,14 +9,16 @@
 		$bd = new Bd("site_stage");
 		$co = $bd->connexion();
 		
-		//On récupère l'adresse mail du tuteur
-		$resultat = mysqli_query($co,  "SELECT t.mail
-										FROM etudiant e, appariement_tuteur at, tuteur_entreprise t
-										WHERE e.login=at.etudiant
-										AND at.tuteur=t.login
+		//On récupère l'adresse mail de l'enseignant
+		$resultat = mysqli_query($co,  "SELECT en.mail
+										FROM etudiant e, appariement_enseignant ae, enseignant en
+										WHERE e.login=ae.etudiant
+										AND ae.enseignant=en.login
 										AND e.login='$membre->login' AND e.mdp='$membre->mdp'");
 		$row = mysqli_fetch_row($resultat);
-		$mail_tuteur = $row[0];
+		$mail_prof = $row[0];
+		
+		
 	}
 ?>
 
@@ -66,8 +68,8 @@
 			<div class="ConteneurPetitPlan">
 				<div class="PlanMenu">Mes contacts</div>
 				<ul>
-					<li><div class="TitrePlan"><a href="#">Tuteur en entreprise</a></div></li>
-					<li><div class="TitrePlan"><a href="page_fiche_avis.php">Enseignant responsable</a></div></li>
+					<li><div class="TitrePlan"><a href="page_contact.php">Tuteur en entreprise</a></div></li>
+					<li><div class="TitrePlan"><a href="page_contact_enseignant.php">Enseignant responsable</a></div></li>
 				</ul>
 			</div>
 		</div>
@@ -93,7 +95,7 @@
 				<form method="post" action="../../controleurs/tuteur/send_mail.php">
 				<p>
 					<label for="MailEtudiant"> Envoyé à : </label>
-						<input type="text" name="to" value="<?php echo $mail_tuteur?>" disabled="disabled"/>
+						<input type="text" name="to" value="<?php echo $mail_prof?>" disabled="disabled"/>
 					<br/>
 					<br/>
 					
