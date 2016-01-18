@@ -46,8 +46,31 @@
 		} 
 		
 		public function modif_mdpasse($mdp) {
+			
+			$bd = new Bd("site_stage");
+			$co = $bd->connexion();
+			
 			$this->mdp=$mdp;
-			mysqli_query($co, "UPDATE membres SET mdpasse=$this->mdpasse WHERE id=$this->id");	
+			
+			switch($this->fonction){
+				case "etudiant":
+					$resultat=mysqli_query($co, "UPDATE etudiant SET mdp='$this->mdp' WHERE login='$this->login'");	
+					break;
+							
+				case "enseignant":
+					$resultat=mysqli_query($co, "UPDATE enseignant SET mdp='$this->mdp' WHERE login='$this->login'");	
+					break;
+							
+				case "tuteur":
+					$resultat=mysqli_query($co, "UPDATE tuteur_entreprise SET mdp='$this->mdp' WHERE login='$this->login'");	
+					break;
+					
+				case "secretariat":
+					$resultat=mysqli_query($co, "UPDATE secretariat SET mdp='$this->mdp' WHERE login='$this->login'");	
+					break;
+							
+			}
+			
 		}
 		
 		public function maj(){

@@ -53,7 +53,7 @@
 			</div>
 		</div>
 		<div class="ConteneurBasPetit">
-			
+			<a href="change_mdp.php" style="font-size:11">Changer mon mot de passe</a>
         </div>
     </div>
     <div class="contenu_page">

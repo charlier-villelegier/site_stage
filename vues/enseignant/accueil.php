@@ -48,14 +48,14 @@
                     	Statut : Professeur
                     </p>
                     <p>
-						<input name="Deconnexion" type="submit" value="Déconnexion"/>
+						<input name="Deconnexion" type="submit" value="Déconnexion"/><br/>
 					</p>
                    
 				</form>
 			</div>
 		</div>
 		<div class="ConteneurBasPetit">
-			
+			<a href="change_mdp.php" style="font-size:11">Changer mon mot de passe</a>
         </div>
     </div>
     <div class="contenu_page">
