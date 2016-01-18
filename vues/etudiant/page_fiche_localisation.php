@@ -128,7 +128,7 @@
 						<li><a href="accueil.php">Accueil</a></li>
 						<li><a href="page_fiche_localisation.php" class="PageActive">Mes fiches</a></li>
 						<li><a href="page_mes_dispo.php">Mes disponibilités</a></li>
-						<li><a href="#">Contacts</a></li>
+						<li><a href="page_contact.php">Contacts</a></li>
 					</ul>
 				</div>
 			</div>
