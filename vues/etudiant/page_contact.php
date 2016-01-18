@@ -125,6 +125,65 @@
             -->
 		</div>
 	</div>
+    
+    <!--Fonctions javascript pour les popup-->
+    <script type="text/javascript" src="../../js/noty/packaged/jquery.noty.packaged.js"></script>
+    <script type="text/javascript">
+
+	function generatePopup(type, text) {
+
+            var popup = noty({
+                text        : text,
+                type        : type,
+                dismissQueue: true,
+                layout      : 'bottomRight',
+                theme       : 'relax',
+                maxVisible  : 10,
+                animation   : {
+                    open  : 'animated bounceInRight',
+                    close : 'animated bounceOutRight',
+                    easing: 'swing',
+                    speed : 500
+                }
+            });
+            console.log('html: ' + n.options.id);
+        }
+		 
+		 function generateSent() {
+			
+            generatePopup('success', 
+			'<div class=\"activity-item\"> <i class=\"fa fa-envelope-o text-success\"></i> <div class=\"activity\"> Votre message à bien été envoyé </div> </div>');
+		 }
+	
+
+</script>
+
+    
+    <!-- Affiche la popup du message envoyé-->
+    <?php
+		if(isset($_GET['sent'])){
+			
+		echo"
+		 
+   		 <script type=\"text/javascript\">
+
+			 $(document).ready(function () {
+
+            setTimeout(function() {
+                generateSent();
+            }, 200);
+			
+			setTimeout(function () {
+           		$.noty.closeAll();
+        	}, 3000);
+		
+        });
+
+    	</script>
+    ";
+    }
+    ?>
+	
 	
 	<!--Scripte pour que le menu verticale suive le scroll-->
 	<script type="text/javascript">

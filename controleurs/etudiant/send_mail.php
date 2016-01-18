@@ -28,9 +28,9 @@
 		$headers = 'From: '.$mail;
 
 		// Envoi du mail
-		mail($destinataire, $objet, $corps, $headers);				
+		echo mail($destinataire, $objet, $corps, $headers);				
 	}
 	
 	//On redirige vers la bonnne page
-	//header("Location: ../../vues/etudiant/page_contact.php");
+	header("Location: ../../vues/etudiant/page_contact.php?sent=true");
 ?>
