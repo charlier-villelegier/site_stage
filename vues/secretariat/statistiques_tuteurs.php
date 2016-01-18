@@ -95,12 +95,12 @@
 					//Je récupère et j'affiche la liste des étudiants sans tuteurs
 					if($tri=="nom"){
 						
-						$resultat = mysqli_query($co,  "(SELECT nom, prenom, tp, 'Non', 'renseigné', NULL
+						$resultat = mysqli_query($co,  "(SELECT nom, prenom, tp, 'Non', 'renseigné', NULL, mail_iut
 														FROM etudiant
 														WHERE login NOT IN (SELECT etudiant
                      														FROM appariement_enseignant))
 														UNION
-														(SELECT E.nom, E.prenom, tp, EN.nom, EN.prenom, date_ajout 
+														(SELECT E.nom, E.prenom, tp, EN.nom, EN.prenom, date_ajout, mail_iut
 														FROM etudiant E, appariement_enseignant A, enseignant EN
 														WHERE E.login=A.etudiant
 														AND A.enseignant=EN.login
@@ -110,7 +110,7 @@
 					}
 					else{
 						
-						$resultat = mysqli_query($co,  "(SELECT E.nom, E.prenom, tp, EN.nom, EN.prenom, date_ajout 
+						$resultat = mysqli_query($co,  "(SELECT E.nom, E.prenom, tp, EN.nom, EN.prenom, date_ajout, mail_iut 
 														FROM etudiant E, appariement_enseignant A, enseignant EN
 														WHERE E.login=A.etudiant
 														AND A.enseignant=EN.login
@@ -118,7 +118,7 @@
 																		FROM appariement_enseignant)
 														ORDER BY nom)
 														UNION
-														(SELECT nom, prenom, tp, 'Non', 'renseigné', NULL
+														(SELECT nom, prenom, tp, 'Non', 'renseigné', NULL, mail_iut
 														FROM etudiant
 														WHERE login NOT IN (SELECT etudiant
                      														FROM appariement_enseignant)
@@ -143,6 +143,7 @@
 								$nom_prof=$row[3];
 								$prenom_prof=$row[4];
 								$date=$row[5];
+								$mail_iut=$row[6];
 						
 								echo"<tr>";
 									echo"<td>$nom</td>";
@@ -152,7 +153,7 @@
 									echo"<td>$date</td>";
 									echo"<form>";
 									?>
-									<td ><input style="width:100%" type="button" value="Contacter l'étudiant" onclick="generate('<?php echo $nom.' '.$prenom?>','<?php echo $login ?>')"/></td>
+									<td ><input style="width:100%" type="button" onclick="generateContact('<?php echo $nom?>','<?php echo $prenom ?>','<?php echo $mail_iut ?>')" value="Contacter"/></td>
                                 	<?php
 									echo"</form>";
 								echo"</tr>";
@@ -180,9 +181,14 @@
     <script type="text/javascript" src="../../js/noty/packaged/jquery.noty.packaged.js"></script>
     <script type="text/javascript">
 
-    function generate(name,login) {
+   //Contact d'un étudiant
+	 function generateContact(nom,prenom,mail) {
         var n = noty({
-            text        : 'Voulez vous vraiment être le tuteur de <b>' + name  + ' </b> ?',
+            text        : 'Contacter <b>'+ nom + ' ' + prenom + '</b> : <br/> <br/>'
+							+ '<div align="left">Objet :'
+							+ '<input type="text" id="objet"/></div> <br/>'
+							+ '<div align="left">Corps : </label> <br/>'
+							+ '<textarea rows="10" cols="40" name="corps" id="corps"></textarea></div>',
             type        : 'information',
             dismissQueue: true,
             layout      : 'center',
@@ -194,10 +200,11 @@
                     speed : 1000
                 },
             buttons     : [
-                {addClass: 'btn btn-primary', text: 'Oui', onClick: function ($noty) {
+                {addClass: 'btn btn-primary', text: 'Envoyer', onClick: function ($noty) {
                     $noty.close();
-					document.location.href="../../controleurs/enseignant/add_etudiant.php?etudiant="+login
-                    
+					var objet=document.getElementById("objet").value;
+					var corps=document.getElementById("corps").value;
+					document.location.href="../../controleurs/secretariat/send_mail.php?to="+mail+"&objet="+objet+"&corps="+corps+"&page=tuteurs";
                 }
                 },
                 {addClass: 'btn btn-danger', text: 'Annuler', onClick: function ($noty) {
@@ -207,11 +214,65 @@
                 }
             ]
         });
+		
+		
         console.log('html: ' + n.options.id);
     }
+	
+	function generatePopup(type, text) {
 
+            var popup = noty({
+                text        : text,
+                type        : type,
+                dismissQueue: true,
+                layout      : 'bottomRight',
+                theme       : 'relax',
+                maxVisible  : 10,
+                animation   : {
+                    open  : 'animated bounceInRight',
+                    close : 'animated bounceOutRight',
+                    easing: 'swing',
+                    speed : 500
+                }
+            });
+            console.log('html: ' + n.options.id);
+			
+        }
+		
+		 function generateSent() {
+			
+            generatePopup('success', 
+			'<div class=\"activity-item\"> <i class=\"fa fa-check text-success\"></i> <div class=\"activity\"> Votre message à bien été envoyé </div> </div>');
+		 }
+		 
+	
 </script>
 
+<!-- Affiche la popup du message envoyé-->
+    <?php
+		if(isset($_GET['sent'])){
+			
+		echo"
+		 
+   		 <script type=\"text/javascript\">
+
+			 $(document).ready(function () {
+
+            setTimeout(function() {
+                generateSent();
+            }, 200);
+			
+			setTimeout(function () {
+           		$.noty.closeAll();
+        	}, 3000);
+		
+        });
+
+    	</script>
+    ";
+    }
+    ?>
+    
 	
     
     <!--Scripte pour que le menu verticale suive le scroll-->

@@ -18,6 +18,9 @@
   <head> 
     <title>Gestion des stages - Accueil</title>
     <link href="../../style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../js/buttons.css"/>
+    <link rel="stylesheet" type="text/css" href="../../js/animate.css"/>
+    <link rel="stylesheet" href="../../js/font-awesome/css/font-awesome.min.css"/>
 	<script src="../../js/jquery-1.11.1.min.js" type="text/javascript"></script>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   </head>
@@ -161,7 +164,7 @@
 								echo"<td align=\"center\">$pourcentage_localisation %</td>";
 								echo"<td align=\"center\">$pourcentage_avis %</td>";
 								?>
-								<td ><input style="width:100%" type="button" value="Contacter"/></td>
+								<td ><input style="width:100%" type="button" onclick="generateContact('<?php echo $nom?>','<?php echo $prenom ?>','<?php echo $mail_iut ?>')" value="Contacter"/></td>
                                 <?php
 							echo"</tr>";
 						}
@@ -189,6 +192,102 @@
             -->
 		</div>
 	</div>
+    
+    <!--Fonctions javascript pour les popup-->
+    <script type="text/javascript" src="../../js/noty/packaged/jquery.noty.packaged.js"></script>
+    <script type="text/javascript">
+	
+	//Contact d'un étudiant
+	 function generateContact(nom,prenom,mail) {
+        var n = noty({
+            text        : 'Contacter <b>'+ nom + ' ' + prenom + '</b> : <br/> <br/>'
+							+ '<div align="left">Objet :'
+							+ '<input type="text" id="objet"/></div> <br/>'
+							+ '<div align="left">Corps : </label> <br/>'
+							+ '<textarea rows="10" cols="40" name="corps" id="corps"></textarea></div>',
+            type        : 'information',
+            dismissQueue: true,
+            layout      : 'center',
+            theme       : 'defaultTheme',
+			 animation   : {
+                    open  : 'animated flipInX',
+                    close : 'animated flipOutX',
+                    easing: 'swing',
+                    speed : 1000
+                },
+            buttons     : [
+                {addClass: 'btn btn-primary', text: 'Envoyer', onClick: function ($noty) {
+                    $noty.close();
+					var objet=document.getElementById("objet").value;
+					var corps=document.getElementById("corps").value;
+					document.location.href="../../controleurs/secretariat/send_mail.php?to="+mail+"&objet="+objet+"&corps="+corps+"&page=fiches";
+                }
+                },
+                {addClass: 'btn btn-danger', text: 'Annuler', onClick: function ($noty) {
+                    $noty.close();
+                    
+                }
+                }
+            ]
+        });
+		
+		
+        console.log('html: ' + n.options.id);
+    }
+	
+	function generatePopup(type, text) {
+
+            var popup = noty({
+                text        : text,
+                type        : type,
+                dismissQueue: true,
+                layout      : 'bottomRight',
+                theme       : 'relax',
+                maxVisible  : 10,
+                animation   : {
+                    open  : 'animated bounceInRight',
+                    close : 'animated bounceOutRight',
+                    easing: 'swing',
+                    speed : 500
+                }
+            });
+            console.log('html: ' + n.options.id);
+			
+        }
+		
+		function generateSent() {
+			
+            generatePopup('success', 
+			'<div class=\"activity-item\"> <i class=\"fa fa-check text-success\"></i> <div class=\"activity\"> Votre message à bien été envoyé </div> </div>');
+		 }
+		 
+	
+	</script>
+    
+    <!-- Affiche la popup du message envoyé-->
+    <?php
+		if(isset($_GET['sent'])){
+			
+		echo"
+		 
+   		 <script type=\"text/javascript\">
+
+			 $(document).ready(function () {
+
+            setTimeout(function() {
+                generateSent();
+            }, 200);
+			
+			setTimeout(function () {
+           		$.noty.closeAll();
+        	}, 3000);
+		
+        });
+
+    	</script>
+    ";
+    }
+    ?>
     
     <!--Scripte pour que le menu verticale suive le scroll-->
 	<script type="text/javascript">
