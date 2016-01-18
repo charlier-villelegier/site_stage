@@ -306,7 +306,7 @@
 						<TABLE class="tab"  width="100%" cellpadding=\"10\">
 							
 							<TR>
-								<th></th>
+								<td></td>
 								<th name="nomTitre"> <label for="nomTitre"><font color="white"> Nom </font></label> </th>
 								<th name="mailTitre"> <label for="mailTitre"><font color="white"> E-mail</font></label> </th>
 								<th name="telephoneTitre"> <label for="telephoneTitre"><font color="white"> Téléphone(s)</font> </label> </th>

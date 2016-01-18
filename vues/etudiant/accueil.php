@@ -85,6 +85,11 @@
     <title>Gestion des stages - Accueil</title>
     <link href="../../style.css" rel="stylesheet" type="text/css" />
 	<script src="../../js/jquery-1.11.1.min.js" type="text/javascript"></script>
+	<style type="text/css">
+		.tab  {border-collapse:collapse;border-spacing:0;}
+		.tab td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+		.tab th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal; background-color:#26ade4;}
+	</style>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   </head>
   
@@ -139,20 +144,20 @@
 				</p>
 				<div class="TitrePartie" id="titre1">Vos statistiques : </div>
 				
-				<TABLE BORDER align="center">
+				<TABLE class="tab" width="100%" cellpadding=\"10\">
 			
 						<TR>
-							<TD name="FicheTitre" align="center"><b>Vos fiches</b></TD>
-							<TD name="RemplissageTitre" align="center"><b>Remplissage</b></TD>
+							<th name="FicheTitre" align="center"><b><font color="white">Vos fiches</font></b></th>
+							<th name="RemplissageTitre" align="center"><b><font color="white">Remplissage</font></b></th>
 						</TR>
 						
 						<TR>
-							<TD name="LabelFicheLocalisation">Fiche de localisation</p> </TD>
+							<th name="LabelFicheLocalisation"><font color="white">Fiche de localisation</font></p> </th>
 							<TD align="center"><?php echo $pourcentage_localisation?>%</TD>
 						</TR>
 						
 						<TR>
-							<TD name="LabelFicheAvis">Fiche d'avis sur le stage</TD>
+							<th name="LabelFicheAvis"><font color="white">Fiche d'avis sur le stage</font></th>
 							<TD name="PourcentageFicheAvis" align="center">Environ <?php echo $pourcentage_avis?>%</TD>
 						</TR>
 				</TABLE>		

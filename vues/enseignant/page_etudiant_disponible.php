@@ -108,10 +108,10 @@
 					
 						echo"<table class=\"tab\" width=\"100%\" cellpadding=\"10\">";
 							echo"<tr>";
-								echo"<th><b><font color=\"white\">NOM</font></b></td>";	
-								echo"<th><b><font color=\"white\">PRENOM</font></b></td>";		
+								echo"<th><b><font color=\"white\">Nom</font></b></td>";	
+								echo"<th><b><font color=\"white\">Prénom</font></b></td>";		
 								echo"<th><b><font color=\"white\">TP</font></b></td>";
-								echo"<th><b><font color=\"white\">VILLE</font></b></td>";
+								echo"<th><b><font color=\"white\">Ville</font></b></td>";
 							echo"</tr>";	
 													
 							while($row = mysqli_fetch_row($resultat)){

@@ -84,7 +84,7 @@
 					
 					echo"<table class=\"tab\" width=\"100%\" cellpadding=\"10\">";
 						echo"<tr>";
-							echo"<th><font color=\"white\"></font></th>";	
+							echo"<td></td>";	
 							echo"<th><b><font color=\"white\">DATE</font></b></th>";		
 							echo"<th><b><font color=\"white\">DE</font></b></th>";
 							echo"<th><b><font color=\"white\">A</font></b></th>";

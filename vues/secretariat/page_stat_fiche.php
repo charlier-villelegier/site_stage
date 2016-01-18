@@ -22,6 +22,11 @@
     <link rel="stylesheet" type="text/css" href="../../js/animate.css"/>
     <link rel="stylesheet" href="../../js/font-awesome/css/font-awesome.min.css"/>
 	<script src="../../js/jquery-1.11.1.min.js" type="text/javascript"></script>
+	<style type="text/css">
+		.tab  {border-collapse:collapse;border-spacing:0;}
+		.tab td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+		.tab th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal; background-color:#26ade4;}
+	</style>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   </head>
   
@@ -78,13 +83,13 @@
 													FROM etudiant
 													ORDER BY nom");
 													
-					echo"<table border='1' width=\"100%\" cellpadding=\"10\">";
+					echo"<table class=\"tab\" width=\"100%\" cellpadding=\"10\">";
 						echo"<tr>";
-							echo"<td align=\"center\"><b>Nom</b></td>";	
-							echo"<td align=\"center\"><b>Prénom</b></td>";		
-							echo"<td align=\"center\"><b>Fiche de localisation</b></td>";
-							echo"<td align=\"center\"><b>Fiche d'avis</b></td>";
-							echo"<td></td>";
+							echo"<th align=\"center\"><b><font color=\"white\">Nom</font></b></th>";	
+							echo"<th align=\"center\"><b><font color=\"white\">Prénom</font></b></th>";		
+							echo"<th align=\"center\"><b><font color=\"white\">Fiche de localisation</font></b></th>";
+							echo"<th align=\"center\"><b><font color=\"white\">Fiche d'avis</font></b></th>";
+							echo"<th></th>";
 						echo"</tr>";	
 					if(mysqli_num_rows($resultat)>0){							
 						while($row = mysqli_fetch_row($resultat)){

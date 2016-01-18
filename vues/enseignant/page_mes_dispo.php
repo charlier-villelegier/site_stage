@@ -85,8 +85,8 @@
 					echo"<table class='tab' width=\"100%\" cellpadding=\"10\">";
 						echo"<tr>";
 							echo"<td></td>";	
-							echo"<th><b><font color=\"white\">DATE</font></b></th>";		
-							echo"<th><b><font color=\"white\">DE</font></b></th>";
+							echo"<th><b><font color=\"white\">Date</font></b></th>";		
+							echo"<th><b><font color=\"white\">De</font></b></th>";
 							echo"<th><b><font color=\"white\">A</font></b></th>";
 						echo"</tr>";	
 					if(mysqli_num_rows($resultat)>0){	

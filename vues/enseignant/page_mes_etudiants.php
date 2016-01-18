@@ -86,8 +86,8 @@
 					
 					echo"<table class=\"tab\" width=\"100%\" cellpadding=\"10\">";
 						echo"<tr>";
-							echo"<th><b><font color=\"white\">NOM</font></b></th>";	
-							echo"<th><b><font color=\"white\">PRENOM</font></b></th>";		
+							echo"<th><b><font color=\"white\">Nom</font></b></th>";	
+							echo"<th><b><font color=\"white\">Prénom</font></b></th>";		
 							echo"<th><b><font color=\"white\">TP</font></b></th>";
 						echo"</tr>";	
 					if(mysqli_num_rows($resultat)>0){							
