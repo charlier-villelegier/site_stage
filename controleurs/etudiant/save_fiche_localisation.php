@@ -39,7 +39,7 @@
 		
 		mysqli_query($co,  "UPDATE entreprise
 							SET nom_entreprise='$nom_entreprise', adresse='$adresse_entreprise',code_postal='$cp_entreprise',ville='$ville_entreprise'
-							WHERE num_entreprise IN (SELECT num_entreprise
+							WHERE num_entreprise IN (SELECT entreprise
 													 FROM appariement_tuteur at, tuteur_entreprise t
 													 WHERE at.tuteur=t.login
 													 AND at.etudiant='$membre->login')");

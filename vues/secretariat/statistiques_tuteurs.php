@@ -43,7 +43,7 @@
                     </div>
               
                     <p>
-                    	Statut : Professeur
+                    	Statut : Secrétariat
                     </p>
                     <p>
 						<input name="Deconnexion" type="submit" value="Déconnexion"/>
@@ -62,9 +62,8 @@
 			<div class="ConteneurPetitPlan">
 				<div class="PlanMenu">Critère de tri</div>
 				<ul>
-					<li><div class="TitrePlan"><a href="page_etudiant_disponible.php?tri=nom">Par nom</a></div></li>
-					<li><div class="TitrePlan"><a href="page_etudiant_disponible.php?tri=tp">Par TP</a></div></li>
-                    <li><div class="TitrePlan"><a href="page_etudiant_disponible.php?tri=tp">Par Ville</a></div></li>
+					<li><div class="TitrePlan"><a href="statistiques_tuteurs.php?tri=nom">Par nom</a></div></li>
+					<li><div class="TitrePlan"><a href="statistiques_tuteurs.php?tri=tuteur">Par tuteur</a></div></li>
 				</ul>
 			</div>
 		</div>
@@ -76,70 +75,91 @@
 			<div class="Bleue">
 				<div id="Ribbon">
 					<ul>
-						<li><a href="accueil.php">Accueil</a></li>
-						<li><a href="page_mes_etudiants.php" >Gérer mes étudiants</a></li>
-						<li><a href="page_etudiant_disponible.php" class="PageActive">Etudiants disponibles</a></li>
-						<li><a href="page_mes_dispo.php">Mes disponibilités</a></li>
-                        <li><a href="#">Contacts</a></li>
+						<li><a href="accueil.php" >Accueil</a></li>
+						<li><a href="page_stat_fiche.php">Statistiques fiches</a></li>
+						<li><a href="session_appariement.php">Session d'appariement</a></li>
+						<li><a href="statistiques_tuteurs.php" class="PageActive">statistiques Tuteurs</a></li>
 					</ul>
 				</div>
 			</div>
       
 			<div class="ConteneurTexte">   
-				<div class="TitrePartie" id="titre1">Etudiants sans professeur tuteur : </div>
-                <p>Voici la liste des étudiants <b>qui n'ont pas encore de professeur tuteur.</b></p>
-                <p>Pour demander à être tuteur d'un élève, vous pouvez appuyer sur "choisir" à côté de son nom.</p>
+				<div class="TitrePartie" id="titre1">Etudiants et tuteurs : </div>
+                <p>Vous pouvez voir ici les étudiants qui ont ou non <b>un tuteur</b></p>
+                <p>Plusieurs critères de tri sont disponibles sur la gauche</p>
                 <?php
 					
 					$tri = (isset($_GET['tri'])? $_GET['tri'] : "nom");
 					
-					//Je vérifie si les session d'admissions sont ouvertes
-					$resultat = mysqli_query($co,  "SELECT session_appariement
-													FROM secretariat");
-					$row=mysqli_fetch_row($resultat);
-					$session_ouverte=$row[0];
 					
-					if($session_ouverte){
-						//Je récupère et j'affiche la liste des étudiants sans tuteurs
-						$resultat = mysqli_query($co,  "SELECT nom, prenom, tp, login, ville
-														FROM etudiant E
-														WHERE E.login NOT IN (SELECT etudiant
-																			  FROM appariement_enseignant)
-														ORDER BY $tri");
+					//Je récupère et j'affiche la liste des étudiants sans tuteurs
+					if($tri=="nom"){
+						
+						$resultat = mysqli_query($co,  "(SELECT nom, prenom, tp, 'Non', 'renseigné', NULL
+														FROM etudiant
+														WHERE login NOT IN (SELECT etudiant
+                     														FROM appariement_enseignant))
+														UNION
+														(SELECT E.nom, E.prenom, tp, EN.nom, EN.prenom, date_ajout 
+														FROM etudiant E, appariement_enseignant A, enseignant EN
+														WHERE E.login=A.etudiant
+														AND A.enseignant=EN.login
+														AND E.login IN (SELECT etudiant
+																		FROM appariement_enseignant))
+														ORDER BY nom");
+					}
+					else{
+						
+						$resultat = mysqli_query($co,  "(SELECT E.nom, E.prenom, tp, EN.nom, EN.prenom, date_ajout 
+														FROM etudiant E, appariement_enseignant A, enseignant EN
+														WHERE E.login=A.etudiant
+														AND A.enseignant=EN.login
+														AND E.login IN (SELECT etudiant
+																		FROM appariement_enseignant)
+														ORDER BY nom)
+														UNION
+														(SELECT nom, prenom, tp, 'Non', 'renseigné', NULL
+														FROM etudiant
+														WHERE login NOT IN (SELECT etudiant
+                     														FROM appariement_enseignant)
+														ORDER BY nom)
+														");
+					}
+					
 					
 						echo"<table class=\"tab\" width=\"100%\" cellpadding=\"10\">";
 							echo"<tr>";
 								echo"<th><b><font color=\"white\">NOM</font></b></td>";	
 								echo"<th><b><font color=\"white\">PRENOM</font></b></td>";		
 								echo"<th><b><font color=\"white\">TP</font></b></td>";
-								echo"<th><b><font color=\"white\">VILLE</font></b></td>";
+								echo"<th><b><font color=\"white\">TUTEUR</font></b></td>";
+								echo"<th><b><font color=\"white\">DATE D'APPARIEMENT</font></b></td>";
 							echo"</tr>";	
 													
 							while($row = mysqli_fetch_row($resultat)){
 								$nom=$row[0];
 								$prenom=$row[1];
 								$tp=($row[2]==NULL? "Non renseigné" : $row[2]);
-								$login=$row[3];
-								$ville=$row[4];
+								$nom_prof=$row[3];
+								$prenom_prof=$row[4];
+								$date=$row[5];
 						
 								echo"<tr>";
 									echo"<td>$nom</td>";
 									echo"<td>$prenom</td>";
 									echo"<td>$tp</td>";
-									echo"<td>$ville</td>";
+									echo"<td>$nom_prof $prenom_prof</td>";
+									echo"<td>$date</td>";
 									echo"<form>";
 									?>
-									<td ><input style="width:100%" type="button" value="Choisir" onclick="generate('<?php echo $nom.' '.$prenom?>','<?php echo $login ?>')"/></td>
+									<td ><input style="width:100%" type="button" value="Contacter l'étudiant" onclick="generate('<?php echo $nom.' '.$prenom?>','<?php echo $login ?>')"/></td>
                                 	<?php
 									echo"</form>";
 								echo"</tr>";
 							}
 						
 						echo"</table>";
-					}
-					else{
-						echo "<h3>Les appariements sont actuellement <b>fermés</b>. Veuillez revenir lors de la prochaine session d'appariement.</h2>";	
-					}
+					
 				?>
                 
 			</div>

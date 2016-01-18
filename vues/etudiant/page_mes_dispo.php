@@ -20,6 +20,11 @@
     <link rel="stylesheet" type="text/css" href="../../js/animate.css"/>
     <link rel="stylesheet" href="../../js/font-awesome/css/font-awesome.min.css"/>
 	<script src="../../js/jquery-1.11.1.min.js" type="text/javascript"></script>
+    <style type="text/css">
+		.tab  {border-collapse:collapse;border-spacing:0;}
+		.tab td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+		.tab th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal; background-color:#26ade4;}
+	</style>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   </head>
   
@@ -86,12 +91,12 @@
 													
 					
 					
-					echo"<table border='1' width=\"100%\" cellpadding=\"10\">";
+					echo"<table class='tab' width=\"100%\" cellpadding=\"10\">";
 						echo"<tr>";
 							echo"<td></td>";	
-							echo"<td><b>DATE</b></td>";		
-							echo"<td><b>DE</b></td>";
-							echo"<td><b>A</b></td>";
+							echo"<th><b><font color=\"white\">DATE</font></b></th>";		
+							echo"<th><b><font color=\"white\">DE</font></b></th>";
+							echo"<th><b><font color=\"white\">A</font></b></th>";
 						echo"</tr>";	
 					if(mysqli_num_rows($resultat)>0){	
 						$nb_dispo=0;						
