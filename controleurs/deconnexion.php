@@ -8,7 +8,7 @@
 		$membre->deconnexion();
 	}
 			
-	header('Location: ../index.html'); 	
+	header('Location: ../accueil.php?deconnect=true'); 	
 	
 	
 ?>

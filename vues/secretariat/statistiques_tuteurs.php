@@ -242,7 +242,7 @@
 		 function generateSent() {
 			
             generatePopup('success', 
-			'<div class=\"activity-item\"> <i class=\"fa fa-check text-success\"></i> <div class=\"activity\"> Votre message à bien été envoyé </div> </div>');
+			'<div class=\"activity-item\"> <i class=\"fa fa-envelope-o text-success\"></i> <div class=\"activity\"> Votre message à bien été envoyé </div> </div>');
 		 }
 		 
 	

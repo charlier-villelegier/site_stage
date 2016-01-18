@@ -334,7 +334,7 @@
 		
 		 function generateDeleted() {
 			
-            generatePopup('success', '<div class=\"activity-item\"> <i class=\"fa fa-check text-success\"></i> <div class=\"activity\"> La disponibilité à bien été supprimée </div> </div>');
+            generatePopup('success', '<div class=\"activity-item\"> <i class=\"fa fa-trash-o text-success\"></i> <div class=\"activity\"> La disponibilité à bien été supprimée </div> </div>');
 			
 		 }
 		 

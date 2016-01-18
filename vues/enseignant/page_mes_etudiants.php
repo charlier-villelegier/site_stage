@@ -234,7 +234,7 @@
 		 function generateDeleted(nom,prenom) {
 			
 			
-            generatePopup('success', '<div class=\"activity-item\"> <i class=\"fa fa-check text-success\"></i> <div class=\"activity\"> Vous n\'êtes plus le tuteur de <b>'+nom+' '+ prenom+'</b> </div> </div>');
+            generatePopup('success', '<div class=\"activity-item\"> <i class=\"fa fa-trash-o text-success\"></i> <div class=\"activity\"> Vous n\'êtes plus le tuteur de <b>'+nom+' '+ prenom+'</b> </div> </div>');
 		 }
 		 
 		 function generateAdded(nom,prenom) {
@@ -246,7 +246,7 @@
 		 function generateSent() {
 			
             generatePopup('success', 
-			'<div class=\"activity-item\"> <i class=\"fa fa-check text-success\"></i> <div class=\"activity\"> Votre message à bien été envoyé </div> </div>');
+			'<div class=\"activity-item\"> <i class=\"fa fa-envelope-o text-success\"></i> <div class=\"activity\"> Votre message à bien été envoyé </div> </div>');
 		 }
 	
 

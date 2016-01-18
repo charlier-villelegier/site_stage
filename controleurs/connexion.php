@@ -13,28 +13,28 @@
 		$resultat = mysqli_query($co, "SELECT login FROM etudiant WHERE login='$login' AND mdp='$mdp'");
 		if(mysqli_num_rows($resultat)>0){
 			$function="etudiant";
-			header('Location: ../vues/etudiant/accueil.php'); 
+			header('Location: ../vues/etudiant/accueil.php?welcome=true'); 
 		}
 		else{
 			$resultat = mysqli_query($co, "SELECT login FROM enseignant WHERE login='$login' AND mdp='$mdp'");
 			if(mysqli_num_rows($resultat)>0){
 				$function="enseignant";
-				header('Location: ../vues/enseignant/accueil.php');
+				header('Location: ../vues/enseignant/accueil.php?welcome=true');
 			}
 			else{
 				$resultat = mysqli_query($co, "SELECT login FROM tuteur_entreprise WHERE login='$login' AND mdp='$mdp'");
 				if(mysqli_num_rows($resultat)>0){
 					$function="tuteur";
-					header('Location: ../vues/tuteur/accueil.php');
+					header('Location: ../vues/tuteur/accueil.php?welcome=true');
 				}
 				else{
 					$resultat = mysqli_query($co, "SELECT login FROM secretariat WHERE login='$login' AND mdp='$mdp'");
 					if(mysqli_num_rows($resultat)>0){
 						$function="secretariat";
-						header('Location: ../vues/secretariat/accueil.php');
+						header('Location: ../vues/secretariat/accueil.php?welcome=true');
 					}
 					else{
-						header('Location: ../index.html'); 
+						header('Location: ../accueil.php?failed=true'); 
 					}
 				}
 			}
