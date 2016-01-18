@@ -53,7 +53,7 @@
                     </div>
               
                     <p>
-                    	Statut : Etudiant
+                    	Statut : Tuteur
                     </p>
                     <p>
 						<input name="Deconnexion" type="submit" value="Déconnexion"/>
