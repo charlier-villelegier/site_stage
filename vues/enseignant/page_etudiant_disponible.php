@@ -100,7 +100,7 @@
 					
 					if($session_ouverte){
 						//Je récupère et j'affiche la liste des étudiants sans tuteurs
-						$resultat = mysqli_query($co,  "SELECT nom, prenom, tp, login, ville
+						$resultat = mysqli_query($co,  "SELECT nom, prenom, tp, login, ville, mail_iut
 														FROM etudiant E
 														WHERE E.login NOT IN (SELECT etudiant
 																			  FROM appariement_enseignant)
@@ -120,6 +120,7 @@
 								$tp=($row[2]==NULL? "Non renseigné" : $row[2]);
 								$login=$row[3];
 								$ville=$row[4];
+								$mail_iut=$row[5];
 						
 								echo"<tr>";
 									echo"<td>$nom</td>";
@@ -129,6 +130,7 @@
 									echo"<form>";
 									?>
 									<td ><input style="width:100%" type="button" value="Choisir" onclick="generate('<?php echo $nom.' '.$prenom?>','<?php echo $login ?>')"/></td>
+                                     <td ><input style="width:100%" type="button" onclick="generateContact('<?php echo $nom?>','<?php echo $prenom ?>','<?php echo $mail_iut ?>')" value="Contacter"/></td>
                                 	<?php
 									echo"</form>";
 								echo"</tr>";
@@ -159,6 +161,45 @@
     <script type="text/javascript" src="../../js/noty/packaged/jquery.noty.packaged.js"></script>
     <script type="text/javascript">
 
+	
+	//Contact d'un étudiant
+	 function generateContact(nom,prenom,mail) {
+        var n = noty({
+            text        : 'Contacter <b>'+ nom + ' ' + prenom + '</b> : <br/> <br/>'
+							+ '<div align="left">Objet :'
+							+ '<input type="text" id="objet"/></div> <br/>'
+							+ '<div align="left">Corps : </label> <br/>'
+							+ '<textarea rows="10" cols="40" name="corps" id="corps"></textarea></div>',
+            type        : 'information',
+            dismissQueue: true,
+            layout      : 'center',
+            theme       : 'defaultTheme',
+			 animation   : {
+                    open  : 'animated flipInX',
+                    close : 'animated flipOutX',
+                    easing: 'swing',
+                    speed : 1000
+                },
+            buttons     : [
+                {addClass: 'btn btn-primary', text: 'Envoyer', onClick: function ($noty) {
+                    $noty.close();
+					var objet=document.getElementById("objet").value;
+					var corps=document.getElementById("corps").value;
+					document.location.href="../../controleurs/enseignant/send_mail.php?to="+mail+"&objet="+objet+"&corps="+corps+"&page=dispo";
+                }
+                },
+                {addClass: 'btn btn-danger', text: 'Annuler', onClick: function ($noty) {
+                    $noty.close();
+                    
+                }
+                }
+            ]
+        });
+		
+		
+        console.log('html: ' + n.options.id);
+    }
+	
     function generate(name,login) {
         var n = noty({
             text        : 'Voulez vous vraiment être le tuteur de <b>' + name  + ' </b> ?',
@@ -188,9 +229,59 @@
         });
         console.log('html: ' + n.options.id);
     }
+	
+	function generatePopup(type, text) {
+
+            var popup = noty({
+                text        : text,
+                type        : type,
+                dismissQueue: true,
+                layout      : 'bottomRight',
+                theme       : 'relax',
+                maxVisible  : 10,
+                animation   : {
+                    open  : 'animated bounceInRight',
+                    close : 'animated bounceOutRight',
+                    easing: 'swing',
+                    speed : 500
+                }
+            });
+            console.log('html: ' + n.options.id);
+        }
+		
+	
+	function generateSent() {
+			
+            generatePopup('success', 
+			'<div class=\"activity-item\"> <i class=\"fa fa-check text-success\"></i> <div class=\"activity\"> Votre message à bien été envoyé </div> </div>');
+		 }
 
 </script>
+	
+     <!-- Affiche la popup du message envoyé-->
+    <?php
+		if(isset($_GET['sent'])){
+			
+		echo"
+		 
+   		 <script type=\"text/javascript\">
 
+			 $(document).ready(function () {
+
+            setTimeout(function() {
+                generateSent();
+            }, 200);
+			
+			setTimeout(function () {
+           		$.noty.closeAll();
+        	}, 3000);
+		
+        });
+
+    	</script>
+    ";
+    }
+    ?>
 	
     
     <!--Scripte pour que le menu verticale suive le scroll-->

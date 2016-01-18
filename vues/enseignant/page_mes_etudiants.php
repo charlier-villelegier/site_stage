@@ -66,7 +66,6 @@
 						<li><a href="page_mes_etudiants.php" class="PageActive">Gérer mes étudiants</a></li>
 						<li><a href="page_etudiant_disponible.php">Etudiants disponibles</a></li>
 						<li><a href="page_mes_dispo.php">Mes disponibilités</a></li>
-                        <li><a href="#">Contacts</a></li>
 					</ul>
 				</div>
 			</div>
@@ -77,7 +76,7 @@
                 <p>Vous pouvez sur cette page remplir leur fiche, ou bien les supprimer afin qu'un autre professeur puisse être son tuteur.</p>
                 <?php
 					//Je récupère et j'affiche la liste des étudiants sans tuteurs
-					$resultat = mysqli_query($co,  "SELECT nom, prenom, tp, login
+					$resultat = mysqli_query($co,  "SELECT nom, prenom, tp, login, mail_iut
 													FROM etudiant E, appariement_enseignant A
 													WHERE E.login=A.etudiant
 													AND A.enseignant='$membre->login'
@@ -97,6 +96,7 @@
 							$prenom=$row[1];
 							$tp=($row[2]==NULL? "Non renseigné" : $row[2]);
 							$login=$row[3];
+							$mail_iut=$row[4];
 						
 							echo"<tr>";
 								echo"<td>$nom</td>";
@@ -106,6 +106,7 @@
 								?>
                                 <td align="center"><input type="button" value="Remplir sa fiche de visite" 
                                 	onclick="self.location.href='page_fiche_visite.php?etudiant=<?php echo $login ?>'"/></td>
+                                    <td ><input style="width:100%" type="button" onclick="generateContact('<?php echo $nom?>','<?php echo $prenom ?>','<?php echo $mail_iut ?>')" value="Contacter"/></td>
 								<td align="center"><input type="button" value="Supprimer" onclick="generate('<?php echo $nom.' '.$prenom?>','<?php echo $login ?>')"/></td>
                                 <?php
 								echo"</form>";
@@ -140,6 +141,45 @@
     <!--Fonctions javascript pour les popup-->
     <script type="text/javascript" src="../../js/noty/packaged/jquery.noty.packaged.js"></script>
     <script type="text/javascript">
+	
+	//Contact d'un étudiant
+	 function generateContact(nom,prenom,mail) {
+        var n = noty({
+            text        : 'Contacter <b>'+ nom + ' ' + prenom + '</b> : <br/> <br/>'
+							+ '<div align="left">Objet :'
+							+ '<input type="text" id="objet"/></div> <br/>'
+							+ '<div align="left">Corps : </label> <br/>'
+							+ '<textarea rows="10" cols="40" name="corps" id="corps"></textarea></div>',
+            type        : 'information',
+            dismissQueue: true,
+            layout      : 'center',
+            theme       : 'defaultTheme',
+			 animation   : {
+                    open  : 'animated flipInX',
+                    close : 'animated flipOutX',
+                    easing: 'swing',
+                    speed : 1000
+                },
+            buttons     : [
+                {addClass: 'btn btn-primary', text: 'Envoyer', onClick: function ($noty) {
+                    $noty.close();
+					var objet=document.getElementById("objet").value;
+					var corps=document.getElementById("corps").value;
+					document.location.href="../../controleurs/enseignant/send_mail.php?to="+mail+"&objet="+objet+"&corps="+corps+"&page=mesetudiants";
+                }
+                },
+                {addClass: 'btn btn-danger', text: 'Annuler', onClick: function ($noty) {
+                    $noty.close();
+                    
+                }
+                }
+            ]
+        });
+		
+		
+        console.log('html: ' + n.options.id);
+    }
+	
 
     function generate(name,login) {
         var n = noty({
@@ -202,9 +242,40 @@
 			
             generatePopup('success', '<div class=\"activity-item\"> <i class=\"fa fa-check text-success\"></i> <div class=\"activity\"> Vous êtes maintenant le tuteur de <b>'+nom+' '+ prenom+'</b> </div> </div>');
 		 }
+		 
+		 function generateSent() {
+			
+            generatePopup('success', 
+			'<div class=\"activity-item\"> <i class=\"fa fa-check text-success\"></i> <div class=\"activity\"> Votre message à bien été envoyé </div> </div>');
+		 }
 	
 
 </script>
+
+	 <!-- Affiche la popup du message envoyé-->
+    <?php
+		if(isset($_GET['sent'])){
+			
+		echo"
+		 
+   		 <script type=\"text/javascript\">
+
+			 $(document).ready(function () {
+
+            setTimeout(function() {
+                generateSent();
+            }, 200);
+			
+			setTimeout(function () {
+           		$.noty.closeAll();
+        	}, 3000);
+		
+        });
+
+    	</script>
+    ";
+    }
+    ?>
 	
 	
     <!-- Affiche la popup de l'étudiant supprimé-->
