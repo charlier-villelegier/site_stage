@@ -37,7 +37,7 @@
                     </div>
               
                     <p>
-                    	Statut : Professeur
+                    	Statut : Secrétariat
                     </p>
                     <p>
 						<input name="Deconnexion" type="submit" value="Déconnexion"/>
@@ -67,7 +67,7 @@
 			<div class="ConteneurTexte">   
 				<p>
 				</p>
-				<div class="TitrePartie" id="titre1">Vos statistiques : </div>
+				<div class="TitrePartie" id="titre1">Statistiques de la promotion : </div>
 				
 				<?php
 					//Je récupère et j'affiche la liste des étudiants sans tuteurs
