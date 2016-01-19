@@ -166,7 +166,7 @@
 					<br/>
 					
 					<label for="MailEtudiant">Courrier IUT : </label>
-						<input name="MailEtudiant" type="text"  value="<?php echo $mail_iut?>"/>
+						<input name="MailEtudiant" type="email"  value="<?php echo $mail_iut?>"/>
 						
 					<label for="TelEtudiant">Téléphone : </label>
 						<input name="TelEtudiant" type="text"  value="<?php echo $tel?>"/>
@@ -206,7 +206,7 @@
 					<br/>
 					
 					<label for="MailResponsable">E-mail : </label>
-						<input name="MailResponsable" type="text" value="<?php echo $mail_tuteur?>" disabled="disabled" size="35"/>
+						<input name="MailResponsable" type="email" value="<?php echo $mail_tuteur?>" disabled="disabled" size="35"/>
 					<br/>
 					<br/>
 					
@@ -219,7 +219,7 @@
 					<br/>
 					
 					<label for="MailPerso">E-Mail personnel : </label>
-						<input name="MailPerso" type="text" value="<?php echo $mail_perso?>" size="35"/>
+						<input name="MailPerso" type="email" value="<?php echo $mail_perso?>" size="35"/>
 					<br/>
 					<br/>
 					

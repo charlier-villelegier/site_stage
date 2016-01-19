@@ -19,10 +19,10 @@
 				<div class="PlanMenu">Veuillez vous connecter</div>
                 <form method="post" action="controleurs/connexion.php">
                     	<label for="login">Login : </label>
-							<input name="login" type="text" size=10 style = "float : right"/>
+							<input name="login" type="text" size=10 style = "float : right" required="required"/>
 						<br/>
 						<br/>
-						<input name="mdp" type="text" size=10 style = "float : right">
+						<input name="mdp" type="password" size=10 style = "float : right">
 						<label for="mdp" style = "margin-left : 5px">Mot de passe : </label>
 							
 						<br/>
@@ -48,7 +48,7 @@
 						Ce site a été réalisé dans le cadre du projet du semestre 3 de l'IUT d'Orsay par des étudiants du département informatique.
 						Il s'agit donc d'un "premier jet". En espérant que vous passerez une agréable navigation.</p>
 						
-						<p align="center"><img src="images/LogoUPSUD.png" alt="Logo de l'université Paris Sud" width="400" height="250"></p>
+						<p align="center"><img src="images/LogoUPSUD.png" alt="Logo de l'université Paris Sud" width="40%" height="25%"></p>
 				</div>
 			</div>
 		</div>

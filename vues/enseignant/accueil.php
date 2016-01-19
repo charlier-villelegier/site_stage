@@ -73,10 +73,10 @@
 			</div>
       
 			<div class="ConteneurTexte">   
-				<p>Bienvenue <?php echo $membre->prenom." ".$membre->nom?>.</br>
+				<p>Bienvenue <b><?php echo $membre->prenom." ".$membre->nom?></b>.</br>
 				Vous pouvez via ce site gérer les étudiants dont vous êtes le tuteur, c'est-à-dire pouvoir remplir leur fiche de visite de stage et supprimer un appariement avec un étudiant. <br/>
 				Vous pouvez également grâce à l'onglet "Etudiants disponibles", effectuer des demandes d'appariement avec un étudiant pour devenir son tuteur de stage. <br/>
-				Enfin vous pouvez contacter les différents membres du stage via l'onglet "Contacts" (Responsable du stage, étudiants, secrétariat etc.).
+				Enfin vous pouvez contacter les différents étudiants grâce aux boutons "Contacter" dans les différentes pages de votre espace.
 				</p>
 				<div class="TitrePartie" id="titre1">Vos statistiques : </div>
 				

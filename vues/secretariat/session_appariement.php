@@ -51,15 +51,7 @@
 			<a href="change_mdp.php" style="font-size:11">Changer mon mot de passe</a>
         </div>
     </div>
-    <div class="menu">
-		<div class="ConteneurHautPetit"></div>
-		<div class="ConteneurPrincipalePetit">
-			<div class="ConteneurPetitPlan">
-				
-			</div>
-		</div>
-		<div class="ConteneurBasPetit"></div>
-    </div>
+    
     <div class="contenu_page">
 		<div class="ConteneurHaut"></div>
 		<div class="ConteneurPrincipale">

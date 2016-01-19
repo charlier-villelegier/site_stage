@@ -6,6 +6,32 @@
 		echo"pas de membre";
 		header('Location: ../../index.html'); 
 	}
+	else{
+		$membre=$_SESSION['membre'];
+		$bd = new Bd("site_stage");
+		$co = $bd->connexion();
+		
+		$resultat=mysqli_query($co,  "SELECT COUNT(*)
+									  FROM etudiant");
+		$row = mysqli_fetch_row($resultat);
+		$nb_etudiant = $row[0];
+		
+		$resultat=mysqli_query($co,  "SELECT COUNT(*)
+									  FROM enseignant");
+		$row = mysqli_fetch_row($resultat);
+		$nb_enseignant = $row[0];
+		
+		$resultat=mysqli_query($co,  "SELECT COUNT(*)
+									  FROM appariement_enseignant");
+		$row = mysqli_fetch_row($resultat);
+		$nb_etudiant_tuteur = $row[0];
+		
+		$resultat=mysqli_query($co,  "SELECT COUNT(DISTINCT enseignant)
+									  FROM appariement_enseignant");
+		$row = mysqli_fetch_row($resultat);
+		$nb_tuteur_different = $row[0];
+		
+	}
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -48,15 +74,7 @@
 			<a href="change_mdp.php" style="font-size:11">Changer mon mot de passe</a>
         </div>
     </div>
-    <div class="menu">
-		<div class="ConteneurHautPetit"></div>
-		<div class="ConteneurPrincipalePetit">
-			<div class="ConteneurPetitPlan">
-				
-			</div>
-		</div>
-		<div class="ConteneurBasPetit"></div>
-    </div>
+    
     <div class="contenu_page">
 		<div class="ConteneurHaut"></div>
 		<div class="ConteneurPrincipale">
@@ -71,9 +89,18 @@
 				</div>
 			</div>
       
-			<div class="ConteneurTexte">   
+			<div class="ConteneurTexte">  
+            <p>Bienvenue <b><?php echo $membre->prenom." ".$membre->nom?></b>.</br>
+				Vous pouvez via ce site, voir les statistiques des stages de S4, ainsi que gérer les sessions de demande d'appariement, afin d'autoriser les professeurs à choisir des élèves pour être leur professeur référant. <br/><br/>
+				Vous pouvez donc consulter les statistiques des fiches de étudiants, ou encore regarder les étudiants qui n'ont pas encore de tuteur. <br/><br/>
+				Enfin vous pouvez contacter les différents élèves.
+				</p> 
 				<div class="TitrePartie" id="titre1">Statistiques générales : </div>
-				
+				<p> Nombre d'étudiants total : <b><?php echo $nb_etudiant ?></b></p>
+                <p> Nombre d'étudiants <b>avec</b> professeur tuteur : <b><?php echo $nb_etudiant_tuteur ?></b></p>
+                <p> Nombre d'étudiants <b>sans</b> professeur tuteur : <b><?php echo intval($nb_etudiant)-intval($nb_etudiant_tuteur); ?></b></p>
+                <p> Nombre d'enseignants total : <b><?php echo $nb_enseignant ?></b></p>
+                <p> Nombre d'enseignants tuteurs différents : <b><?php echo $nb_tuteur_different ?></b></p>
 				
 			</div>
 		</div>

@@ -18,7 +18,13 @@
 		$row = mysqli_fetch_row($resultat);
 		$mail_prof = $row[0];
 		
-		
+		//On vérifie que l'étudiant a un tuteur enseignant
+		$resultat=mysqli_query($co,  "SELECT etudiant
+									  FROM appariement_enseignant
+									  WHERE etudiant='$membre->login'");
+		$row=mysqli_fetch_row($resultat);
+		$etudiant=$row[0];
+		$valide=($etudiant==$membre->login? true : false);
 	}
 ?>
 
@@ -88,31 +94,36 @@
 					</ul>
 				</div>
 			</div>
+            <p><br/></p>
       
 			<div class="ConteneurTexte">   
 				<div class="TitrePartie" id="titre1">Envoyez un e-mail à votre tuteur enseignant responsable</div>
-				
-				<form method="post" action="../../controleurs/etudiant/send_mail_enseignant.php">
+				<?php if($valide){
+					echo "
+				<form method=\"post\" action=\"../../controleurs/etudiant/send_mail_enseignant.php\">
 				<p>
-					<label for="MailEtudiant"> Envoyé à : </label>
-						<input type="text" name="to" value="<?php echo $mail_prof?>" disabled="disabled"/>
+					<label for=\"MailEtudiant\"> Envoyé à : </label>
+						<input type=\"text\" name=\"to\" value=\"".$mail_prof."\" disabled=\"disabled\"/>
 					<br/>
 					<br/>
 					
-					<label for="ObjetMail"> Objet : </label>
-						<input type="text" name="objet"/>
+					<label for=\"ObjetMail\"> Objet : </label>
+						<input type=\"text\" name=\"objet\"/>
 					<br/>
 					<br/>
 					
-					<textarea name="corps" rows="30" cols="85"></textarea>
+					<textarea name=\"corps\" rows=\"30\" cols=\"85\"></textarea>
 					<br/>
 					<br/>
 					
-					<p align="center">
-							<input name="Envoyer" type="submit" value="Envoyer"/>
+					<p align=\"center\">
+							<input name=\"Envoyer\" type=\"submit\" value=\"Envoyer\"/>
 					</p>
                 </p>
-				</form>
+				</form>";
+				}
+				else{echo "<h3>Vous n'avez pas encore d'enseignant responsable.</h3>";}
+				?>
 			</div>
 	</div>
     

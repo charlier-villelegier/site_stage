@@ -119,7 +119,7 @@
 					}
 					else{
 						echo"<tr>";
-							echo"<td colspan=\"3\" align=\"center\">Vous n'avez aucune disponibilité</td>";
+							echo"<td colspan=\"4\" align=\"center\">Vous n'avez aucune disponibilité</td>";
 						echo"</tr>";
 					}
 						

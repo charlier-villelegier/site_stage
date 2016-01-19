@@ -32,5 +32,5 @@
 	}
 	
 	//On redirige vers la bonnne page
-	header("Location: ../../vues/etudiant/page_contact_enseignant.php");
+	header("Location: ../../vues/etudiant/page_contact_enseignant.php?sent=true");
 ?>

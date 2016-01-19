@@ -79,17 +79,17 @@
                 <form method="post" action="../../controleurs/enseignant/change_mdp.php">
 			<p>
 			<label for="AncienMdp">Ancien mot de passe : </label>
-				<input name="AncienMdp" type="text"/>
+				<input name="AncienMdp" type="password"/>
 			<br/>
             <br/>
 				
 			<label for="NouveauMdp">Nouveau mot de passe : </label>
-				<input name="NouveauMdp" type="text"/>
+				<input name="NouveauMdp" type="password"/>
 			<br/>
 			<br/>
 			
 			<label for="NouveauMdpConfirm">Confirmation du nouveau mot de passe : </label>
-				<input name="NouveauMdpConfirm" type="text"/>
+				<input name="NouveauMdpConfirm" type="password"/>
 			<br/>
 			<br/>
             </p>

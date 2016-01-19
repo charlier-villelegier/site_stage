@@ -223,7 +223,7 @@
 							<input name="TP" type="text" value="<?php echo $tp ?>"/>
 						
 						<label for="AdressePerso">Adresse électronique autre que IUT : </label>
-							<input name="AdressePerso" type="text" value="<?php echo $mail_perso ?>"/>
+							<input name="AdressePerso" type="email" value="<?php echo $mail_perso ?>"/>
 						<br/>
 						<br/>
 						

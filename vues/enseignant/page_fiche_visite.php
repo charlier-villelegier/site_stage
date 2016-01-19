@@ -235,7 +235,7 @@
 				<input name="TelRH" type="text" value="<?php echo $telephone_drh?>"/>
 				
 			<label for="MailRH">E-mail : </label>
-				<input name="MailRH" type="text" value="<?php echo $mail_drh?>"/>
+				<input name="MailRH" type="email" value="<?php echo $mail_drh?>"/>
                 
 			<div id="encadrement"></div>
 			<h3> ENCADREMENT DE L'ETUDIANT : </h3>

@@ -146,7 +146,7 @@
 			</div>
       
 			<div class="ConteneurTexte">   
-				<p>Bienvenue <?php echo $membre->prenom." ".$membre->nom?>.</br>
+				<p>Bienvenue <b><?php echo $membre->prenom." ".$membre->nom?></b>.</br>
 				Vous êtes le tuteur en entreprise de <b><?php echo $prenom_etudiant." ".$nom_etudiant?></b>. 
 				Grâce à votre espace, vous pourrez saisir la fiche d'appréciation sur votre stagiaire dans l'onglet "Mes fiches"
 				Si vous pensez venir assister à la soutenance de fin de stage de l'étudiant, nous vous demanderons également de saisir vos disponibilités (via l'onglet "Mes disponibilités") pour établir un planning des soutenances.

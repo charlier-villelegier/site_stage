@@ -140,7 +140,7 @@
 			</div>
       
 			<div class="ConteneurTexte">
-				<p>Bienvenue <?php echo $membre->prenom." ".$membre->nom?>.</br>
+				<p>Bienvenue <b><?php echo $membre->prenom." ".$membre->nom?></b>.</br>
 				Vous pouvez via ce site remplir les fiches concernant votre stage du dernier semestre de l'IUT grâce à l'onglet "Mes fiches" ci-dessus. </br>
 				Vous pouvez également saisir vos différentes disponibilités pour la soutenance de votre rapport de stage via l'onglet "Mes disponibilités". </br>
 				Enfin, vous pourrez contacter les différents membres qui concerne votre stage (tuteur, reponsable en entreprise, secrétariat, etc.) via l'onglet "Contact".
